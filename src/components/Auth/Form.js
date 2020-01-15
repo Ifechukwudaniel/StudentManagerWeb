@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn({matricNumber ,passwword,onChange, onSubmit}) {
+export default function SignIn({matricNumber,password,rememberMe,onChange,onSubmit, error}) {
   const classes = useStyles();
 
   return (
@@ -47,6 +47,7 @@ export default function SignIn({matricNumber ,passwword,onChange, onSubmit}) {
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
+           <Typography component="span" color='error'> {error? error: ""} </Typography>
           <TextField
             variant="outlined"
             margin="normal"
@@ -71,13 +72,14 @@ export default function SignIn({matricNumber ,passwword,onChange, onSubmit}) {
             id="password"
             autoComplete="current-password"
             onChange= {(value)=>{onChange(value)}}
-            value={passwword}
+            value={password}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
             name="RememberMe"
             onChange= {(value)=>{onChange(value)}}
+            value= {rememberMe}
           />
           <Button
             type="submit"
@@ -85,6 +87,7 @@ export default function SignIn({matricNumber ,passwword,onChange, onSubmit}) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick ={(value)=>{onSubmit(value)}}
           >
             Sign In
           </Button>
