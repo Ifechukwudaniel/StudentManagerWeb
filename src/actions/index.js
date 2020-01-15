@@ -3,15 +3,19 @@ const axios = require('axios');
 const config = require('../config');
 const {
    LOGIN_SUCCESS,
-   LOGIN_FAILURE
+   LOGIN_FAILURE,
+   LOGOUT,
+   FETCH_ALL_USERS,
+   FETCH_ALL_USERS_SUCCESS,
+   FETCH_ALL_USERS_FAILURE
 } = require('./types')
 const jwt = require('jsonwebtoken')
 
-const tokenName= "BIU_WEB_APP";
+const {tokenName}= require('../config');
 
 export const login = (userData, navigate) => {
     return dispatch => {
-      return axios.post(config.apiUrl, {
+      return axios.post(`${config.apiUrl}/auth/login`, {
         "matricNumber": userData.matricNumber,
         "password":userData.password
     })
@@ -26,7 +30,8 @@ export const login = (userData, navigate) => {
     }
   }
 
-  const loginSuccess = (navigate) => {
+
+export const loginSuccess = (navigate) => {
     const {name ,matricNumber} = jwt.decode(localStorage.getItem(tokenName),tokenName)
     navigate()
     return {
@@ -42,3 +47,37 @@ export const login = (userData, navigate) => {
       error
     }
   }
+
+ export const logOut = ()=>{
+    return {
+     type:LOGOUT
+    }
+}
+
+
+export const fetchAllUsers  = () => {
+  return dispatch => {
+    return axios.get(`${config.apiUrl}/users`)
+      .then(res => res.data)
+      .then((data) => {
+          dispatch(fetchAllUsersSuccess(data))
+      })
+      .catch(({response}) => {
+         dispatch(fetchAllUsersFailure(response.data.error))
+      })
+  }
+}
+
+export const fetchAllUsersSuccess = (users) => {
+  return {
+    type: FETCH_ALL_USERS_SUCCESS,
+    users
+  }
+}
+
+export const fetchAllUsersFailure = (error) => {
+  return {
+    type: FETCH_ALL_USERS_FAILURE,
+    error
+  }
+}
