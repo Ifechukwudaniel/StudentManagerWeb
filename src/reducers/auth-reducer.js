@@ -14,7 +14,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
     case LOGIN_FAILURE:
       return Object.assign({}, state, {error: action.error});
     case LOGOUT:
-      return Object.assign({}, state, {isAuth: false, name: action.name, matricNumber:action.matricNumber});
+      return Object.assign({}, state, {isAuth: false, name: '', matricNumber:''});
     default:
       return state;
   }
