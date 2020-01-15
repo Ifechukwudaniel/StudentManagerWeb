@@ -14,6 +14,8 @@ const Footer = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  var d = new Date();
+  var n = d.getFullYear();
 
   return (
     <div
@@ -24,16 +26,11 @@ const Footer = props => {
         &copy;{' '}
         <Link
           component="a"
-          href="https://devias.io/"
           target="_blank"
         >
-          Devias IO
+          Quantum cube
         </Link>
-        . 2019
-      </Typography>
-      <Typography variant="caption">
-        Created with love for the environment. By designers and developers who
-        love to work together in offices!
+        .{n}
       </Typography>
     </div>
   );

@@ -8,9 +8,10 @@ import PeopleIcon from '@material-ui/icons/People';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import LayersIcon from '@material-ui/icons/Layers';
 
 import { Profile, SidebarNav, UpgradePlan } from './components';
 
@@ -54,35 +55,25 @@ const Sidebar = props => {
       icon: <PeopleIcon />
     },
     {
-      title: 'Products',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
+      title: 'Courses',
+      href: '/courses',
+      icon: <MenuBookIcon />
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
+      title: 'Department',
+      href: '/department',
+      icon: <LocationCityIcon/>
     },
     {
-      title: 'Typography',
-      href: '/typography',
-      icon: <TextFieldsIcon />
+      title: 'Level',
+      href: '/level',
+      icon: <LayersIcon />
     },
     {
-      title: 'Icons',
-      href: '/icons',
+      title: 'Material',
+      href: '/material',
       icon: <ImageIcon />
     },
-    {
-      title: 'Account',
-      href: '/account',
-      icon: <AccountBoxIcon />
-    },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
-    }
   ];
 
   return (
@@ -103,7 +94,6 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        <UpgradePlan />
       </div>
     </Drawer>
   );
