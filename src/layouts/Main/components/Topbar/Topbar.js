@@ -7,6 +7,8 @@ import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
+import {connect} from 'react-redux';
+import * as action from '../../../../actions'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,6 +46,7 @@ const Topbar = props => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
+            onClick={()=>props.dispatch(action.logOut())}
           >
             <InputIcon />
           </IconButton>
@@ -66,4 +69,11 @@ Topbar.propTypes = {
   onSidebarOpen: PropTypes.func
 };
 
-export default Topbar;
+const mapStateToProps = (state) => {
+   return{
+     auth:state.auth
+   }
+}
+
+
+export default connect(mapStateToProps)(Topbar);
