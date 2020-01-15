@@ -11,7 +11,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import AttachmentIcon from '@material-ui/icons/Attachment';
 
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { Profile, SidebarNav } from './components';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
