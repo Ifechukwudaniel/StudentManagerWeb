@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
+import {connect} from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,19 +23,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
-  const { className, ...rest } = props;
-
+  const { className } = props;
   const classes = useStyles();
-
+  if(!props.auth.isAuth){
+    return (
+       <Redirect to="/"/>
+    )
+  }
+  else{
   const user = {
-    name: 'Shen Zhi',
+    name: props.auth.name,
     avatar: '/images/avatars/avatar_11.png',
-    bio: 'Brain Director'
+    matricNumber: props.auth.matricNumber
   };
 
   return (
     <div
-      {...rest}
       className={clsx(classes.root, className)}
     >
       <Typography
@@ -43,13 +47,21 @@ const Profile = props => {
       >
         {user.name}
       </Typography>
-      <Typography variant="body2">{user.bio}</Typography>
+      <Typography variant="body2">{user.matricNumber}</Typography>
     </div>
   );
+  }
 };
 
 Profile.propTypes = {
   className: PropTypes.string
 };
 
-export default Profile;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  }
+}
+
+
+export default connect(mapStateToProps)(Profile);

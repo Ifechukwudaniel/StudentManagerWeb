@@ -5,13 +5,11 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import LayersIcon from '@material-ui/icons/Layers';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import AttachmentIcon from '@material-ui/icons/Attachment';
 
 import { Profile, SidebarNav, UpgradePlan } from './components';
 
@@ -60,19 +58,24 @@ const Sidebar = props => {
       icon: <MenuBookIcon />
     },
     {
-      title: 'Department',
+      title: 'Departments',
       href: '/department',
       icon: <LocationCityIcon/>
     },
     {
-      title: 'Level',
+      title: 'Levels',
       href: '/level',
       icon: <LayersIcon />
     },
     {
-      title: 'Material',
+      title: 'Materials',
       href: '/material',
-      icon: <ImageIcon />
+      icon: <AttachmentIcon/>
+    },
+    {
+      title: 'Blog',
+      href: '/blog',
+      icon: <AnnouncementIcon />
     },
   ];
 

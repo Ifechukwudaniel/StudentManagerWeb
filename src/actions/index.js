@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken')
 
 const tokenName= "BIU_WEB_APP";
 
-export const login = (userData) => {
+export const login = (userData, navigate) => {
     return dispatch => {
       return axios.post(config.apiUrl, {
         "matricNumber": userData.matricNumber,
@@ -18,7 +18,7 @@ export const login = (userData) => {
         .then(res => res.data)
         .then(({token}) => {
           localStorage.setItem(tokenName,token)
-          dispatch(loginSuccess());
+          dispatch(loginSuccess(navigate));
         })
         .catch(({response}) => {
           dispatch(loginFailure(response.data.error));
@@ -26,8 +26,9 @@ export const login = (userData) => {
     }
   }
 
-  const loginSuccess = () => {
+  const loginSuccess = (navigate) => {
     const {name ,matricNumber} = jwt.decode(localStorage.getItem(tokenName),tokenName)
+    navigate()
     return {
       type: LOGIN_SUCCESS,
       name:name,

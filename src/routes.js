@@ -8,7 +8,9 @@ import UsersScreen from './screens/UsersScreen';
 import DepartmentScreen from './screens/DepartmentScreen';
 import LevelScreen from './screens/LevelScreen';
 import MaterialScreen from './screens/MaterialScreen';
+import BlogScreen from './screens/BlogScreen';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
+import DashboardScreen from './screens/DashboardScreen';
 
 export default class Navigation extends Component {
 
@@ -22,7 +24,7 @@ export default class Navigation extends Component {
                  component={AuthScreen}
                  />
                  <RouteWithLayout
-                  component={CourseScreen}
+                  component={DashboardScreen}
                   exact
                   layout={MainLayout}
                   path="/dashboard"
@@ -56,6 +58,12 @@ export default class Navigation extends Component {
                   exact
                   layout={MainLayout}
                   path="/material"
+                />
+                <RouteWithLayout
+                  component={BlogScreen}
+                  exact
+                  layout={MainLayout}
+                  path="/blog"
                 />
             </Switch>
          </BrowserRouter>

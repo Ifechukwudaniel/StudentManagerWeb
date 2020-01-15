@@ -3,15 +3,15 @@ import {connect} from 'react-redux'
 import Form from '../components/Auth/Form';
 
 import * as actions from '../actions';
+import { Redirect } from 'react-router-dom';
 
 class AuthScreen extends Component {
 
 
   constructor() {
     super();
-
-    this.loginUser = this.loginUser.bind(this);
-  }
+     this.loginUser = this.loginUser.bind(this);
+    }
 
   state= {
      matricNumber:"",
@@ -26,19 +26,29 @@ class AuthScreen extends Component {
 
   loginUser(value) {
     value.preventDefault()
-    this.props.dispatch(actions.login(this.state));
+    this.props.dispatch(actions.login(this.state,this.navigate));
   }
+   
+  navigate=()=>{
+    this.props.history.push('/dashboard')
+  }
+
   render() {
-    return (
-      <Form 
-      matricNumber ={this.state.matricNumber} 
-      password ={this.state.password} 
-      rememberMe= {this.state.RememberMe}
-      onChange={this.handleChange}
-      onSubmit={this.loginUser} 
-      error= {this.props.auth.error}
-      />
-    );
+    if(this.props.auth.isAuth){
+      return <Redirect to={'/dashboard'}/>
+    }  
+    else{
+      return (
+        <Form 
+        matricNumber ={this.state.matricNumber} 
+        password ={this.state.password} 
+        rememberMe= {this.state.RememberMe}
+        onChange={this.handleChange}
+        onSubmit={this.loginUser} 
+        error= {this.props.auth.error}
+        />
+      );
+    }
   }
 }
 
