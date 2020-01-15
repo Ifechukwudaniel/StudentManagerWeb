@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import Form from '../Auth/Form';
+import Form from '../components/Auth/Form';
 
-import * as actions from '../../actions';
+import * as actions from '../actions';
 
 class AuthScreen extends Component {
 
