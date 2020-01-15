@@ -5,9 +5,10 @@ const {
    LOGIN_SUCCESS,
    LOGIN_FAILURE,
    LOGOUT,
-   FETCH_ALL_USERS,
    FETCH_ALL_USERS_SUCCESS,
-   FETCH_ALL_USERS_FAILURE
+   FETCH_ALL_USERS_FAILURE,
+   FETCH_ALL_DEPARTMENT_FAILURE,
+   FETCH_ALL_DEPARTMENT_SUCCESS
 } = require('./types')
 const jwt = require('jsonwebtoken')
 
@@ -78,6 +79,34 @@ export const fetchAllUsersSuccess = (users) => {
 export const fetchAllUsersFailure = (error) => {
   return {
     type: FETCH_ALL_USERS_FAILURE,
+    error
+  }
+}
+
+
+export const fetchAllDepartment  = () => {
+  return dispatch => {
+    return axios.get(`${config.apiUrl}/users`)
+      .then(res => res.data)
+      .then((data) => {
+          dispatch(fetchAllDepartmentsSuccess(data))
+      })
+      .catch(({response}) => {
+         dispatch(fetchAllDepartmentsFailure(response.data.error))
+      })
+  }
+}
+
+export const fetchAllDepartmentsSuccess = (departments) => {
+  return {
+    type: FETCH_ALL_DEPARTMENT_SUCCESS,
+     departments
+  }
+}
+
+export const fetchAllDepartmentsFailure = (error) => {
+  return {
+    type: FETCH_ALL_DEPARTMENT_FAILURE,
     error
   }
 }
