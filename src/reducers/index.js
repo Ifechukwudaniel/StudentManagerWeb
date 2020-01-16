@@ -5,10 +5,14 @@ import storage from 'redux-persist/lib/storage'
 
 
 import {authReducer} from "./auth-reducer"
+import {userReducer} from './users-reducer'
+import {departmentReducer} from './department-reducer'
 
  export const init = () => {
   const reducer = combineReducers({
-    auth:authReducer
+    auth:authReducer,
+    users:userReducer,
+    departments:departmentReducer
   });
 
 
