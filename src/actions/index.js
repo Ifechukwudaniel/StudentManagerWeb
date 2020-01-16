@@ -27,7 +27,8 @@ export const login = (userData, navigate) => {
           dispatch(loginSuccess(navigate));
         })
         .catch(({response}) => {
-          dispatch(loginFailure(response.data.error));
+          console.log(response)
+          // dispatch(loginFailure(response.error));
         })
     }
   }
@@ -65,7 +66,8 @@ export const fetchAllUsers  = () => {
           dispatch(fetchAllUsersSuccess(data))
       })
       .catch(({response}) => {
-         dispatch(fetchAllUsersFailure(response.data.error))
+         console.log(response)
+        //  dispatch(fetchAllUsersFailure(response.data.error))
       })
   }
 }
@@ -123,7 +125,8 @@ export const fetchAllDepartment  = () => {
           dispatch(fetchAllDepartmentsSuccess(data))
       })
       .catch(({response}) => {
-         dispatch(fetchAllDepartmentsFailure(response))
+        console.log(response)
+         //dispatch(fetchAllDepartmentsFailure(response.error))
       })
   }
 }
@@ -140,4 +143,21 @@ export const fetchAllDepartmentsFailure = (error) => {
     type: FETCH_ALL_DEPARTMENT_FAILURE,
     error
   }
+}
+
+export const addDepartment= (data, cd)=>{
+  const x = cd;
+ return dispatch=>{
+   axios.post(`${config.apiUrl}/department/create`,
+   {...data})
+   .then(res=>res.data)
+   .then(data=>{
+      dispatch(fetchAllDepartment())
+      x()
+   })
+   .catch((response)=>{
+     console.log(response)
+    //  dispatch(creatUsersFailure(response.data.error))
+   })
+ }
 }

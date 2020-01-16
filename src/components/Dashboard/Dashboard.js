@@ -40,7 +40,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TotalDepartment />
+          {/* <TotalDepartment /> */}
         </Grid>
         <Grid
           item

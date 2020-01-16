@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const AddDepartments = props => {
-  const { className,name,matricNumber,role ,AddDepartments,loading,handleChange, ...rest  } = props;
+  const { className,name,addDepartment,loading,handleChange, ...rest  } = props;
 
   const classes = useStyles();
 
@@ -35,7 +35,7 @@ const AddDepartments = props => {
         noValidate
       >
         <CardHeader
-          title="Create A new Dapartment"
+          title="Create a new department"
         />
         <Divider />
         <CardContent>
@@ -45,51 +45,19 @@ const AddDepartments = props => {
           >
             <Grid
               item
-              md={4}
+              md={12}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="matricNumber"
+                label="name of department"
                 margin="dense"
-                name="matricNumber"
-                onChange={handleChange}
-                required
-                value={matricNumber}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="password"
-                margin="dense"
-                name="password"
+                name="name"
                 onChange={handleChange}
                 required
                 value={name}
                 variant="outlined"
-                type="password"
               />
-            </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
-              <InputLabel>Role</InputLabel>
-                <Select
-                  name='role'
-                  value={role}
-                  onChange={handleChange}
-                >
-                  <MenuItem value={'user'}>users</MenuItem>
-                  <MenuItem value={'admin'}>admin</MenuItem>
-                </Select>
             </Grid>
           </Grid>
         </CardContent>
@@ -98,7 +66,7 @@ const AddDepartments = props => {
           <Button
             color="primary"
             variant="contained"
-            onClick={AddDepartments}
+            onClick={addDepartment}
             disabled={loading}
           >
             { loading? "Loading..." :"Add User"}

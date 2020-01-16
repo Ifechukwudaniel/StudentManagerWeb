@@ -6,39 +6,50 @@ import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    height: '100%',
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText
-  },
-  content: {
-    alignItems: 'center',
-    display: 'flex'
-  },
-  title: {
-    fontWeight: 700
-  },
-  avatar: {
-    backgroundColor: theme.palette.white,
-    color: theme.palette.primary.main,
-    height: 56,
-    width: 56
-  },
-  icon: {
-    height: 32,
-    width: 32
-  }
+root: {
+  height: '100%'
+},
+content: {
+  alignItems: 'center',
+  display: 'flex'
+},
+title: {
+  fontWeight: 700
+},
+avatar: {
+  backgroundColor: theme.palette.success.main,
+  height: 56,
+  width: 56
+},
+icon: {
+  height: 32,
+  width: 32
+},
+difference: {
+  marginTop: theme.spacing(2),
+  display: 'flex',
+  alignItems: 'center'
+},
+differenceIcon: {
+  color: theme.palette.success.dark
+},
+differenceValue: {
+  color: theme.palette.success.dark,
+  marginRight: theme.spacing(1)
+}
 }));
 
 const TotalDepartments = props => {
-  const { className, ...rest } = props;
+  const { className, departments , ...rest } = props;
 
   const classes = useStyles();
 
   return (
     <Card
+     color='inherit'
       {...rest}
-      className={clsx(classes.root, className)}
+      className={clsx(classes.root, 
+      className)}
     >
       <CardContent>
         <Grid
@@ -48,17 +59,15 @@ const TotalDepartments = props => {
           <Grid item>
             <Typography
               className={classes.title}
-              color="inherit"
               gutterBottom
               variant="body2"
             >
-              TOTAL PROFIT
+              TOTAL DEPARTMENTS
             </Typography>
             <Typography
-              color="inherit"
               variant="h3"
             >
-              $23,200
+               {departments.length}
             </Typography>
           </Grid>
           <Grid item>

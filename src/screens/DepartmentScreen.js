@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import * as action from '../actions'
-import  {Table, } from '../components/Departments'
-import {TotalUsers} from '../components/Dashboard/components'
+import  {Table,AddDepartment } from '../components/Departments'
+import {TotalDepartment,} from '../components/Dashboard/components'
 import {Grid, } from '@material-ui/core'
 import * as actions from '../actions'
  
 class DepartmentScreen extends Component {
+    state= {
+        name:"",
+        loading:false
+    }
     componentDidMount(){
         this.props.dispatch(actions.fetchAllDepartment())
+    }
+    handleChange=(event)=>{
+        this.setState({[event.target.name]:event.target.value})
+    }
+    addDepartment = ()=>{
+        this.setState({loading:true})
+        this.props.dispatch(action.addDepartment(this.state, ()=>{
+            this.setState({loading:false})
+        }))
     }
     render() { 
         return (
@@ -18,28 +31,26 @@ class DepartmentScreen extends Component {
             >
                 <Grid
                 item
-                lg={3}
+                lg={6}
                 sm={6}
                 xl={3}
                 xs={12}
                 >
-                     {/* <TotalUsers users= {this.props.users.allUsers}/> */}
+                     <TotalDepartment departments= {this.props.departments.allDepartments}/> 
                </Grid>
 
                 <Grid
                 item
-                lg={9}
+                lg={6}
                 sm={6}
                 xl={3}
                 xs={12}>
-                     {/* <AddUser
-                      matricNumber={this.state.matricNumber} 
-                      password={this.state.password}
-                      role={this.state.role}
+                     <AddDepartment
+                      name={this.state.name} 
                       handleChange={this.handleChange}
-                      addUser={this.addUser}
+                      addDepartment={this.addDepartment}
                       loading={this.state.loading}
-                    /> */}
+                    /> 
                 </Grid>
 
                 <Grid
@@ -49,7 +60,9 @@ class DepartmentScreen extends Component {
                 xl={12}
                 xs={12}
                 >
-                    <Table data={this.props.departments.allDepartments}/>
+                    <Table 
+                    data={this.props.departments.allDepartments}
+                    />
                 </Grid>
             </Grid>
         );
