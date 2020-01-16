@@ -8,7 +8,8 @@ const {
    FETCH_ALL_USERS_SUCCESS,
    FETCH_ALL_USERS_FAILURE,
    FETCH_ALL_DEPARTMENT_FAILURE,
-   FETCH_ALL_DEPARTMENT_SUCCESS
+   FETCH_ALL_DEPARTMENT_SUCCESS,
+   CREATE_USER_FAILURE,
 } = require('./types')
 const jwt = require('jsonwebtoken')
 
@@ -84,15 +85,45 @@ export const fetchAllUsersFailure = (error) => {
 }
 
 
+export const creatUsers= (data, cd)=>{
+     const x = cd;
+    return dispatch=>{
+      axios.post(`${config.apiUrl}/auth/register`,
+      {...data, register:true})
+      .then(res=>res.data)
+      .then(data=>{
+         dispatch(fetchAllUsers())
+         x()
+      })
+      .catch((response)=>{
+         dispatch(creatUsersFailure(response.data.error))
+      })
+    }
+}
+
+export const creatUsersFailure= (error) => {
+  return {
+    type: CREATE_USER_FAILURE,
+    error
+  }
+}
+
+
+
+
+
+
+
+
 export const fetchAllDepartment  = () => {
   return dispatch => {
-    return axios.get(`${config.apiUrl}/users`)
+    return axios.get(`${config.apiUrl}/department/`)
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllDepartmentsSuccess(data))
       })
       .catch(({response}) => {
-         dispatch(fetchAllDepartmentsFailure(response.data.error))
+         dispatch(fetchAllDepartmentsFailure(response))
       })
   }
 }

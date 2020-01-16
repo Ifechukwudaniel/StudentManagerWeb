@@ -31,7 +31,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TotalUsers />
+          {/* {<TotalUsers />} */}
         </Grid>
         <Grid
           item

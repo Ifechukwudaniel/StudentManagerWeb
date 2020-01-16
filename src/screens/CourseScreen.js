@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
- 
+import {connect} from 'react-redux'
+import * as action from '../actions'
+ import  {Table} from '../components/Users'
 class CourseScreen extends Component {
     render() { 
         return (
@@ -9,5 +11,11 @@ class CourseScreen extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+      users: state.users
+    }
+  }
  
-export default CourseScreen;
+export default connect(mapStateToProps)(CourseScreen);

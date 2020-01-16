@@ -4,15 +4,12 @@ import Form from '../components/Auth/Form';
 
 import * as actions from '../actions';
 import { Redirect } from 'react-router-dom';
+import Axios from 'axios';
+//const {isAuth}  = require('../helpers/Auth')
+
+const {tokenName, apiUrl} = require('../config')
 
 class AuthScreen extends Component {
-
-
-  constructor() {
-    super();
-     this.loginUser = this.loginUser.bind(this);
-    }
-
   state= {
      matricNumber:"",
      password:"",
@@ -24,7 +21,7 @@ class AuthScreen extends Component {
     this.setState({[name]: value})
   }
 
-  loginUser(value) {
+  loginUser =(value)=> {
     value.preventDefault()
     this.props.dispatch(actions.login(this.state,this.navigate));
   }
@@ -34,7 +31,7 @@ class AuthScreen extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuth){
+   if(this.props.auth.isAuth){
       return <Redirect to={'/dashboard'}/>
     }  
     else{
