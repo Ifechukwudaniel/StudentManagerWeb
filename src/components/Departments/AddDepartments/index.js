@@ -69,7 +69,7 @@ const AddDepartments = props => {
             onClick={addDepartment}
             disabled={loading}
           >
-            { loading? "Loading..." :"Add User"}
+            { loading? "Loading..." :"Add Department"}
           </Button>
         </CardActions>
       </form>

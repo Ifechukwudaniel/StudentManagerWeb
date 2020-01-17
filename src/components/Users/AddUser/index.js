@@ -35,7 +35,7 @@ const AddUser = props => {
         noValidate
       >
         <CardHeader
-          title="Create A new user"
+          title="Create a new user"
         />
         <Divider />
         <CardContent>

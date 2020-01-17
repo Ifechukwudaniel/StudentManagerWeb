@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import LocationCityIcon from '@material-ui/icons/LocationCity'; 
 
 const useStyles = makeStyles(theme => ({
 root: {
@@ -65,14 +65,14 @@ const TotalDepartments = props => {
               TOTAL DEPARTMENTS
             </Typography>
             <Typography
-              variant="h3"
+              variant="h2"
             >
                {departments.length}
             </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <AttachMoneyIcon className={classes.icon} />
+              <LocationCityIcon className={classes.icon} />
             </Avatar>
           </Grid>
         </Grid>
