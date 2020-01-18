@@ -217,3 +217,19 @@ export const fetchAllLevelsFailure = (error) => {
     error
   }
 }
+
+
+export const addCourse = (data)=>{
+  return dispatch => {
+    return axios.post(`${config.apiUrl}/course/create`, data)
+      .then(res => res.data)
+      .then((data) => {
+        console.log(data)
+          dispatch(fetchAllLevels())
+      })
+      .catch(({response}) => {
+        console.log(response)
+         //dispatch(fetchAllDepartmentsFailure(response.error))
+      })
+  }
+}

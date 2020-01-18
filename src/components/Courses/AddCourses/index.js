@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const AddCourses = ({className, courseCode,courses, description,department,loading, levels, handleChange,...rest}) => {
+const AddCourses = ({className, courseCode,courses, description,department,loading, levels, handleChange,addCourse,...rest}) => {
   const classes = useStyles();
   return (
     <Card
@@ -60,9 +60,9 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
               md={4}
               xs={12}
             >
-                <InputLabel> Course</InputLabel>
+                <InputLabel> Level</InputLabel>
                 <Select
-                  name='course'
+                  name='level'
                   onChange={handleChange}
                 >
                   {levels.map((value)=>(
@@ -99,6 +99,20 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
                 variant="outlined"
               />
             </Grid>
+            <Grid
+              item
+              md={4}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Title"
+                margin="dense"
+                name="title"
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Grid>
           </Grid>
         </CardContent>
         <Divider />
@@ -106,6 +120,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
           <Button
             color="primary"
             variant="contained"
+            onClick={addCourse}
           >
             {loading?"Loading..":"Add Course"}
           </Button>

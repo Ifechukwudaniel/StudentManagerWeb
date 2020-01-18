@@ -30,6 +30,10 @@ class CoursesScreen extends Component {
         }
         else this.setState({[event.target.name]:event.target.value})
     }
+
+    addCourse = ()=>{
+      this.props.addCourse(this.state)
+    }
     render() { 
         return (
                <Grid
@@ -59,6 +63,7 @@ class CoursesScreen extends Component {
                       levels={this.state.departmentLevels}
                       loading={this.state.loading}
                       handleChange= {this.handleChange}
+                      addCourse={this.addCourse}
                     />  
                 </Grid>
 
@@ -69,8 +74,8 @@ class CoursesScreen extends Component {
                 xl={12}
                 xs={12}
                 >
-                    {/* <Table 
-                         data={this.props.courses.allCourses} */}
+                    <Table 
+                         data={this.props.courses.allCourses}
                     />
                 </Grid>
             </Grid>
@@ -95,6 +100,9 @@ function mapStateToProps(state) {
       },
       fetchAllLevels: () => {
         dispatch(actions.fetchAllLevels())
+    },
+    addCourse:(data)=>{
+      dispatch(action.addCourse(data))
     }
   }
 }

@@ -37,7 +37,7 @@ export default function SimpleTable({data}) {
                 {row.title}
               </TableCell>
               <TableCell align="right">{row.courseCode}</TableCell>
-              <TableCell align="right">{1}</TableCell>
+              <TableCell align="right">{row.material.length}</TableCell>
               <TableCell align="right">{row.department.name}</TableCell>
               <TableCell align="right">{row.level.number}</TableCell>
             </TableRow>
