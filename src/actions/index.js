@@ -219,16 +219,15 @@ export const fetchAllLevelsFailure = (error) => {
 }
 
 
-export const addCourse = (data)=>{
+export const addCourse = (data,cb=()=>{})=>{
   return dispatch => {
     return axios.post(`${config.apiUrl}/course/create`, data)
       .then(res => res.data)
       .then((data) => {
-        console.log(data)
-          dispatch(fetchAllLevels())
+          dispatch(fetchAllCourses())
       })
-      .catch(({response}) => {
-        console.log(response)
+      .catch((error) => {
+        console.log(error)
          //dispatch(fetchAllDepartmentsFailure(response.error))
       })
   }

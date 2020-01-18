@@ -121,6 +121,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             color="primary"
             variant="contained"
             onClick={addCourse}
+            disabled={loading}
           >
             {loading?"Loading..":"Add Course"}
           </Button>

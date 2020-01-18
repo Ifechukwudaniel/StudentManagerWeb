@@ -32,7 +32,10 @@ class CoursesScreen extends Component {
     }
 
     addCourse = ()=>{
-      this.props.addCourse(this.state)
+      this.setState({loading:true})
+      this.props.addCourse(this.state,()=>{
+           this.setState({loading:false})
+      })
     }
     render() { 
         return (
@@ -100,10 +103,10 @@ function mapStateToProps(state) {
       },
       fetchAllLevels: () => {
         dispatch(actions.fetchAllLevels())
-    },
-    addCourse:(data)=>{
-      dispatch(action.addCourse(data))
-    }
+      },
+      addCourse:(data)=>{
+        dispatch(action.addCourse(data))
+      }
   }
 }
  
