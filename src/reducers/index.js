@@ -8,13 +8,15 @@ import {authReducer} from "./auth-reducer"
 import {userReducer} from './users-reducer'
 import {departmentReducer} from './department-reducer'
 import { coursesReducer} from './courses-reducer'
+import {levelsReducer } from './levels-reducers'
 
  export const init = () => {
   const reducer = combineReducers({
     auth:authReducer,
     users:userReducer,
     departments:departmentReducer,
-    courses:combineReducers
+    courses:coursesReducer,
+    levels:levelsReducer
   });
 
 

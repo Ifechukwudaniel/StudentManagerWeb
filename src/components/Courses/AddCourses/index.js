@@ -10,49 +10,18 @@ import {
   Divider,
   Grid,
   Button,
-  TextField
+  Select,
+  MenuItem,
+  TextField,
+  InputLabel
 } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const AddCourses = props => {
-  const { className, ...rest } = props;
-
+const AddCourses = ({className, courseCode,courses, description,department,loading, levels, handleChange,...rest}) => {
   const classes = useStyles();
-
-  const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
-  });
-
-  const handleChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
-
-  const states = [
-    {
-      value: 'alabama',
-      label: 'Alabama'
-    },
-    {
-      value: 'new-york',
-      label: 'New York'
-    },
-    {
-      value: 'san-francisco',
-      label: 'San Francisco'
-    }
-  ];
-
   return (
     <Card
       {...rest}
@@ -63,7 +32,7 @@ const AddCourses = props => {
         noValidate
       >
         <CardHeader
-          title="Create A new user"
+          title="Create a new course"
         />
         <Divider />
         <CardContent>
@@ -76,15 +45,43 @@ const AddCourses = props => {
               md={4}
               xs={12}
             >
+                <InputLabel> Department</InputLabel>
+                <Select
+                  name='department'
+                  onChange={handleChange}
+                >
+                  {department.map((value)=>(
+                      <MenuItem value={value._id}>{value.name}</MenuItem>
+                  ))}
+                </Select>
+            </Grid>
+            <Grid
+              item
+              md={4}
+              xs={12}
+            >
+                <InputLabel> Course</InputLabel>
+                <Select
+                  name='course'
+                  onChange={handleChange}
+                >
+                  {levels.map((value)=>(
+                      <MenuItem value={value._id}>{value.number}</MenuItem>
+                  ))}
+                </Select>
+            </Grid>
+            <Grid
+              item
+              md={4}
+              xs={12}
+            >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
+                label="Course Code"
                 margin="dense"
-                name="firstName"
+                name="courseCode"
                 onChange={handleChange}
                 required
-                value={values.firstName}
                 variant="outlined"
               />
             </Grid>
@@ -95,28 +92,10 @@ const AddCourses = props => {
             >
               <TextField
                 fullWidth
-                label="Last name"
+                label="Description"
                 margin="dense"
-                name="lastName"
+                name="description"
                 onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Phone Number"
-                margin="dense"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
                 variant="outlined"
               />
             </Grid>
@@ -128,7 +107,7 @@ const AddCourses = props => {
             color="primary"
             variant="contained"
           >
-            Save details
+            {loading?"Loading..":"Add Course"}
           </Button>
         </CardActions>
       </form>

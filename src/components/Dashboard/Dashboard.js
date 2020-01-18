@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = ({users, departments}) => {
+const Dashboard = ({users, departments, courses}) => {
   const classes = useStyles();
 
   return (
@@ -58,7 +58,7 @@ const Dashboard = ({users, departments}) => {
           xl={6}
           xs={12}
         >
-          <TotalCourses />
+           <TotalCourses courses = {courses.allCourses} /> 
         </Grid>
       </Grid>
     </div>

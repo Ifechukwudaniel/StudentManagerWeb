@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import Dashboard from '../components/Dashboard'
 import {connect} from 'react-redux'
 import * as action from '../actions'
+import { coursesReducer } from '../reducers/courses-reducer';
 class DashboardScreen extends Component {
   componentWillMount(){
-    this.props.dispatch(action.fetchAllDepartment())
-    this.props.dispatch(action.fetchAllUsers())
+    this.props.fetchAllDepartment()
+    this.props.fetchAllUsers()
+    this.props.fetchAllCourses()
   }
     render() { 
         return (
             <div>
                  <Dashboard 
-                 users={this.props.users}
+                   users={this.props.users}
                   departments={this.props.departments}
+                  courses = {this.props.courses}
                  />
             </div>
         );
@@ -22,8 +25,24 @@ function mapStateToProps(state) {
     return {
       auth: state.auth,
       users:state.users,
-      departments:state.departments
-
+      departments:state.departments,
+      courses:state.courses
     }
   }
-export default connect(mapStateToProps)(DashboardScreen);
+  const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+      fetchAllDepartment: () => {
+        dispatch(action.fetchAllDepartment())
+      },
+      fetchAllUsers: () => {
+        dispatch(action.fetchAllUsers())
+      },
+      fetchAllCourses: () => {
+        dispatch(action.fetchAllCourses())
+      },
+      fetchAllLevels:()=>{
+        dispatch(action.fetchAllLevels())
+      }
+    }
+  }
+export default connect(mapStateToProps,mapDispatchToProps)(DashboardScreen);

@@ -45,7 +45,7 @@ const Topbar = props => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
-            onClick={()=>props.dispatch(action.logOut())}
+            onClick={()=>{props.dispatch(action.logOut())}}
           >
             <InputIcon />
           </IconButton>

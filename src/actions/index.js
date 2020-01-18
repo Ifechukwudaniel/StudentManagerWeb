@@ -1,3 +1,5 @@
+import { FETCH_ALL_COURSES_SUCCESS, FETCH_ALL_COURSES_FAILURE } from "./types";
+
 const authService = require("../services/authService");
 const axios = require('axios');
 const config = require('../config');
@@ -9,7 +11,10 @@ const {
    FETCH_ALL_USERS_FAILURE,
    FETCH_ALL_DEPARTMENT_FAILURE,
    FETCH_ALL_DEPARTMENT_SUCCESS,
+   FETCH_ALL_LEVELS_SUCCESS,
+   FETCH_ALL_LEVELS_FAILURE,
    CREATE_USER_FAILURE,
+
 } = require('./types')
 const jwt = require('jsonwebtoken')
 
@@ -34,7 +39,7 @@ export const login = (userData, navigate) => {
   }
 
 
-export const loginSuccess = (navigate) => {
+export const loginSuccess = (navigate=()=>{}) => {
     const {name ,matricNumber} = jwt.decode(localStorage.getItem(tokenName),tokenName)
     navigate()
     return {
@@ -44,7 +49,7 @@ export const loginSuccess = (navigate) => {
     }
   }
 
-  const loginFailure = (error) => {
+ export const loginFailure = (  error) => {
     return {
       type: LOGIN_FAILURE,
       error
@@ -110,13 +115,6 @@ export const creatUsersFailure= (error) => {
   }
 }
 
-
-
-
-
-
-
-
 export const fetchAllDepartment  = () => {
   return dispatch => {
     return axios.get(`${config.apiUrl}/department/`)
@@ -145,7 +143,7 @@ export const fetchAllDepartmentsFailure = (error) => {
   }
 }
 
-export const addDepartment= (data, cd)=>{
+export const addDepartment= (data, cd=()=>{})=>{
   const x = cd;
  return dispatch=>{
    axios.post(`${config.apiUrl}/department/create`,
@@ -160,4 +158,62 @@ export const addDepartment= (data, cd)=>{
     //  dispatch(creatUsersFailure(response.data.error))
    })
  }
+}
+
+export const fetchAllCourses = ()=>{
+  return dispatch => {
+    return axios.get(`${config.apiUrl}/courses/`)
+      .then(res => res.data)
+      .then((data) => {
+          dispatch(fetchAllCoursesSuccess(data))
+      })
+      .catch(({response}) => {
+        console.log(response)
+         //dispatch(fetchAllDepartmentsFailure(response.error))
+      })
+  }
+}
+
+export const fetchAllCoursesSuccess = (courses) => {
+  return {
+    type: FETCH_ALL_COURSES_SUCCESS,
+     courses
+  }
+}
+
+export const fetchAllCoursesFailure = (error) => {
+  return {
+    type: FETCH_ALL_COURSES_FAILURE,
+    error
+  }
+}
+
+
+export const fetchAllLevels = ()=>{
+  return dispatch => {
+    return axios.get(`${config.apiUrl}/levels/`)
+      .then(res => res.data)
+      .then((data) => {
+        console.log(data)
+          dispatch(fetchAllLevelsSuccess(data))
+      })
+      .catch(({response}) => {
+        console.log(response)
+         //dispatch(fetchAllDepartmentsFailure(response.error))
+      })
+  }
+}
+
+export const fetchAllLevelsSuccess = (levels) => {
+  return {
+    type: FETCH_ALL_LEVELS_SUCCESS,
+     levels
+  }
+}
+
+export const fetchAllLevelsFailure = (error) => {
+  return {
+    type: FETCH_ALL_LEVELS_FAILURE,
+    error
+  }
 }

@@ -23,21 +23,23 @@ export default function SimpleTable({data}) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">Role</TableCell>
-            <TableCell align="right">matricNumber</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Id</TableCell>
+            <TableCell   component="th" scope="row" >title</TableCell>
+            <TableCell align="right">courseCode</TableCell>
+            <TableCell align="right">TotalMaterial</TableCell>
+            <TableCell align="right">Department</TableCell>
+            <TableCell align="right">Level</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map(row => (
             <TableRow key={row._id}>
               <TableCell component="th" scope="row">
-                {row.role}
+                {row.title}
               </TableCell>
-              <TableCell align="right">{row.matricNumber}</TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row._id}</TableCell>
+              <TableCell align="right">{row.courseCode}</TableCell>
+              <TableCell align="right">{1}</TableCell>
+              <TableCell align="right">{row.department.name}</TableCell>
+              <TableCell align="right">{row.level.number}</TableCell>
             </TableRow>
           ))}
         </TableBody>

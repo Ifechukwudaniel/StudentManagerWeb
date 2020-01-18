@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter  , Route, Redirect, Switch } from 'react-router-dom';
 import  RouteWithLayout from "./components/RouteWIthLayout";
+import  PrivateRoute from './components/Route/PrivateRoute'
 import AuthScreen from './screens/AuthScreen';
 import CourseScreen from './screens/CourseScreen';
 import UsersScreen from './screens/UsersScreen';
@@ -22,43 +23,43 @@ export default class Navigation extends Component {
                  path="/"
                  component={AuthScreen}
                  />
-                 <RouteWithLayout
+                 <PrivateRoute
                   component={DashboardScreen}
                   exact
                   layout={MainLayout}
                   path="/dashboard"
                 />
-               <RouteWithLayout
+               <PrivateRoute
                   component={UsersScreen}
                   exact
                   layout={MainLayout}
                   path="/users"
                 />
-                 <RouteWithLayout
+                 <PrivateRoute
                   component={CourseScreen}
                   exact
                   layout={MainLayout}
                   path="/courses"
                 />
-                 <RouteWithLayout
+                 <PrivateRoute
                   component={DepartmentScreen}
                   exact
                   layout={MainLayout}
                   path="/department"
                 />
-                  <RouteWithLayout
+                  <PrivateRoute
                   component={LevelScreen}
                   exact
                   layout={MainLayout}
                   path="/level"
                 />
-                <RouteWithLayout
+                <PrivateRoute
                   component={MaterialScreen}
                   exact
                   layout={MainLayout}
                   path="/material"
                 />
-                <RouteWithLayout
+                <PrivateRoute
                   component={BlogScreen}
                   exact
                   layout={MainLayout}
