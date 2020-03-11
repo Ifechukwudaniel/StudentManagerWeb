@@ -2,14 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Divider, Drawer } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import LocationCityIcon from '@material-ui/icons/LocationCity';
-import LayersIcon from '@material-ui/icons/Layers';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
-import AttachmentIcon from '@material-ui/icons/Attachment';
+import { Divider, Drawer, Hidden , Avatar} from '@material-ui/core';
+import {Input, CheckBoxRounded, Dashboard , People, MenuBook, LocationCity, Layers,Announcement, Attachment}  from '@material-ui/icons';
 
 import { Profile, SidebarNav } from './components';
 
@@ -33,6 +27,11 @@ const useStyles = makeStyles(theme => ({
   },
   nav: {
     marginBottom: theme.spacing(2)
+  },
+  avatar:{
+    width:'50%',
+    alignSelf:'center',
+    height:'15%'
   }
 }));
 
@@ -45,37 +44,47 @@ const Sidebar = props => {
     {
       title: 'Dashboard',
       href: '/dashboard',
-      icon: <DashboardIcon />
+      icon: <Dashboard />
     },
     {
       title: 'Users',
       href: '/users',
-      icon: <PeopleIcon />
+      icon: <People />
     },
     {
       title: 'Courses',
       href: '/courses',
-      icon: <MenuBookIcon />
+      icon: <MenuBook />
     },
     {
       title: 'Departments',
       href: '/department',
-      icon: <LocationCityIcon/>
+      icon: <LocationCity/>
     },
     {
       title: 'Levels',
       href: '/level',
-      icon: <LayersIcon />
+      icon: <Layers/>
     },
     {
       title: 'Materials',
       href: '/material',
-      icon: <AttachmentIcon/>
+      icon: <Attachment/>
     },
     {
       title: 'Blog',
       href: '/blog',
-      icon: <AnnouncementIcon />
+      icon: <Announcement/>
+    },
+    {
+      title: 'Attendance',
+      href: '/attendance',
+      icon: <CheckBoxRounded/>
+    },
+    {
+      title: 'Logout',
+      href: '/logout',
+      icon: <Input/>
     },
   ];
 
@@ -90,12 +99,14 @@ const Sidebar = props => {
       <div
         {...rest}
         className={clsx(classes.root, className)}
-      >
+      > 
+        <Avatar className={classes.avatar}/>
         <Profile />
         <Divider className={classes.divider} />
         <SidebarNav
           className={classes.nav}
           pages={pages}
+          handleClose= {onClose}
         />
       </div>
     </Drawer>
