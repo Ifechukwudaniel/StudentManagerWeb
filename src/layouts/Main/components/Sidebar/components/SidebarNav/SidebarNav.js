@@ -50,7 +50,7 @@ const CustomRouterLink = forwardRef((props, ref) => (
 ));
 
 const SidebarNav = props => {
-  const { pages, className, ...rest } = props;
+  const { pages, className,handleClose, ...rest } = props;
 
   const classes = useStyles();
 
@@ -64,6 +64,7 @@ const SidebarNav = props => {
           className={classes.item}
           disableGutters
           key={page.title}
+          onClick={()=>handleClose()}
         >
           <Button
             activeClassName={classes.active}
@@ -82,7 +83,8 @@ const SidebarNav = props => {
 
 SidebarNav.propTypes = {
   className: PropTypes.string,
-  pages: PropTypes.array.isRequired
+  pages: PropTypes.array.isRequired,
+  handleClose:PropTypes.func
 };
 
 export default SidebarNav;
