@@ -10,6 +10,12 @@ import Axios from 'axios';
 const {tokenName, apiUrl} = require('../config')
 
 class AuthScreen extends Component {
+  componentWillMount(){
+      if(localStorage.getItem("BIU_WEB_APP")!= undefined){
+        this.props.autoLogin(this.navigate)
+      }
+      return
+  }
   state= {
      matricNumber:"",
      password:"",
@@ -23,7 +29,7 @@ class AuthScreen extends Component {
 
   loginUser =(value)=> {
     value.preventDefault()
-    this.props.dispatch(actions.login(this.state,this.navigate));
+    this.props.login(this.state,this.navigate);
   }
    
   navigate=()=>{
@@ -54,4 +60,16 @@ function mapStateToProps(state) {
     auth: state.auth
   }
 }
-export default connect(mapStateToProps)(AuthScreen)
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    autoLogin:(navigate)=>{
+      dispatch(actions.loginSuccess(navigate))
+    },
+    login:(user,navigate)=>{
+      dispatch(actions.login(user,navigate))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen)
