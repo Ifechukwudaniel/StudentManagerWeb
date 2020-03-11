@@ -14,8 +14,8 @@ class AuthService {
   }
 
   saveToken(token) {
-    //console.error(token)
-    //localStorage.setItem(this.tokenKey, token);
+    console.error(token)
+    localStorage.setItem(this.tokenKey, token);
   }
 
   invalidateUser() {
@@ -30,7 +30,7 @@ class AuthService {
 
   getUsername() {
      console.log(this.getToken())
-    //return this.decode(this.getToken()).username;
+    return this.decode(this.getToken()).username;
   }
 
   isValid(token) {
