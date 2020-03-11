@@ -9,6 +9,8 @@ import DepartmentScreen from './screens/DepartmentScreen';
 import LevelScreen from './screens/LevelScreen';
 import MaterialScreen from './screens/MaterialScreen';
 import BlogScreen from './screens/BlogScreen';
+import LogoutScreen from './screens/LogoutScreen';
+import AttendanceScreen from './screens/AttendanceScreen';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import DashboardScreen from './screens/DashboardScreen';
 
@@ -64,6 +66,18 @@ export default class Navigation extends Component {
                   exact
                   layout={MainLayout}
                   path="/blog"
+                />
+                <PrivateRoute
+                  component={AttendanceScreen}
+                  exact
+                  layout={MainLayout}
+                  path="/attendance"
+                />
+                 <Route
+                  component={LogoutScreen}
+                  exact
+                  layout={MainLayout}
+                  path="/logout"
                 />
             </Switch>
          </BrowserRouter>
