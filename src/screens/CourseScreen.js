@@ -45,8 +45,8 @@ class CoursesScreen extends Component {
             >
                 <Grid
                 item
-                lg={6}
-                sm={6}
+                lg={3}
+                sm={3}
                 xl={3}
                 xs={12}
                 >
@@ -55,9 +55,9 @@ class CoursesScreen extends Component {
 
                 <Grid
                 item
-                lg={6}
-                sm={6}
-                xl={3}
+                lg={9}
+                sm={9}
+                xl={9}
                 xs={12}>
                      <AddCourses
                       description={this.state.description}

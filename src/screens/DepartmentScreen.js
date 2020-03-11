@@ -31,8 +31,8 @@ class DepartmentScreen extends Component {
             >
                 <Grid
                 item
-                lg={6}
-                sm={6}
+                lg={3}
+                sm={3}
                 xl={3}
                 xs={12}
                 >
@@ -41,9 +41,9 @@ class DepartmentScreen extends Component {
 
                 <Grid
                 item
-                lg={6}
-                sm={6}
-                xl={3}
+                lg={9}
+                sm={9}
+                xl={9}
                 xs={12}>
                      <AddDepartment
                       name={this.state.name} 
