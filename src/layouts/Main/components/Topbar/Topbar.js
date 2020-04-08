@@ -11,7 +11,8 @@ import * as action from '../../../../actions'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: 'none'
+    boxShadow: 'none',
+    background:theme.palette.primary.main
   },
   flexGrow: {
     flexGrow: 1

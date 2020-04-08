@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TotalCourses = props => {
-  const { className, coursesLength, ...rest } = props;
+  const { className, blogsNumber, ...rest } = props;
 
   const classes = useStyles();
 
@@ -52,13 +52,13 @@ const TotalCourses = props => {
               gutterBottom
               variant="body2"
             >
-              TOTAL COURSES
+              TOTAL BLOGS
             </Typography>
             <Typography
               color="inherit"
               variant="h3"
             >
-              {coursesLength}
+              {blogsNumber}
             </Typography>
           </Grid>
           <Grid item>
@@ -74,7 +74,7 @@ const TotalCourses = props => {
 
 TotalCourses.propTypes = {
   className: PropTypes.string,
-  coursesLength:PropTypes.number
+  blogNumber: PropTypes.number
 };
 
 export default TotalCourses;

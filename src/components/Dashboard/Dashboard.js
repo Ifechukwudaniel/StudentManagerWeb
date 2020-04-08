@@ -58,7 +58,7 @@ const Dashboard = ({users, departments, courses}) => {
           xl={6}
           xs={12}
         >
-           <TotalCourses courses = {courses.allCourses} /> 
+           <TotalCourses coursesLength= {courses.allCourses.length} /> 
         </Grid>
       </Grid>
     </div>

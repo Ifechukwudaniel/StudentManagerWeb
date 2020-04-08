@@ -50,7 +50,7 @@ class CoursesScreen extends Component {
                 xl={3}
                 xs={12}
                 >
-                    <TotalCourses courses={this.props.courses.allCourses}/> 
+                    <TotalCourses coursesLength={this.props.courses.allCourses.length}/> 
                </Grid>
 
                 <Grid

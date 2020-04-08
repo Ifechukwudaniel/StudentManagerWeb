@@ -13,7 +13,7 @@ import {
   Select,
   MenuItem,
   TextField,
-  InputLabel
+  InputLabel,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -42,13 +42,14 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
           >
             <Grid
               item
-              md={4}
+              md={6}
               xs={12}
             >
                 <InputLabel> Department</InputLabel>
                 <Select
                   name='department'
                   onChange={handleChange}
+                  value={null}
                 >
                   {department.map((value)=>(
                       <MenuItem value={value._id}>{value.name}</MenuItem>
@@ -57,13 +58,14 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             </Grid>
             <Grid
               item
-              md={4}
+              md={6}
               xs={12}
             >
                 <InputLabel> Level</InputLabel>
                 <Select
                   name='level'
                   onChange={handleChange}
+                  value={null}
                 >
                   {levels.map((value)=>(
                       <MenuItem value={value._id}>{value.number}</MenuItem>
@@ -72,7 +74,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             </Grid>
             <Grid
               item
-              md={4}
+              md={6}
               xs={12}
             >
               <TextField
@@ -87,21 +89,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             </Grid>
             <Grid
               item
-              md={4}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Description"
-                margin="dense"
-                name="description"
-                onChange={handleChange}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={4}
+              md={6}
               xs={12}
             >
               <TextField
@@ -111,6 +99,22 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
                 name="title"
                 onChange={handleChange}
                 variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={12}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Description"
+                margin="dense"
+                name="description"
+                onChange={handleChange}
+                variant="outlined"
+                multiline={true}
+                rows={5}
               />
             </Grid>
           </Grid>

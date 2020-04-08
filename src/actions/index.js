@@ -1,6 +1,7 @@
 import { FETCH_ALL_COURSES_SUCCESS, FETCH_ALL_COURSES_FAILURE } from "./types";
+import axiosService from "../services/axiosService";
 
-const authService = require("../services/authService");
+const AxiosService = require("../services/axiosService");
 const axios = require('axios');
 const config = require('../config');
 const {
@@ -19,6 +20,7 @@ const {
 const jwt = require('jsonwebtoken')
 
 const {tokenName}= require('../config');
+const  axiosAuth= axiosService.initInstance();
 
 export const login = (userData, navigate) => {
     return dispatch => {
@@ -57,6 +59,7 @@ export const loginSuccess = (navigate=()=>{}) => {
   }
 
  export const logOut = ()=>{
+   localStorage.removeItem(tokenName)
     return {
      type:LOGOUT
     }
@@ -65,7 +68,7 @@ export const loginSuccess = (navigate=()=>{}) => {
 
 export const fetchAllUsers  = () => {
   return dispatch => {
-    return axios.get(`${config.apiUrl}/users`)
+    return axiosAuth.get(`${config.apiUrl}/users`)
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllUsersSuccess(data))
@@ -95,15 +98,16 @@ export const fetchAllUsersFailure = (error) => {
 export const creatUsers= (data, cd)=>{
      const x = cd;
     return dispatch=>{
-      axios.post(`${config.apiUrl}/auth/register`,
+      axiosAuth.post(`${config.apiUrl}/auth/register`,
       {...data, register:true})
       .then(res=>res.data)
       .then(data=>{
          dispatch(fetchAllUsers())
          x()
       })
-      .catch((response)=>{
-         dispatch(creatUsersFailure(response.data.error))
+      .catch(({response})=>{
+        //  console.log(response.data.error)
+        //  dispatch(creatUsersFailure(response.data.error))
       })
     }
 }
@@ -117,7 +121,7 @@ export const creatUsersFailure= (error) => {
 
 export const fetchAllDepartment  = () => {
   return dispatch => {
-    return axios.get(`${config.apiUrl}/department/`)
+    return axiosAuth.get(`${config.apiUrl}/department/`)
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllDepartmentsSuccess(data))
@@ -146,7 +150,7 @@ export const fetchAllDepartmentsFailure = (error) => {
 export const addDepartment= (data, cd=()=>{})=>{
   const x = cd;
  return dispatch=>{
-   axios.post(`${config.apiUrl}/department/create`,
+   axiosAuth.post(`${config.apiUrl}/department/create`,
    {...data})
    .then(res=>res.data)
    .then(data=>{
@@ -162,7 +166,7 @@ export const addDepartment= (data, cd=()=>{})=>{
 
 export const fetchAllCourses = ()=>{
   return dispatch => {
-    return axios.get(`${config.apiUrl}/courses/`)
+    return axiosAuth.get(`${config.apiUrl}/courses/`)
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllCoursesSuccess(data))
@@ -191,7 +195,7 @@ export const fetchAllCoursesFailure = (error) => {
 
 export const fetchAllLevels = ()=>{
   return dispatch => {
-    return axios.get(`${config.apiUrl}/levels/`)
+    return axiosAuth.get(`${config.apiUrl}/levels/`)
       .then(res => res.data)
       .then((data) => {
         console.log(data)
@@ -221,10 +225,27 @@ export const fetchAllLevelsFailure = (error) => {
 
 export const addCourse = (data,cb=()=>{})=>{
   return dispatch => {
-    return axios.post(`${config.apiUrl}/course/create`, data)
+    return axiosAuth.post(`${config.apiUrl}/course/create`, data)
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllCourses())
+      })
+      .catch((error) => {
+        console.log(error)
+         //dispatch(fetchAllDepartmentsFailure(response.error))
+      })
+  }
+}
+
+
+export const addLevel = (data,cb=()=>{})=>{
+  return dispatch => {
+    const x = cb
+    return axiosAuth.post(`${config.apiUrl}/level/create`, data)
+      .then(res => res.data)
+      .then((data) => {
+          x()
+          dispatch(fetchAllLevels())
       })
       .catch((error) => {
         console.log(error)
