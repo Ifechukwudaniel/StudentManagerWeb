@@ -28,14 +28,15 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+ 
 }));
 
 export default function SignIn({matricNumber,password,rememberMe,onChange,onSubmit, error}) {
   const classes = useStyles();
 
   return (
+   <div className={classes.back}   >
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -91,5 +92,6 @@ export default function SignIn({matricNumber,password,rememberMe,onChange,onSubm
         </form>
       </div>
     </Container>
+    </div>
   );
 }

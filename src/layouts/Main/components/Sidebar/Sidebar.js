@@ -72,8 +72,8 @@ const Sidebar = props => {
       icon: <Attachment/>
     },
     {
-      title: 'Blog',
-      href: '/blog',
+      title: 'Notifications',
+      href: '/notifications',
       icon: <Announcement/>
     },
     {
