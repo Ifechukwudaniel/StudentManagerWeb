@@ -65,7 +65,7 @@ export default class Navigation extends Component {
                   component={BlogScreen}
                   exact
                   layout={MainLayout}
-                  path="/blog"
+                  path="/notifications"
                 />
                 <PrivateRoute
                   component={AttendanceScreen}
