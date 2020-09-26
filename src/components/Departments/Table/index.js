@@ -34,10 +34,11 @@ export default function SimpleTable({data}) {
   const  rows = data
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table  checkboxSelection  className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="left">Department</TableCell>
+            <TableCell align="left">Level</TableCell>
             <TableCell align='center'>Edit</TableCell>
             <TableCell align="center">Delete</TableCell>
             <TableCell align="center">Rename</TableCell>
@@ -48,6 +49,9 @@ export default function SimpleTable({data}) {
             <TableRow key={row._id}>
               <TableCell align="left">
                 {row.name}
+              </TableCell>
+              <TableCell align="left">
+                {row.levels.length}
               </TableCell>
               <TableCell align='center'>
                  <Button contained="true"  className={classes.edit}>Edit </Button>
