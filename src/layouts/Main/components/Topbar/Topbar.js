@@ -12,7 +12,7 @@ import * as action from '../../../../actions'
 const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: 'none',
-    background:theme.palette.primary.main
+    background:"#E8A33D"
   },
   flexGrow: {
     flexGrow: 1

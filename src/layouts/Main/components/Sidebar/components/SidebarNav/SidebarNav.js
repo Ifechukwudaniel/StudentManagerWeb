@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: theme.typography.fontWeightMedium
   },
   icon: {
-    color: theme.palette.icon,
+    color: "#E8A33D",
     width: 24,
     height: 24,
     display: 'flex',
