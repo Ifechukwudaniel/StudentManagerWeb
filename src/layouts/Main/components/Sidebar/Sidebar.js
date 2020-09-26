@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer, Hidden , Avatar} from '@material-ui/core';
-import {Input, CheckBoxRounded, Dashboard , People, MenuBook, LocationCity, Layers,Announcement, Attachment}  from '@material-ui/icons';
+import {Input, CheckBoxRounded, Dashboard , People, MenuBook, LocationCity, Layers,Announcement, Attachment, AvTimer}  from '@material-ui/icons';
 
 import { Profile, SidebarNav } from './components';
 
@@ -80,6 +80,11 @@ const Sidebar = props => {
       title: 'Attendance',
       href: '/attendance',
       icon: <CheckBoxRounded/>
+    },
+    {
+      title: 'TimeTable',
+      href: '/timetable',
+      icon: <AvTimer/>
     },
     {
       title: 'Logout',
