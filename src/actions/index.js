@@ -150,12 +150,12 @@ export const fetchAllDepartmentsFailure = (error) => {
 export const addDepartment= (data, cd=()=>{})=>{
   const x = cd;
  return dispatch=>{
-   axiosAuth.post(`${config.apiUrl}/department/create`,
+   axiosAuth.post(`${config.apiUrl}/department/levels/create`,
    {...data})
    .then(res=>res.data)
    .then(data=>{
       dispatch(fetchAllDepartment())
-      x()
+      alert("jjsjsjjsj")
    })
    .catch((response)=>{
      console.log(response)

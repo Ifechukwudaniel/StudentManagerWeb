@@ -43,19 +43,32 @@ const AddDepartments = props => {
             container
             spacing={3}
           >
-            <Grid
+          <Grid
               item
-              md={12}
+              md={6}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="name of department"
+                label="department"
                 margin="dense"
                 name="name"
                 onChange={handleChange}
-                required
-                value={name}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                type="number"
+                label="total number of level"
+                margin="dense"
+                name="numberOfLevels"
+                onChange={handleChange}
                 variant="outlined"
               />
             </Grid>

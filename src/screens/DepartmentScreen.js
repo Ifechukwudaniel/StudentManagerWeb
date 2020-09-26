@@ -9,6 +9,7 @@ import * as actions from '../actions'
 class DepartmentScreen extends Component {
     state= {
         name:"",
+        numberOfLevels:0,
         loading:false
     }
     componentDidMount(){
@@ -21,7 +22,7 @@ class DepartmentScreen extends Component {
         this.setState({loading:true})
         this.props.dispatch(action.addDepartment(this.state, ()=>{
             this.setState({loading:false})
-        }))
+     }))
     }
     render() { 
         return (
