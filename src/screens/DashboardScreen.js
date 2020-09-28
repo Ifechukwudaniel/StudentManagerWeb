@@ -13,9 +13,7 @@ class DashboardScreen extends Component {
         return (
             <div>
                  <Dashboard 
-                   users={this.props.users}
-                  departments={this.props.departments}
-                  courses = {this.props.courses}
+                  
                  />
             </div>
         );

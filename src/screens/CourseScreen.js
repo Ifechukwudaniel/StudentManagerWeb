@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import * as action from '../actions'
-import  {Table,AddCourses } from '../components/Courses'
+import  {Table,AddCourses, CoursesDescription } from '../components/Courses'
 import {TotalCourses} from '../components/Dashboard/components'
-import {Grid, } from '@material-ui/core'
+import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
  
 class CoursesScreen extends Component {
@@ -41,35 +41,28 @@ class CoursesScreen extends Component {
         return (
                <Grid
               container
-              spacing={5}
+              spacing={4}
             >
-                <Grid
-                item
-                lg={3}
-                sm={3}
-                xl={3}
+               <Grid
+                 item
+                lg={12}
+                sm={12}
+                xl={12}
                 xs={12}
                 >
-                    <TotalCourses coursesLength={this.props.courses.allCourses.length}/> 
-               </Grid>
-
-                <Grid
-                item
-                lg={9}
-                sm={9}
-                xl={9}
-                xs={12}>
-                     <AddCourses
-                      description={this.state.description}
-                      department={this.props.departments.allDepartments}
-                      courseCode={this.state.courseCode}
-                      levels={this.state.departmentLevels}
-                      loading={this.state.loading}
-                      handleChange= {this.handleChange}
-                      addCourse={this.addCourse}
-                    />  
+                  <CoursesDescription/>
                 </Grid>
 
+               <Grid
+                item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                     <TotalCourses  coursesLength= {this.props.courses.allCourses.length}/> 
+               </Grid>
+                   
                 <Grid
                  item
                 lg={12}

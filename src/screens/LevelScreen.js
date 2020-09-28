@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import AddLevel from '../components/Level/components/AddLevel/AddLevel'
+import  {Table} from '../components/Level'
 import {Grid, } from '@material-ui/core'
 import * as actions from '../actions'
- 
+import Description from '../components/description';
+import TotalLevel from '../components/Dashboard/components/TotalLevel';
  
 class LevelScreen extends Component {
     state={
@@ -11,33 +12,42 @@ class LevelScreen extends Component {
         loading:false,
         department:''
     }
-    handleChange=(event)=>{
-        this.setState({[event.target.name]:event.target.value})
-    }
-     addLevel=()=>{
-       this.setState({loading:true})
-      this.props.addLevel(this.state, ()=>{
-        this.setState({loading:false})
-      })
-     }
+    componentDidMount(){
+      this.props.fetchAllLevels()
+  }
     render() { 
         return (
           <Grid
            container
            spacing={5}
           >
-            <Grid
-             item
-              md={12}
-              xs={12}
-            >
-            <AddLevel department={this.props.departments.allDepartments} 
-                      handleChange={this.handleChange} 
-                      number={this.state.number}
-                      loading={this.state.loading}
-                       addLevel={this.addLevel}
-                      />
-            </Grid>
+           <Grid
+                 item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <Description screenName="Level"/>
+                </Grid>
+                <Grid
+                 item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <TotalLevel levels={this.props.levels.allLevels}/>
+                </Grid>
+                <Grid
+                 item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <Table data={this.props.levels.allLevels}/>
+                </Grid>
           </Grid>
         );
     }
@@ -52,11 +62,8 @@ function mapStateToProps(state) {
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      fetchAllDepartment: () => {
-        dispatch(actions.fetchAllDepartment())
-      },
-      fetchAllCourses: () => {
-        dispatch(actions.fetchAllCourses())
+      fetchAllLevels: () => {
+        dispatch(actions.fetchAllLevels())
       },
       addLevel:(data)=>{
         dispatch(actions.addLevel(data))

@@ -1,12 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import MaterialTable from "material-table"
 
 const useStyles = makeStyles({
   table: {
@@ -15,29 +11,54 @@ const useStyles = makeStyles({
 });
 
 
-export default function SimpleTable({data}) {
+export default function Table({data}) {
   const classes = useStyles();
-  const  rows = data
+  const [row, setData] = useState(data);
+
+  const [columns, setColumns] = useState([
+    { title: 'Department', field: 'department',  editable: 'never'},
+    { title: 'Level', field:'level', filtering: false,  editable: 'never' },
+    { title: 'Has A TimeTable', field:'hasTimeTable' , filtering: false,  editable: 'never'},
+    { title: 'Total Number Of Courses', field:'totalCourses', filtering: false ,  editable: 'never'},
+  ]);
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Department</TableCell>
-            <TableCell align="right">Id</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row._id}>
-              <TableCell align="left">
-                {row.name}
-              </TableCell>
-              <TableCell align="left">{row._id}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          <MaterialTable
+         title="Levels"
+         columns={columns}
+         data={data}
+          options= {{
+            sorting:true,
+            exportButton: true,
+            filtering:true,
+          }}
+         editable={{
+       onRowUpdate: (newData, oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const dataUpdate = [...row];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newData;
+              setData([...dataUpdate]);
+
+              resolve();
+            }, 1000)
+          }),
+        onRowDelete: oldData =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const dataDelete = [...row];
+              const index = oldData.tableData.id;
+              dataDelete.splice(index, 1);
+              setData([...dataDelete]);
+              
+              resolve()
+            }, 1000)
+          }),
+      }}
+         
+      />
+           
     </TableContainer>
   );
 }
