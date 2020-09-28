@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import * as action from '../actions'
-import  {Table,AddDepartment } from '../components/Departments'
+import  {Table} from '../components/Departments'
 import {TotalDepartment,} from '../components/Dashboard/components'
 import {Grid, } from '@material-ui/core'
 import * as actions from '../actions'
+import Description from '../components/description'
  
 class DepartmentScreen extends Component {
     state= {
@@ -28,19 +29,29 @@ class DepartmentScreen extends Component {
         return (
                <Grid
               container
-              spacing={5}
+              spacing={4}
             >
+             <Grid
+                item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                   <Description screenName="Department"/>
+               </Grid>
+
                 <Grid
                 item
-                lg={3}
-                sm={3}
-                xl={3}
+                lg={12}
+                sm={12}
+                xl={12}
                 xs={12}
                 >
                      <TotalDepartment departments= {this.props.departments.allDepartments}/> 
                </Grid>
 
-                <Grid
+                {/* <Grid
                 item
                 lg={9}
                 sm={9}
@@ -52,7 +63,7 @@ class DepartmentScreen extends Component {
                       addDepartment={this.addDepartment}
                       loading={this.state.loading}
                     /> 
-                </Grid>
+                </Grid> */}
 
                 <Grid
                  item
@@ -62,7 +73,7 @@ class DepartmentScreen extends Component {
                 xs={12}
                 >
                     <Table 
-                    data={this.props.departments.allDepartments}
+                       data={this.props.departments.allDepartments}
                     />
                 </Grid>
             </Grid>

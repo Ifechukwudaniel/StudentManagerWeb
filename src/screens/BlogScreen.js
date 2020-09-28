@@ -1,13 +1,50 @@
 import React, { Component } from 'react';
- 
-class BlogScreen extends Component {
+import {connect} from 'react-redux'
+import * as action from '../actions'
+import  {Table,AddCourses, CoursesDescription } from '../components/Courses'
+import {TotalCourses} from '../components/Dashboard/components'
+import {Grid, Typography, Paper } from '@material-ui/core'
+import * as actions from '../actions'
+import Description from '../components/description';
+class BlogsScreen extends Component {
+    state= {
+    
+    }
+    handleChange=(event)=>{
+    }
+
+    addCourse = ()=>{
+
+    }
     render() { 
         return (
-            <div>
-                BlogScreen
-            </div>
+               <Grid
+              container
+              spacing={4}
+            >
+               <Grid
+                 item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <Description screenName="Notifications"/>
+                </Grid>
+            </Grid>
         );
     }
 }
  
-export default BlogScreen;
+function mapStateToProps(state) {
+    return {
+     
+    }
+  }
+  const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+     
+  }
+}
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(BlogsScreen);
