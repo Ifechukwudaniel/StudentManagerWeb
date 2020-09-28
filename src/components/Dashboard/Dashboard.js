@@ -20,47 +20,7 @@ const Dashboard = ({users, departments, courses}) => {
 
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        spacing={4}
-      >
-        <Grid
-          item
-          lg={6}
-          sm={6}
-          xl={6}
-          xs={12}
-        >
-          <TotalUsers users={users.allUsers} />
-        </Grid>
-        <Grid
-          item
-          lg={6}
-          sm={6}
-          xl={6}
-          xs={12}
-        >
-         <TotalDepartment departments= {departments.allDepartments} /> 
-        </Grid>
-        <Grid
-          item
-          lg={6}
-          sm={6}
-          xl={6}
-          xs={12}
-        >
-          <TotalMaterials />
-        </Grid>
-        <Grid
-          item
-          lg={6}
-          sm={6}
-          xl={6}
-          xs={12}
-        >
-           <TotalCourses coursesLength= {courses.allCourses.length} /> 
-        </Grid>
-      </Grid>
+      
     </div>
   );
 };
