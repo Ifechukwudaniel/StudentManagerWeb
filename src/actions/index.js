@@ -121,7 +121,7 @@ export const creatUsersFailure= (error) => {
 
 export const fetchAllDepartment  = () => {
   return dispatch => {
-    return axiosAuth.get(`${config.apiUrl}/department/`)
+    return axiosAuth.get(`${config.apiUrl}/department/view`)
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllDepartmentsSuccess(data))
@@ -166,7 +166,7 @@ export const addDepartment= (data, cd=()=>{})=>{
 
 export const fetchAllCourses = ()=>{
   return dispatch => {
-    return axiosAuth.get(`${config.apiUrl}/courses/`)
+    return axiosAuth.get(`${config.apiUrl}/courses/view`)
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllCoursesSuccess(data))
