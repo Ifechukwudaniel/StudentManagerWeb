@@ -105,9 +105,9 @@ const Sidebar = props => {
         {...rest}
         className={clsx(classes.root, className)}
       > 
-        <Avatar className={classes.avatar}/>
-        <Profile />
-        <Divider className={classes.divider} />
+        {/* <Avatar className={classes.avatar}/> */}
+        {/* <Profile /> */}
+        {/* <Divider className={classes.divider} /> */}
         <SidebarNav
           className={classes.nav}
           pages={pages}

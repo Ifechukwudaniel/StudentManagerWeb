@@ -6,37 +6,28 @@ import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import LocationCityIcon from '@material-ui/icons/LocationCity'; 
 
 const useStyles = makeStyles(theme => ({
-root: {
-  height: '100%'
-},
-content: {
-  alignItems: 'center',
-  display: 'flex'
-},
-title: {
-  fontWeight: 700
-},
-avatar: {
-  backgroundColor: theme.palette.success.main,
-  height: 56,
-  width: 56
-},
-icon: {
-  height: 32,
-  width: 32
-},
-difference: {
-  marginTop: theme.spacing(2),
-  display: 'flex',
-  alignItems: 'center'
-},
-differenceIcon: {
-  color: theme.palette.success.dark
-},
-differenceValue: {
-  color: theme.palette.success.dark,
-  marginRight: theme.spacing(1)
-}
+  root: {
+    height: '100%',
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText
+  },
+  content: {
+    alignItems: 'center',
+    display: 'flex'
+  },
+  title: {
+    fontWeight: 700
+  },
+  avatar: {
+    backgroundColor: theme.palette.white,
+    color: theme.palette.primary.main,
+    height: 56,
+    width: 56
+  },
+  icon: {
+    height: 32,
+    width: 32
+  }
 }));
 
 const TotalDepartments = props => {
@@ -46,7 +37,6 @@ const TotalDepartments = props => {
 
   return (
     <Card
-     color='inherit'
       {...rest}
       className={clsx(classes.root, 
       className)}
@@ -60,12 +50,14 @@ const TotalDepartments = props => {
             <Typography
               className={classes.title}
               gutterBottom
+              color="inherit"
               variant="body2"
             >
               TOTAL DEPARTMENTS
             </Typography>
             <Typography
               variant="h2"
+              color="inherit"
             >
                {departments.length}
             </Typography>
