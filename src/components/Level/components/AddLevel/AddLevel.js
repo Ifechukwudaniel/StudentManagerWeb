@@ -20,16 +20,13 @@ import {
   IconButton
 } from '@material-ui/core';
 import PlusIcon from '@material-ui/icons/Add';
+import { addLevel } from '../../../../actions';
 
 const useStyles = makeStyles((theme) =>  ({
   root: {
-    top:120,
     margin:'auto',
-    position: 'absolute',
     width: 500,
     outline: 0
-    // backgroundColor: theme.palette.background.paper,
-    // boxShadow: theme.shadows[5],
   },
   rootOut: {
     height: '100%',
@@ -59,7 +56,7 @@ const useStyles = makeStyles((theme) =>  ({
   }
 }));
 
-const AddLevel = ({className, departments,level, handleChange=()=>{},loading,...rest}) => {
+const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},loading,...rest}) => {
   const classes = useStyles();
   const [modal , setModal] = useState(false)
   return (
@@ -151,7 +148,7 @@ const AddLevel = ({className, departments,level, handleChange=()=>{},loading,...
             color="primary"
             variant="contained"
             onClick={()=>{
-               setModal(false)
+              addLevel()
             }}
             disabled={loading}
           >

@@ -57,9 +57,10 @@ const useStyles = makeStyles((theme) =>  ({
   }
 }));
 
-const AddCourses = ({className, courseCode,courses, description="",department=[],loading, levels=[], handleChange=()=>{},addCourse, coursesLength=0,...rest}) => {
+const AddCourses = ({className, courseCode,courses, description,department,loading, levels, handleChange,addCourse,...rest}) => {
   const classes = useStyles();
   const [modal , setModal] = useState(false)
+  console.log(levels)
   return (
     <div>
     <Card
@@ -120,7 +121,7 @@ const AddCourses = ({className, courseCode,courses, description="",department=[]
                   value={null}
                 >
                   {department.map((value)=>(
-                      <MenuItem value={value._id}>{value.name}</MenuItem>
+                      <MenuItem value={value.id}>{value.name}</MenuItem>
                   ))}
                 </Select>
             </Grid>
@@ -139,7 +140,7 @@ const AddCourses = ({className, courseCode,courses, description="",department=[]
                   value={null}
                 >
                   {levels.map((value)=>(
-                      <MenuItem value={value._id}>{value.number}</MenuItem>
+                      <MenuItem value={value.id}>{value.level}</MenuItem>
                   ))}
                 </Select>
             </Grid>
@@ -187,6 +188,22 @@ const AddCourses = ({className, courseCode,courses, description="",department=[]
             >
               <TextField
                 fullWidth
+                label="Lecturer"
+                margin="dense"
+                name="lecturer"
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={12}
+              xs={12}
+              lg={12}
+              xl={12}
+            >
+              <TextField
+                fullWidth
                 label="Description"
                 margin="dense"
                 name="description"
@@ -204,7 +221,7 @@ const AddCourses = ({className, courseCode,courses, description="",department=[]
             color="primary"
             variant="contained"
             onClick={()=>{
-               setModal(false)
+               addCourse()
             }}
             disabled={loading}
           >

@@ -18,13 +18,15 @@ class CoursesScreen extends Component {
         title:'',
         department:'',
         level:'',
+        lecturer:'',
         departmentLevels:[],
         loading:false
     }
     handleChange=(event)=>{
         if(event.target.name==="department"){
             this.setState({[event.target.name]:event.target.value}, ()=>{
-             const levels=    this.props.levels.allLevels.filter((value)=>value.department===this.state.department)
+               console.log(this.state.department)
+             const levels=    this.props.levels.allLevels.filter((value)=>value.departmentId===this.state.department)
              this.setState({departmentLevels:levels});
              })
         }
@@ -69,7 +71,16 @@ class CoursesScreen extends Component {
                 xl={4}
                 xs={4}
                 >
-                    <AddCourses courseCode={this.props.departments}/>
+                    <AddCourses 
+                      description={this.state.description}
+                      courseCode={this.state.courseCode}
+                      levels= {this.state.departmentLevels}
+                      loading={this.state.loading}
+                      department= {this.props.departments.allDepartments}
+                      handleChange={this.handleChange}
+                      addCourse={this.addCourse}
+
+                    />
                </Grid>
                    
                 <Grid
