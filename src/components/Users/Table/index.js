@@ -35,6 +35,9 @@ export default function SimpleTable({data}) {
          title="Departments"
          columns={columns}
          data={data}
+         onRowClick= {()=>{
+           alert("jjjdj")
+         }}
           options= {{
             sorting:true,
             exportButton: true,

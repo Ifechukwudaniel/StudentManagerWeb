@@ -10,23 +10,91 @@ import {
   Divider,
   Grid,
   Button,
-  TextField,
   Select,
   MenuItem,
-  InputLabel
+  TextField,
+  InputLabel,
+  Dialog,
+  Modal,
+  Typography,
+  IconButton
 } from '@material-ui/core';
+import PlusIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles(() => ({
-  root: {}
+const useStyles = makeStyles((theme) =>  ({
+  root: {
+    top:120,
+    margin:'auto',
+    position: 'absolute',
+    width: 500,
+    outline: 0
+    // backgroundColor: theme.palette.background.paper,
+    // boxShadow: theme.shadows[5],
+  },
+  rootOut: {
+    height: '100%',
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText
+  },
+  content: {
+    alignItems: 'center',
+    display: 'flex'
+  },
+  title: {
+    fontWeight: 700
+  },
+  avatar: {
+    backgroundColor: theme.palette.white,
+    color: theme.palette.primary.main,
+    height: 56,
+    width: 56,
+    "&:hover":{
+      backgroundColor: theme.palette.white,
+      color: theme.palette.primary.main,
+    }
+  },
+  icon: {
+    height: 32,
+    width: 32
+  }
 }));
 
-const AddLevel = ({className,number,department,addLevel,loading,handleChange, ...rest}) => {
+const AddLevel = ({className, departments,level, handleChange=()=>{},loading,...rest}) => {
   const classes = useStyles();
-
+  const [modal , setModal] = useState(false)
   return (
+    <div>
+    <Card
+    {...rest}
+    className={clsx(classes.rootOut, className)}
+  >
+    <CardContent>
+      <Grid
+        container
+        justify="space-between"
+      >
+        <Grid item>
+          <Typography
+            className={classes.title}
+            color="inherit"
+            gutterBottom
+            variant="h5"
+          >
+            Add a new level
+          </Typography>
+        </Grid>
+        <Grid item>
+          <IconButton  onClick= {()=>setModal(true)} className={classes.avatar}>
+            <PlusIcon className={classes.icon} />
+          </IconButton>
+        </Grid>
+      </Grid>
+    </CardContent>
+  </Card>
+    <Modal  style={{display:'flex',alignItems:'center',justifyContent:'center'}}  open={modal}>
     <Card
       {...rest}
-      className={clsx(classes.root, className)}
+      className={classes.root}
     >
       <form
         autoComplete="off"
@@ -38,39 +106,40 @@ const AddLevel = ({className,number,department,addLevel,loading,handleChange, ..
         <Divider />
         <CardContent>
           <Grid
-            container
-            spacing={3}
+            spacing={1}
           >
             <Grid
               item
-              md={6}
+              item
+              md={12}
               xs={12}
+              lg={12}
+              xl={12}
             >
-             <InputLabel> Department</InputLabel>
-                <Select
-                  name='department'
-                  onChange={handleChange}
-                  value={null}
-                >
-                  {department.map((value)=>(
-                      <MenuItem key={value._id} value={value._id}>{value.name}</MenuItem>
-                  ))}
-                </Select>
+              <TextField
+                fullWidth
+                label="Department Name"
+                margin="dense"
+                name="name"
+                onChange={handleChange}
+                required
+                variant="outlined"
+              />
             </Grid>
             <Grid
               item
-              md={6}
+              md={12}
               xs={12}
+              lg={12}
+              xl={12}
             >
-            <TextField
+              <TextField
                 fullWidth
-                label="Level"
+                 type="number"
+                label="Total Number of Levels"
                 margin="dense"
-                name="number"
-                type='number'
+                name="levels"
                 onChange={handleChange}
-                required
-                value={number}
                 variant="outlined"
               />
             </Grid>
@@ -81,14 +150,28 @@ const AddLevel = ({className,number,department,addLevel,loading,handleChange, ..
           <Button
             color="primary"
             variant="contained"
-            onClick={addLevel}
+            onClick={()=>{
+               setModal(false)
+            }}
             disabled={loading}
           >
-            { loading? "Loading..." :"Add Level"}
+            {loading?"Loading..":"Add Level"}
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={()=>{
+               setModal(false)
+            }}
+            disabled={loading}
+          >
+            Cancel
           </Button>
         </CardActions>
       </form>
     </Card>
+    </Modal>
+    </div>
   );
 };
 
@@ -96,4 +179,4 @@ AddLevel.propTypes = {
   className: PropTypes.string
 };
 
-export default AddLevel
+export default AddLevel;

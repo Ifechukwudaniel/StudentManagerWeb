@@ -26,6 +26,9 @@ export default function Table({data}) {
           <MaterialTable
          title="Levels"
          columns={columns}
+         onRowClick= {()=>{
+           alert("jjjdj")
+         }}
          data={data}
           options= {{
             sorting:true,

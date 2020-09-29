@@ -42,6 +42,9 @@ export default function Table({data}) {
          title="Departments"
          columns={columns}
          data={data}
+         onRowClick= {()=>{
+           alert("jjjdj")
+         }}
           options= {{
             sorting:true,
             exportButton: true,

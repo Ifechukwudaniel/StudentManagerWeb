@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import * as action from '../actions'
-import  {Table} from '../components/Departments'
+import  {AddDepartment, Table} from '../components/Departments'
 import {TotalDepartment,} from '../components/Dashboard/components'
 import {Grid, } from '@material-ui/core'
 import * as actions from '../actions'
@@ -43,27 +43,27 @@ class DepartmentScreen extends Component {
 
                 <Grid
                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
+                lg={8}
+                sm={8}
+                xl={8}
+                xs={8}
                 >
                      <TotalDepartment departments= {this.props.departments.allDepartments}/> 
                </Grid>
-
-                {/* <Grid
+               <Grid
                 item
-                lg={9}
-                sm={9}
-                xl={9}
-                xs={12}>
+                lg={4}
+                sm={4}
+                xl={4}
+                xs={4}
+                >
                      <AddDepartment
-                      name={this.state.name} 
+                       name={this.state.name} 
                       handleChange={this.handleChange}
                       addDepartment={this.addDepartment}
                       loading={this.state.loading}
-                    /> 
-                </Grid> */}
+                     />
+               </Grid>
 
                 <Grid
                  item

@@ -47,12 +47,23 @@ class UsersScreen extends Component {
 
                 <Grid
                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
+                lg={8}
+                sm={8}
+                xl={8}
+                xs={8}
                 >
                      <TotalUsers users= {this.props.users.allUsers}/>
+               </Grid>
+               <Grid
+                item
+                lg={4}
+                sm={4}
+                xl={4}
+                xs={4}
+                >
+                   <AddUser
+                       
+                   />
                </Grid>
 
                 <Grid

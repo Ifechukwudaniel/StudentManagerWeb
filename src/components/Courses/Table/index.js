@@ -34,7 +34,11 @@ export default function SimpleTable({data}) {
       <MaterialTable
          title="Courses"
          columns={columns}
+         
          data={data}
+         onRowClick= {()=>{
+           alert("jjjdj")
+         }}
           options= {{
             sorting:true,
             exportButton: true,

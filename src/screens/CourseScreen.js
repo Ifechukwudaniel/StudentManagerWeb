@@ -55,12 +55,21 @@ class CoursesScreen extends Component {
 
                <Grid
                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
+                lg={8}
+                sm={8}
+                xl={8}
+                xs={8}
                 >
                      <TotalCourses  coursesLength= {this.props.courses.allCourses.length}/> 
+               </Grid>
+               <Grid
+                item
+                lg={4}
+                sm={4}
+                xl={4}
+                xs={4}
+                >
+                    <AddCourses courseCode={this.props.departments}/>
                </Grid>
                    
                 <Grid

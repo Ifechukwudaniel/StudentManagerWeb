@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import  {Table} from '../components/Level'
+import  {AddLevel, Table} from '../components/Level'
 import {Grid, } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
@@ -32,12 +32,23 @@ class LevelScreen extends Component {
                 </Grid>
                 <Grid
                  item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
+                lg={8}
+                sm={8}
+                xl={8}
+                xs={8}
                 >
                   <TotalLevel levels={this.props.levels.allLevels}/>
+                </Grid>
+                <Grid
+                 item
+                lg={4}
+                sm={4}
+                xl={4}
+                xs={4}
+                >
+                  <AddLevel
+                    
+                  />
                 </Grid>
                 <Grid
                  item
