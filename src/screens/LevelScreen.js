@@ -8,14 +8,24 @@ import TotalLevel from '../components/Dashboard/components/TotalLevel';
  
 class LevelScreen extends Component {
     state={
-        level:0,
+        number:0,
         loading:false,
-        department:''
+        department:'',
+        modal:false
     }
     componentDidMount(){
       this.props.fetchAllLevels()
       this.props.fetchAllDepartment()
-  }
+    }
+
+    addLevel= ()=>{
+       this.setState({loading:true})
+       this.props.addLevel(this.state)
+       this.setState({loading:false, modal:false})
+    }
+  handleChange=(event)=>{
+    this.setState({[event.target.name]:event.target.value})
+}
     render() { 
         return (
           <Grid
@@ -48,7 +58,13 @@ class LevelScreen extends Component {
                 xs={4}
                 >
                   <AddLevel
-
+                     departments={this.props.departments.allDepartments}
+                     handleChange= {this.handleChange}
+                     modal={this.state.modal}
+                     loading= {this.state.loading}
+                     openModal={()=>this.setState({modal:true})}
+                     closeModal={()=>this.setState({modal:false})}
+                     addLevel={this.addLevel}
                   />
                 </Grid>
                 <Grid

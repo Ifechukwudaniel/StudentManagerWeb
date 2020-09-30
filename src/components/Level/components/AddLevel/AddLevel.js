@@ -53,12 +53,15 @@ const useStyles = makeStyles((theme) =>  ({
   icon: {
     height: 32,
     width: 32
+  },
+  formItem:{
+    marginTop:10,
+    marginBottom:10
   }
 }));
 
-const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},loading,...rest}) => {
+const AddLevel = ({className, departments,level,addLevel,modal,openModal,closeModal,handleChange, loading,...rest}) => {
   const classes = useStyles();
-  const [modal , setModal] = useState(false)
   return (
     <div>
     <Card
@@ -81,7 +84,9 @@ const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},lo
           </Typography>
         </Grid>
         <Grid item>
-          <IconButton  onClick= {()=>setModal(true)} className={classes.avatar}>
+          <IconButton  onClick= {
+            openModal
+          } className={classes.avatar}>
             <PlusIcon className={classes.icon} />
           </IconButton>
         </Grid>
@@ -113,15 +118,19 @@ const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},lo
               lg={12}
               xl={12}
             >
-              <TextField
-                fullWidth
-                label="Department Name"
-                margin="dense"
-                name="name"
-                onChange={handleChange}
-                required
-                variant="outlined"
-              />
+            <InputLabel> Department</InputLabel>
+                <Select
+                  className={classes.formItem}
+                  style={{width:'100%'}}
+                  name='department'
+                  onChange={handleChange}
+                  value={null}
+                >
+                  {departments.map((value)=>(
+                      <MenuItem value={value.id}>{value.name}</MenuItem>
+                  ))}
+                </Select>
+             
             </Grid>
             <Grid
               item
@@ -130,6 +139,7 @@ const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},lo
               lg={12}
               xl={12}
             >
+          <InputLabel> Level</InputLabel>
               <TextField
                 fullWidth
                 type="number"
@@ -138,6 +148,7 @@ const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},lo
                 name="number"
                 onChange={handleChange}
                 variant="outlined"
+                className= {classes.formItem}
               />
             </Grid>
           </Grid>
@@ -158,7 +169,7 @@ const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},lo
             color="secondary"
             variant="contained"
             onClick={()=>{
-               setModal(false)
+               closeModal()
             }}
             disabled={loading}
           >
