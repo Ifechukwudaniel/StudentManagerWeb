@@ -13,7 +13,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "TEST hxdhhd",
-        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-28T07:00:00.000Z",
         "EndTime": "2020-09-28T09:00:00.000Z"
     },
@@ -23,7 +23,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "CSC 123",
         "Location": "nnnd",
-        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-28T09:00:00.000Z",
         "EndTime": "2020-09-28T11:00:00.000Z"
     },
@@ -33,7 +33,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "Biu chapelmmnns c cdc",
-        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-28T12:00:00.000Z",
         "EndTime": "2020-09-28T14:00:00.000Z"
     },
@@ -43,6 +43,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "Biu mcmmc chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-29T07:00:00.000Z",
         "EndTime": "2020-09-29T09:00:00.000Z"
     },
@@ -52,6 +53,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "CSC 123",
         "Location": "Biu  nncc chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-29T09:00:00.000Z",
         "EndTime": "2020-09-29T10:40:00.000Z"
     },
@@ -61,6 +63,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "CSC 123",
         "Location": "Biunn  chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-29T11:00:00.000Z",
         "EndTime": "2020-09-29T12:00:00.000Z"
     },
@@ -70,6 +73,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "Biu chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-29T12:00:00.000Z",
         "EndTime": "2020-09-29T14:00:00.000Z"
     },
@@ -79,6 +83,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "Biu chkxdk apel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-30T07:00:00.000Z",
         "EndTime": "2020-09-30T09:00:00.000Z"
     },
@@ -88,6 +93,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "CSC 123",
         "Location": "Biu jdjdj chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-30T09:00:00.000Z",
         "EndTime": "2020-09-30T10:40:00.000Z"
     },
@@ -97,6 +103,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "CSC 123",
         "Location": "Biu  mm   chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-30T11:00:00.000Z",
         "EndTime": "2020-09-30T12:00:00.000Z"
     },
@@ -106,6 +113,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "Biu nnnc chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-09-30T12:00:00.000Z",
         "EndTime": "2020-09-30T14:00:00.000Z"
     },
@@ -115,6 +123,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "Biu mcmmc chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-10-01T07:00:00.000Z",
         "EndTime": "2020-10-01T09:00:00.000Z"
     },
@@ -124,6 +133,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "CSC 123",
         "Location": "Biu  nncc chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-10-01T09:00:00.000Z",
         "EndTime": "2020-10-01T10:40:00.000Z"
     },
@@ -133,6 +143,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "CSC 123",
         "Location": "Biunn  chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-10-01T11:00:00.000Z",
         "EndTime": "2020-10-01T12:00:00.000Z"
     },
@@ -142,6 +153,7 @@ const TimeTable = () => {
         "IsAllDay": false,
         "Subject": "Csc 125",
         "Location": "Biu chapel",
+        "RecurrenceRule": "FREQ=WEEKLY;INTERVAL=1;",
         "StartTime": "2020-10-01T12:00:00.000Z",
         "EndTime": "2020-10-01T14:00:00.000Z"
     },

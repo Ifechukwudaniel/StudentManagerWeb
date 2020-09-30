@@ -7,6 +7,7 @@ import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
 import TimeTable from '../components/TimeTable';
+import TimeTableTabs from '../components/TimeTable/Tab';
 
 class TimeTableScreen extends Component {
     state= {
@@ -34,7 +35,7 @@ class TimeTableScreen extends Component {
                 xl={12}
                 xs={12}
                 >
-                   <TimeTable/>
+                   <TimeTableTabs/>
                 </Grid>
             </Grid>
         );

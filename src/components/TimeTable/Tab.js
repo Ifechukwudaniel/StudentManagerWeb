@@ -38,7 +38,7 @@ const TimeTableTabs = ({departments,levels })=> {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" color="primary">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -56,10 +56,11 @@ const TimeTableTabs = ({departments,levels })=> {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-           {/* <TimeTableAccordions/> */}
+        <TabPanel  value={value} index={0} dir={theme.direction}>
+           <TimeTableAccordions/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
+          <TimeTableAccordions/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
            <TimeTable/>

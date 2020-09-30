@@ -49,7 +49,8 @@ export default {
   },
   background: {
     default: '#F4F6F8',
-    paper: white
+    paper: white,
+    tab:"#f4f6f4"
   },
   icon: colors.blueGrey[600],
   divider: colors.grey[200]

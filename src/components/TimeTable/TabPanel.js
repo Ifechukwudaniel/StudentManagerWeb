@@ -15,7 +15,7 @@ import Box from '@material-ui/core/Box';
       {...other}
     >
       {value === index && (
-        <Box p={0}>
+        <Box style={{height:'100%'}} p={1}>
           <Typography>{children}</Typography>
         </Box>
       )}
