@@ -20,7 +20,8 @@ class CoursesScreen extends Component {
         level:'',
         lecturer:'',
         departmentLevels:[],
-        loading:false
+        loading:false ,
+        modal :false
     }
     handleChange=(event)=>{
         if(event.target.name==="department"){
@@ -33,11 +34,10 @@ class CoursesScreen extends Component {
         else this.setState({[event.target.name]:event.target.value})
     }
 
-    addCourse = ()=>{
+    addCourse = ( fun)=>{
       this.setState({loading:true})
-      this.props.addCourse(this.state,()=>{
-           this.setState({loading:false})
-      })
+      this.props.addCourse(this.state)
+      this.setState({loading:false, modal:false})
     }
     render() { 
         return (
@@ -79,7 +79,9 @@ class CoursesScreen extends Component {
                       department= {this.props.departments.allDepartments}
                       handleChange={this.handleChange}
                       addCourse={this.addCourse}
-
+                      modal= {this.state.modal}
+                      openModal ={()=>this.setState({modal:true})}
+                      closeModal ={()=>this.setState({modal:false})}
                     />
                </Grid>
                    

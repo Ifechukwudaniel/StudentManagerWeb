@@ -11,7 +11,8 @@ class DepartmentScreen extends Component {
     state= {
         name:"",
         numberOfLevels:0,
-        loading:false
+        loading:false,
+        modal :false
     }
     componentDidMount(){
         this.props.dispatch(actions.fetchAllDepartment())
@@ -20,10 +21,10 @@ class DepartmentScreen extends Component {
         this.setState({[event.target.name]:event.target.value})
     }
     addDepartment = ()=>{
+        console.log('x')
         this.setState({loading:true})
-        this.props.dispatch(action.addDepartment(this.state, ()=>{
-            this.setState({loading:false})
-     }))
+        this.props.dispatch(action.addDepartment(this.state))
+        this.setState({loading:false,modal:false})
     }
     render() { 
         return (
@@ -58,10 +59,13 @@ class DepartmentScreen extends Component {
                 xs={4}
                 >
                      <AddDepartment
-                       name={this.state.name} 
+                      name={this.state.name} 
                       handleChange={this.handleChange}
                       addDepartment={this.addDepartment}
                       loading={this.state.loading}
+                      openModal= {()=>this.setState({modal:true})}
+                      closeModal= {()=>this.setState({modal:false})}
+                      modal={this.state.modal}
                      />
                </Grid>
 

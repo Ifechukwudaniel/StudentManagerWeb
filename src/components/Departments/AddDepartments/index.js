@@ -58,9 +58,8 @@ const useStyles = makeStyles((theme) =>  ({
   }
 }));
 
-const AddDepartment = ({className, name, handleChange=()=>{},loading,...rest}) => {
+const AddDepartment = ({className,addDepartment, name,modal,closeModal , openModal,  handleChange,loading,...rest}) => {
   const classes = useStyles();
-  const [modal , setModal] = useState(false)
   return (
     <div>
     <Card
@@ -83,7 +82,7 @@ const AddDepartment = ({className, name, handleChange=()=>{},loading,...rest}) =
           </Typography>
         </Grid>
         <Grid item>
-          <IconButton  onClick= {()=>setModal(true)} className={classes.avatar}>
+          <IconButton  onClick= {()=>openModal()} className={classes.avatar}>
             <PlusIcon className={classes.icon} />
           </IconButton>
         </Grid>
@@ -134,10 +133,10 @@ const AddDepartment = ({className, name, handleChange=()=>{},loading,...rest}) =
             >
               <TextField
                 fullWidth
-                 type="number"
+                type="number"
                 label="Total Number of Levels"
                 margin="dense"
-                name="levels"
+                name="numberOfLevels"
                 onChange={handleChange}
                 variant="outlined"
               />
@@ -150,7 +149,7 @@ const AddDepartment = ({className, name, handleChange=()=>{},loading,...rest}) =
             color="primary"
             variant="contained"
             onClick={()=>{
-               setModal(false)
+              addDepartment()
             }}
             disabled={loading}
           >
@@ -160,7 +159,7 @@ const AddDepartment = ({className, name, handleChange=()=>{},loading,...rest}) =
             color="secondary"
             variant="contained"
             onClick={()=>{
-               setModal(false)
+              closeModal()
             }}
             disabled={loading}
           >

@@ -54,13 +54,15 @@ const useStyles = makeStyles((theme) =>  ({
   icon: {
     height: 32,
     width: 32
+  },
+  formItem:{
+    marginTop:10,
+    marginBottom:10
   }
 }));
 
-const AddCourses = ({className, courseCode,courses, description,department,loading, levels, handleChange,addCourse,...rest}) => {
+const AddCourses = ({className, courseCode,courses, description,department,loading, levels,modal, handleChange,addCourse, openModal, closeModal,...rest}) => {
   const classes = useStyles();
-  const [modal , setModal] = useState(false)
-  console.log(levels)
   return (
     <div>
     <Card
@@ -83,7 +85,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
           </Typography>
         </Grid>
         <Grid item>
-          <IconButton  onClick= {()=>setModal(true)} className={classes.avatar}>
+          <IconButton  onClick= {()=>openModal()} className={classes.avatar}>
             <PlusIcon className={classes.icon} />
           </IconButton>
         </Grid>
@@ -109,13 +111,15 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
           >
             <Grid
               item
-              md={4}
-              xs={4}
-              lg={4}
-              xl={4}
+              md={12}
+              xs={12}
+              lg={12}
+              xl={12}
             >
                 <InputLabel> Department</InputLabel>
                 <Select
+                className={classes.formItem}
+                  style={{width:'100%'}}
                   name='department'
                   onChange={handleChange}
                   value={null}
@@ -124,17 +128,11 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
                       <MenuItem value={value.id}>{value.name}</MenuItem>
                   ))}
                 </Select>
-            </Grid>
-            <Grid
-              item
-              item
-              md={4}
-              xs={4}
-              lg={4}
-              xl={4}
-            >
                 <InputLabel> Level</InputLabel>
                 <Select
+              
+                  className={classes.formItem}
+                 style={{width:'100%'}}
                   name='level'
                   onChange={handleChange}
                   value={null}
@@ -154,6 +152,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             >
               <TextField
                 fullWidth
+                className={classes.formItem}
                 label="Course Code"
                 margin="dense"
                 name="courseCode"
@@ -164,7 +163,6 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             </Grid>
             <Grid
               item
-              item
               md={12}
               xs={12}
               lg={12}
@@ -172,6 +170,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             >
               <TextField
                 fullWidth
+                className={classes.formItem}
                 label="Title"
                 margin="dense"
                 name="title"
@@ -188,6 +187,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             >
               <TextField
                 fullWidth
+                className={classes.formItem}
                 label="Lecturer"
                 margin="dense"
                 name="lecturer"
@@ -204,6 +204,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             >
               <TextField
                 fullWidth
+                className={classes.formItem}
                 label="Description"
                 margin="dense"
                 name="description"
@@ -222,6 +223,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             variant="contained"
             onClick={()=>{
                addCourse()
+               closeModal()
             }}
             disabled={loading}
           >
@@ -231,7 +233,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
             color="secondary"
             variant="contained"
             onClick={()=>{
-               setModal(false)
+               closeModal()
             }}
             disabled={loading}
           >

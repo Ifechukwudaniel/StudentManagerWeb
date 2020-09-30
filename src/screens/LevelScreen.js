@@ -14,6 +14,7 @@ class LevelScreen extends Component {
     }
     componentDidMount(){
       this.props.fetchAllLevels()
+      this.props.fetchAllDepartment()
   }
     render() { 
         return (
@@ -47,7 +48,7 @@ class LevelScreen extends Component {
                 xs={4}
                 >
                   <AddLevel
-                    
+
                   />
                 </Grid>
                 <Grid
@@ -78,6 +79,9 @@ function mapStateToProps(state) {
       },
       addLevel:(data)=>{
         dispatch(actions.addLevel(data))
+      },
+      fetchAllDepartment: ()=>{
+        dispatch(actions.fetchAllDepartment())
       }
   }
 }

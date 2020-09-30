@@ -155,7 +155,7 @@ export const addDepartment= (data, cd=()=>{})=>{
    .then(res=>res.data)
    .then(data=>{
       dispatch(fetchAllDepartment())
-      alert("jjsjsjjsj")
+    
    })
    .catch((response)=>{
      console.log(response)
@@ -229,6 +229,7 @@ export const addCourse = (data,cb=()=>{})=>{
       .then(res => res.data)
       .then((data) => {
           dispatch(fetchAllCourses())
+          cb()
       })
       .catch((error) => {
         console.log(error)

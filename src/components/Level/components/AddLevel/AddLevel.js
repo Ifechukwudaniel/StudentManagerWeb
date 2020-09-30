@@ -132,10 +132,10 @@ const AddLevel = ({className, departments,level,addLevel, handleChange=()=>{},lo
             >
               <TextField
                 fullWidth
-                 type="number"
-                label="Total Number of Levels"
+                type="number"
+                label="Level"
                 margin="dense"
-                name="levels"
+                name="number"
                 onChange={handleChange}
                 variant="outlined"
               />

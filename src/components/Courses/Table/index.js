@@ -24,7 +24,7 @@ export default function SimpleTable({data}) {
 
   const [columns, setColumns] = useState([
     { title: 'CourseCode', field: 'courseCode' },
-    { title: 'Total Materials ', field:"totalMaterial"},
+    { title: 'Total Materials ', field:"totalMaterial", filtering:false},
     { title: 'Department ' , field:'department'},
     { title: 'Level' ,field:'level'},
   ]);
@@ -42,6 +42,7 @@ export default function SimpleTable({data}) {
           options= {{
             sorting:true,
             exportButton: true,
+            filtering:true
           }}
          editable={{
         onRowUpdate: (newData, oldData) =>
