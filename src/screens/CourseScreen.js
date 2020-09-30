@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import * as action from '../actions'
-import  {Table,AddCourses, CoursesDescription } from '../components/Courses'
+import  {Table,AddCourses } from '../components/Courses'
 import {TotalCourses} from '../components/Dashboard/components'
 import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
@@ -52,7 +52,7 @@ class CoursesScreen extends Component {
                 xl={12}
                 xs={12}
                 >
-                  <CoursesDescription/>
+                  
                 </Grid>
 
                <Grid
