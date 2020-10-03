@@ -33,7 +33,7 @@ class UsersScreen extends Component {
         return (
             <Grid
               container
-              spacing={5}
+              spacing={4}
             >
              <Grid
                  item

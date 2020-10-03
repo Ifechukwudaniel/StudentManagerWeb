@@ -60,6 +60,7 @@ class LevelScreen extends Component {
                   <AddLevel
                      departments={this.props.departments.allDepartments}
                      handleChange= {this.handleChange}
+                      department ={this.state.department}
                      modal={this.state.modal}
                      loading= {this.state.loading}
                      openModal={()=>this.setState({modal:true})}

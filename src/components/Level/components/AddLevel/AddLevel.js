@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) =>  ({
   }
 }));
 
-const AddLevel = ({className, departments,level,addLevel,modal,openModal,closeModal,handleChange, loading,...rest}) => {
+const AddLevel = ({className, departments,level,addLevel,modal,openModal,closeModal,handleChange,department, loading,...rest}) => {
   const classes = useStyles();
   return (
     <div>
@@ -124,7 +124,7 @@ const AddLevel = ({className, departments,level,addLevel,modal,openModal,closeMo
                   style={{width:'100%'}}
                   name='department'
                   onChange={handleChange}
-                  value={null}
+                  value={department}
                 >
                   {departments.map((value)=>(
                       <MenuItem value={value.id}>{value.name}</MenuItem>

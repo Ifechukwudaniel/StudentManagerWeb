@@ -5,6 +5,7 @@ import  {Table,AddCourses } from '../components/Courses'
 import {TotalCourses} from '../components/Dashboard/components'
 import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
+import Description from '../components/description';
  
 class CoursesScreen extends Component {
     componentWillMount(){
@@ -24,6 +25,7 @@ class CoursesScreen extends Component {
         modal :false
     }
     handleChange=(event)=>{
+       console.log(this.state.department)
         if(event.target.name==="department"){
             this.setState({[event.target.name]:event.target.value}, ()=>{
                console.log(this.state.department)
@@ -34,7 +36,7 @@ class CoursesScreen extends Component {
         else this.setState({[event.target.name]:event.target.value})
     }
 
-    addCourse = ( fun)=>{
+    addCourse = ()=>{
       this.setState({loading:true})
       this.props.addCourse(this.state)
       this.setState({loading:false, modal:false})
@@ -52,7 +54,7 @@ class CoursesScreen extends Component {
                 xl={12}
                 xs={12}
                 >
-                  
+                  <Description screenName="Course"/>
                 </Grid>
 
                <Grid
@@ -77,6 +79,8 @@ class CoursesScreen extends Component {
                       levels= {this.state.departmentLevels}
                       loading={this.state.loading}
                       department= {this.props.departments.allDepartments}
+                      dep = {this.state.department}
+                      level={this.state.level}
                       handleChange={this.handleChange}
                       addCourse={this.addCourse}
                       modal= {this.state.modal}

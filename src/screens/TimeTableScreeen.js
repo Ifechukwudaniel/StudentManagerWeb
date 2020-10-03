@@ -6,13 +6,34 @@ import {TotalCourses} from '../components/Dashboard/components'
 import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
-import TimeTable from '../components/TimeTable';
 import TimeTableTabs from '../components/TimeTable/Tab';
 
 class TimeTableScreen extends Component {
     state= {
-    
+      filteredLevels:[],
+      level:'',
+      department:''
     }
+    componentDidMount (){
+      this.props.fetchAllLevels()
+      this.props.fetchAllDepartment()
+    }
+
+    handleFetchTimetableChange= (event)=>{
+      if(event.target.name==="department"){
+        this.setState({[event.target.name]:event.target.value},()=>{
+          this.setState({filteredLevels:this.props.levels.allLevels.filter((x)=>x.departmentId==event.target.value)})
+        })
+      }
+      else{
+         this.setState({[event.target.name]:event.target.value})
+      }
+    }
+   
+  fetchDepartmentTimetable=(levelId)=>{
+     this.props.fetchDepartmentTimetable(this.state.level)
+  }
+    
     render() { 
         return (
                <Grid
@@ -35,7 +56,15 @@ class TimeTableScreen extends Component {
                 xl={12}
                 xs={12}
                 >
-                   <TimeTableTabs/>
+                   <TimeTableTabs
+                   handleFetchTimetableChange={this.handleFetchTimetableChange} 
+                   departments = {this.props.departments.allDepartments} 
+                   levels={this.state.filteredLevels}
+                   department = {this.state.department}
+                   level = {this.state.level}
+                   fetchDepartmentTimetable={this.fetchDepartmentTimetable}
+                   timeTableData={this.props.timeTable.departmentTimeTable}
+                   />
                 </Grid>
             </Grid>
         );
@@ -44,13 +73,25 @@ class TimeTableScreen extends Component {
  
 function mapStateToProps(state) {
     return {
-     
+      departments: state.departments,
+      levels: state.levels,
+      timeTable:state.timeTable
     }
   }
+
   const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-     
+      fetchAllDepartment: () => {
+        dispatch(actions.fetchAllDepartment())
+      },
+      fetchAllLevels: () => {
+        dispatch(actions.fetchAllLevels())
+      },
+      fetchDepartmentTimetable: (levelId)=>{
+         console.log(levelId)
+        dispatch(actions.fetchDepartmentTimetable(levelId))
+      }
   }
 }
  
-export default connect(mapStateToProps, mapDispatchToProps)(TimeTableScreen);
+export default connect(mapStateToProps,mapDispatchToProps)(TimeTableScreen);

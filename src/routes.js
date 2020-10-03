@@ -14,6 +14,7 @@ import AttendanceScreen from './screens/AttendanceScreen';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import DashboardScreen from './screens/DashboardScreen';
 import TimeTableScreen from './screens/TimeTableScreeen';
+import ChatScreen from './screens/ChatScreen'
 
 export default class Navigation extends Component {
 
@@ -79,6 +80,12 @@ export default class Navigation extends Component {
                   exact
                   layout={MainLayout}
                   path="/TimeTable"
+                />
+                 <PrivateRoute
+                  component={ChatScreen}
+                  exact
+                  layout={MainLayout}
+                  path="/Chat"
                 />
                  <Route
                   component={LogoutScreen}

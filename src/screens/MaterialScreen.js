@@ -6,6 +6,9 @@ import {TotalCourses} from '../components/Dashboard/components'
 import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
+import { FileIcon, defaultStyles } from 'react-file-icon';
+ 
+
 class MaterialScreen extends Component {
     state= {
     
@@ -13,20 +16,23 @@ class MaterialScreen extends Component {
 
     render() { 
         return (
-               <Grid
-              container
-              spacing={4}
+          <Grid
+          container
+          spacing={4}
+        >
+           <Grid
+             item
+            lg={12}
+            sm={12}
+            xl={12}
+            xs={12}
             >
-               <Grid
-                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
-                >
-                  <Description screenName="Material"/>
-                </Grid>
+              <Description screenName="Material"/>
             </Grid>
+            <div style={{width:30, marginLeft:20}}>
+              <FileIcon extension="zip" {...defaultStyles['zip']}/>
+            </div>
+        </Grid>
         );
     }
 }

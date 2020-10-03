@@ -30,7 +30,9 @@ const Main = props => {
       paddingLeft:  240
     },
     content: {
-      height: '100%'
+      height: '100%',
+      overflow:'auto',
+      position: "absolute",
     }
   }));
 

@@ -10,6 +10,7 @@ import {userReducer} from './users-reducer'
 import {departmentReducer} from './department-reducer'
 import { coursesReducer} from './courses-reducer'
 import {levelsReducer } from './levels-reducers'
+import {timeTableReducer} from './timeTables-reducer'
 
  export const init = () => {
   const reducer = combineReducers({
@@ -17,7 +18,8 @@ import {levelsReducer } from './levels-reducers'
     users:userReducer,
     departments:departmentReducer,
     courses:coursesReducer,
-    levels:levelsReducer
+    levels:levelsReducer,
+    timeTable:timeTableReducer
   });
 
 

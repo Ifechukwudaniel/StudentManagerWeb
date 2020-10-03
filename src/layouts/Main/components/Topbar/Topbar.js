@@ -3,24 +3,52 @@ import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { AppBar, Toolbar, Hidden, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, Hidden, IconButton, Badge } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import InputIcon from '@material-ui/icons/Input';
+import {
+   Notifications, 
+   Mail
+} from '@material-ui/icons'
 import {connect} from 'react-redux';
 import * as action from '../../../../actions'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
 
+
+const drawerWidth = 240
 const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: 'none',
-    background:theme.palette.primary.main
+    // background:theme.palette.primary.main,
+    [theme.breakpoints.up('lg')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
   },
   flexGrow: {
     flexGrow: 1
   },
   signOutButton: {
     marginLeft: theme.spacing(1)
+  },
+  icons:{
+    margin:theme.spacing(1)
   }
 }));
+
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
 
 const Topbar = props => {
   const { className, onSidebarOpen, ...rest } = props;
@@ -30,28 +58,13 @@ const Topbar = props => {
   const [notifications] = useState([]);
 
   return (
-    <AppBar
+    <HideOnScroll>
+        <AppBar
       {...rest}
       className={clsx(classes.root, className)}
     >
       <Toolbar>
-        <RouterLink to="/">
-          <img
-            alt="Logo"
-            src="/images/logos/logo--white.svg"
-          />
-        </RouterLink>
-        <div className={classes.flexGrow} />
-        <Hidden mdDown>
-          <IconButton
-            className={classes.signOutButton}
-            color="inherit"
-            onClick={()=>{props.dispatch(action.logOut())}}
-          >
-            <InputIcon />
-          </IconButton>
-        </Hidden>
-        <Hidden lgUp>
+      <Hidden lgUp>
           <IconButton
             color="inherit"
             onClick={onSidebarOpen}
@@ -59,8 +72,23 @@ const Topbar = props => {
             <MenuIcon />
           </IconButton>
         </Hidden>
+        <div className={classes.flexGrow} />
+          <div className={classes.icons}>
+          <IconButton color="inherit">
+              <Badge badgeContent={4} color="error">
+                  <Notifications/>
+               </Badge>
+            </IconButton>
+            <IconButton color="inherit">
+              <Badge badgeContent={0} color="error">
+                 <Mail/>
+              </Badge>
+            </IconButton>
+          </div>
       </Toolbar>
     </AppBar>
+
+ </HideOnScroll>
   );
 };
 

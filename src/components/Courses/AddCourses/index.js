@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) =>  ({
   }
 }));
 
-const AddCourses = ({className, courseCode,courses, description,department,loading, levels,modal, handleChange,addCourse, openModal, closeModal,...rest}) => {
+const AddCourses = ({className,dep, level, courseCode,courses, description,department,loading, levels,modal, handleChange,addCourse, openModal, closeModal,...rest}) => {
   const classes = useStyles();
   return (
     <div>
@@ -122,7 +122,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
                   style={{width:'100%'}}
                   name='department'
                   onChange={handleChange}
-                  value={null}
+                  value={dep}
                 >
                   {department.map((value)=>(
                       <MenuItem value={value.id}>{value.name}</MenuItem>
@@ -135,7 +135,7 @@ const AddCourses = ({className, courseCode,courses, description,department,loadi
                  style={{width:'100%'}}
                   name='level'
                   onChange={handleChange}
-                  value={null}
+                  value={level}
                 >
                   {levels.map((value)=>(
                       <MenuItem value={value.id}>{value.level}</MenuItem>
