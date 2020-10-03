@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { Paper } from '@material-ui/core';
 
  export default function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -16,7 +16,7 @@ import Box from '@material-ui/core/Box';
     >
       {value === index && (
         <Box style={{height:'100%'}} p={1}>
-          <Typography>{children}</Typography>
+          <Paper>{children}</Paper>
         </Box>
       )}
     </div>

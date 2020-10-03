@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import TabPanel from './TabPanel'
 import TimeTableAccordions from './TimeTableAccordion'
 import TimeTable from '.'
+import TimeTableForm from './TimeTableForm';
 
 function a11yProps(index) {
   return {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TimeTableTabs = ({departments,levels })=> {
+const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, department, level, fetchDepartmentTimetable, timeTableData})=> {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -57,13 +58,38 @@ const TimeTableTabs = ({departments,levels })=> {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel  value={value} index={0} dir={theme.direction}>
-           <TimeTableAccordions/>
+         <TimeTableForm
+              levels = {levels}
+              handleFetchTimetableChange = {handleFetchTimetableChange} 
+              level= {level}
+              department= {department}
+              departments={departments}
+              fetchDepartmentTimetable= {fetchDepartmentTimetable}
+              createTimeTable
+          />
+          <TimeTableAccordions/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
+          <TimeTableForm
+             levels = {levels}
+             handleFetchTimetableChange = {handleFetchTimetableChange} 
+             level= {level}
+             department= {department}
+             departments={departments}
+             fetchDepartmentTimetable= {fetchDepartmentTimetable} 
+          />
           <TimeTableAccordions/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-           <TimeTable/>
+           <TimeTable departments={departments} 
+             levels = {levels}
+             handleFetchTimetableChange = {handleFetchTimetableChange} 
+             level= {level}
+             department= {department}
+             departments={departments}
+             fetchDepartmentTimetable= {fetchDepartmentTimetable}
+             timeTableData={timeTableData}
+            />
         </TabPanel>
       </SwipeableViews>
     </div>

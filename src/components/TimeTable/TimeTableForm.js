@@ -1,15 +1,10 @@
 import React from 'react';
 import {
-     Grid, Paper, Button
+     Grid,  Button
 } from '@material-ui/core'
-import {
-  ScheduleComponent, Day, Week, WorkWeek, Agenda, Month, Inject,
-  ViewsDirective, ViewDirective
-} from '@syncfusion/ej2-react-schedule';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -27,14 +22,15 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
       },
       button :{
-         marginTop:20
+         marginTop:20,
+         marginBottom:20,
+         marginLeft:10
       }
   }));
 
-const TimeTable = ({departments= [], levels= [],handleFetchTimetableChange, department, level,fetchDepartmentTimetable, timeTableData}) => {
+const TimeTableForm = ({departments= [], levels= [],handleFetchTimetableChange, department, level,fetchDepartmentTimetable, createTimeTable}) => {
   const classes = useStyles();
   return (
-      <Grid container spacing={3} >
          <Grid item lg={12} xs={12} >
                <FormControl className={classes.formControl}>
                <InputLabel  className= {classes.select}> Department</InputLabel>
@@ -63,25 +59,22 @@ const TimeTable = ({departments= [], levels= [],handleFetchTimetableChange, depa
                  }
                 </Select>
                 </FormControl>
-                 <Button  onClick={
-                     ()=>{
-                        fetchDepartmentTimetable(level)
-                     }
-                 } className= {classes.button} variant="contained" color="primary">  Get TimeTable</Button>
+                {
+                  !createTimeTable? (
+                    <div>
+                      <Button  onClick={()=>{}} className= {classes.button} variant="contained" color="primary">  Get TimeTable</Button>
+                      <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary">  Save TimeTable</Button>
+                    </div>
+                  ):(
+                     <div>
+                           <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary"> Creating TimeTable</Button>
+                           <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary">  Save TimeTable</Button>
+                     </div>
+                  )
+                }
          </Grid>
-         <Grid item xs={12}>
-         <ScheduleComponent  width='100%' eventSettings={{dataSource:timeTableData,editFollowingEvents:false}} height='550px' currentView='WorkWeek'
-             readonly={true}   timeScale={{ enable: false }}>
-             <ViewsDirective>
-              <ViewDirective    option='WorkWeek'/>
-              {/* <ViewDirective     option="Day"/> */}
-            </ViewsDirective>
-          <Inject services={[WorkWeek, Day]} />
-         </ScheduleComponent>
-       </Grid>
-      </Grid>
   );
 }
  
  
-export default TimeTable;
+export default TimeTableForm;

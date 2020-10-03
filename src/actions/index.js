@@ -15,6 +15,9 @@ const {
    FETCH_ALL_LEVELS_SUCCESS,
    FETCH_ALL_LEVELS_FAILURE,
    CREATE_USER_FAILURE,
+   FETCH_DEPARTMENT_TIMETABLE,
+   FETCH_DEPARTMENT_TIMETABLE_FAILURE,
+   FETCH_DEPARTMENT_TIMETABLE_SUCCESS
 
 } = require('./types')
 const jwt = require('jsonwebtoken')
@@ -127,7 +130,7 @@ export const fetchAllDepartment  = () => {
           dispatch(fetchAllDepartmentsSuccess(data))
       })
       .catch(({response}) => {
-        console.log(response)
+        // console.log(response)
          //dispatch(fetchAllDepartmentsFailure(response.error))
       })
   }
@@ -158,7 +161,7 @@ export const addDepartment= (data, cd=()=>{})=>{
     
    })
    .catch((response)=>{
-     console.log(response)
+    //  console.log(response)
     //  dispatch(creatUsersFailure(response.data.error))
    })
  }
@@ -172,7 +175,7 @@ export const fetchAllCourses = ()=>{
           dispatch(fetchAllCoursesSuccess(data))
       })
       .catch(({response}) => {
-        console.log(response)
+        // console.log(response)
          //dispatch(fetchAllDepartmentsFailure(response.error))
       })
   }
@@ -198,12 +201,12 @@ export const fetchAllLevels = ()=>{
     return axiosAuth.get(`${config.apiUrl}/levels/`)
       .then(res => res.data)
       .then((data) => {
-        console.log(data)
+        // console.log(data)
           dispatch(fetchAllLevelsSuccess(data))
       })
       .catch(({response}) => {
-        console.log(response)
-         //dispatch(fetchAllDepartmentsFailure(response.error))
+        // console.log(response)
+         dispatch(fetchAllDepartmentsFailure(response.error))
       })
   }
 }
@@ -232,7 +235,7 @@ export const addCourse = (data,cb=()=>{})=>{
           cb()
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error)
          //dispatch(fetchAllDepartmentsFailure(response.error))
       })
   }
@@ -248,9 +251,37 @@ export const addLevel = (data,cb=()=>{})=>{
           x()
           dispatch(fetchAllLevels())
       })
-      .catch((error) => {
-        console.log(error)
-         //dispatch(fetchAllDepartmentsFailure(response.error))
+      .catch(({response}) => {
+         dispatch(fetchAllDepartmentsFailure(response.data.error))
       })
+  }
+}
+
+
+export const fetchDepartmentTimetable = (levelId)=>{
+  return dispatch => {
+    return axiosAuth.get(`${config.apiUrl}/activity/timetable/view/${levelId}`)
+      .then(res => res.data)
+      .then((data) => {
+        // console.log(data)
+          dispatch(fetchDepartmentTimetableSuccess(data))
+      })
+      .catch(({response}) => {
+         dispatch(fetchDepartmentTimetableFailure(response.data.error))
+      })
+  }
+}
+
+export const fetchDepartmentTimetableSuccess = (timetable) => {
+  return {
+    type:FETCH_DEPARTMENT_TIMETABLE_SUCCESS,
+     timetable
+  }
+}
+
+export const fetchDepartmentTimetableFailure = (error) => {
+  return {
+    type: FETCH_DEPARTMENT_TIMETABLE_FAILURE,
+    error
   }
 }
