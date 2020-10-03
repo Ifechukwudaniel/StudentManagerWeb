@@ -6,6 +6,7 @@ import {TotalCourses} from '../components/Dashboard/components'
 import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
+import AttendanceTabs from '../components/Attendance/Tab';
 class AttendanceScreen extends Component {
     state= {
     
@@ -30,6 +31,15 @@ class AttendanceScreen extends Component {
                 xs={12}
                 >
                   <Description screenName="Attendance"/>
+                </Grid>
+                <Grid
+                 item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                   <AttendanceTabs/>
                 </Grid>
             </Grid>
         );
