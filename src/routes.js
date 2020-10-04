@@ -15,6 +15,7 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import DashboardScreen from './screens/DashboardScreen';
 import TimeTableScreen from './screens/TimeTableScreeen';
 import ChatScreen from './screens/ChatScreen'
+import UserProfile from './screens/UserProfile'
 
 export default class Navigation extends Component {
 
@@ -86,6 +87,12 @@ export default class Navigation extends Component {
                   exact
                   layout={MainLayout}
                   path="/Chat"
+                />
+                 <PrivateRoute
+                  component={UserProfile}
+                  exact
+                  layout={MainLayout}
+                  path="/profile"
                 />
                  <Route
                   component={LogoutScreen}

@@ -47,59 +47,6 @@ class CoursesScreen extends Component {
               container
               spacing={4}
             >
-               <Grid
-                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
-                >
-                  <Description screenName="Course"/>
-                </Grid>
-
-               <Grid
-                item
-                lg={8}
-                sm={8}
-                xl={8}
-                xs={8}
-                >
-                     <TotalCourses  coursesLength= {this.props.courses.allCourses.length}/> 
-               </Grid>
-               <Grid
-                item
-                lg={4}
-                sm={4}
-                xl={4}
-                xs={4}
-                >
-                    <AddCourses 
-                      description={this.state.description}
-                      courseCode={this.state.courseCode}
-                      levels= {this.state.departmentLevels}
-                      loading={this.state.loading}
-                      department= {this.props.departments.allDepartments}
-                      dep = {this.state.department}
-                      level={this.state.level}
-                      handleChange={this.handleChange}
-                      addCourse={this.addCourse}
-                      modal= {this.state.modal}
-                      openModal ={()=>this.setState({modal:true})}
-                      closeModal ={()=>this.setState({modal:false})}
-                    />
-               </Grid>
-                   
-                <Grid
-                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
-                >
-                    <Table 
-                         data={this.props.courses.allCourses}
-                    />
-                </Grid>
             </Grid>
         );
     }

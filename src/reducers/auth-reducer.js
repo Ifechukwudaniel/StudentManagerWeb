@@ -4,13 +4,14 @@ const INITIAL_STATE = {
   isAuth: false,
   errors: [],
   name: '',
-  matricNumber:''
+  matricNumber:'', 
+  role:''
 }
 
 export const authReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case LOGIN_SUCCESS:
-      return Object.assign({}, state, {isAuth: true, error:"", name: action.name, matricNumber:action.matricNumber});
+      return Object.assign({}, state, {isAuth: true, error:"", name: action.name, matricNumber:action.matricNumber , role:action.role});
     case LOGIN_FAILURE:
       return Object.assign({}, state, {error: action.error});
     case LOGOUT:

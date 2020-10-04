@@ -45,12 +45,13 @@ export const login = (userData, navigate) => {
 
 
 export const loginSuccess = (navigate=()=>{}) => {
-    const {name ,matricNumber} = jwt.decode(localStorage.getItem(tokenName),tokenName)
+    const {name ,matricNumber, role} = jwt.decode(localStorage.getItem(tokenName),tokenName)
     navigate()
     return {
       type: LOGIN_SUCCESS,
       name:name,
-      matricNumber:matricNumber
+      matricNumber:matricNumber,
+      role
     }
   }
 

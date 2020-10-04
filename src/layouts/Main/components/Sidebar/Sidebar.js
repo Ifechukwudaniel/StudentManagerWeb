@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer, Hidden , Avatar} from '@material-ui/core';
-import {Input, CheckBoxRounded, Dashboard , People, MenuBook, LocationCity, Layers,Announcement, Attachment, AvTimer, Chat}  from '@material-ui/icons';
+import {Input, CheckBoxRounded, Dashboard , People, MenuBook, LocationCity, Layers,Announcement, Attachment, AvTimer, Chat, Person}  from '@material-ui/icons';
 
 import { Profile, SidebarNav } from './components';
 import Logo from '../../../../images/logo--white.png'
 import image from '../../../../images/sidebar-2.jpg'
+import {connect} from 'react-redux'
+import * as actions from '../../../../actions'
+
 
 const drawerWidth = 240;
 
@@ -18,13 +21,12 @@ const useStyles = makeStyles(theme => ({
       width: drawerWidth,
       flexShrink: 0,
     },
-    width:240,
+     width:240,
      height:"100%"
   },
 
   root: {
       zIndex: "1",
-      // height: "100%",
       width:drawerWidth,
       display: "block",
       top: "0",
@@ -70,34 +72,91 @@ const useStyles = makeStyles(theme => ({
 
 const Sidebar = props => {
   const { open, variant, onClose, className, ...rest } = props;
-
   const classes = useStyles();
 
-  const pages = [
+
+  let pages = []
+
+  const pagesAdmin = [
     {
+      id:'1',
       title: 'Dashboard',
       href: '/dashboard',
       icon: <Dashboard />
     },
     {
+      id:'2',
       title: 'Users',
       href: '/users',
       icon: <People />
     },
     {
+      id:'3',
       title: 'Courses',
       href: '/courses',
       icon: <MenuBook />
     },
     {
+      id:'4',
       title: 'Departments',
       href: '/department',
       icon: <LocationCity/>
     },
     {
+      id:'5',
       title: 'Levels',
       href: '/level',
       icon: <Layers/>
+    },
+    {
+      id:'6',
+      title: 'Materials',
+      href: '/material',
+      icon: <Attachment/>
+    },
+    {
+      id:'7',
+      title: 'Notifications',
+      href: '/notifications',
+      icon: <Announcement/>
+    },
+    {
+      id:'8',
+      title: 'Attendance',
+      href: '/attendance',
+      icon: <CheckBoxRounded/>
+    },
+    {
+      id:'9',
+      title: 'TimeTable',
+      href: '/timetable',
+      icon: <AvTimer/>
+    },
+    {
+      id:'10',
+      title: 'Chat',
+      href: '/Chat',
+      icon: <Chat/>
+    },
+    {
+      id:'11',
+      title: 'My Profile',
+      href: '/profile',
+      icon: <Person/>
+    },
+    {
+      id:'12',
+      title: 'Logout',
+      href: '/logout',
+      icon: <Input/>
+    },
+  ];
+
+  const pagesUser = [
+    {
+      title: 'Dashboard',
+      href: '/dashboard',
+      icon: <Dashboard />
     },
     {
       title: 'Materials',
@@ -125,11 +184,30 @@ const Sidebar = props => {
       icon: <Chat/>
     },
     {
+      title: 'My Profile',
+      href: '/profile',
+      icon: <Person/>
+    },
+    {
       title: 'Logout',
       href: '/logout',
       icon: <Input/>
     },
   ];
+
+  // useEffect(()=>{
+  //   if(props.auth.role==''){
+  //     props.logOut()
+  // }
+  // else{
+  //   if(props.auth.role="admin"){
+  //      pages= pagesAdmin
+  //   }
+  //   else{
+  //     pages=pagesUser
+  //   }
+  // }
+  // })
 
   return (
      <div>
@@ -143,12 +221,13 @@ const Sidebar = props => {
       <div
         {...rest}
         className={clsx(classes.root, className)}
+        style={{height:'100%'}}
       > 
         <img  src= {Logo} className={classes.image}/>
          <Divider className={classes.divider} />
          <SidebarNav
           className={classes.nav}
-          pages={pages}
+          pages={pagesUser}
           handleClose= {onClose}
         /> 
 
@@ -160,6 +239,20 @@ const Sidebar = props => {
   );
 };
 
+function mapStateToProps(state) {
+  return {
+   auth:state.auth
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    logOut: () => {
+      dispatch(actions.logOut())
+    },
+
+}
+}
+
 Sidebar.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
@@ -167,4 +260,4 @@ Sidebar.propTypes = {
   variant: PropTypes.string.isRequired
 };
 
-export default Sidebar;
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
