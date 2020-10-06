@@ -84,6 +84,20 @@ export const fetchAllUsers  = () => {
   }
 }
 
+export const fetchUserByLevel   = (level) => {
+  return dispatch => {
+    return axiosAuth.get(`${config.apiUrl}/users/${level}`)
+      .then(res => res.data)
+      .then((data) => {
+          dispatch(fetchAllUsersSuccess(data))
+      })
+      .catch(({response}) => {
+         console.log(response)
+        //  dispatch(fetchAllUsersFailure(response.data.error))
+      })
+  }
+}
+
 export const fetchAllUsersSuccess = (users) => {
   return {
     type: FETCH_ALL_USERS_SUCCESS,

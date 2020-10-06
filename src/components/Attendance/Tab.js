@@ -11,6 +11,7 @@ import StudentTable from './StudentTable';
 import StudentAttendanceTable from './StudentAttendanceTable'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
+import AttendanceForm from './AttendanceForm'
 
 function a11yProps(index) {
   return {
@@ -31,7 +32,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const AttendanceTabs = ({departments,levels,handleFetchTimetableChange, department, level, fetchDepartmentTimetable, timeTableData})=> {
+const AttendanceTabs = ({departments =[]
+  ,levels=[], courses=[], users=[],
+   department='' ,level="", 
+   startTime="", endTime="",
+   course="", handleFormChange, handleFetchStudents,
+   handleCheck =()=>{},
+   saveAttendance})=> {
+    
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -65,8 +73,21 @@ const AttendanceTabs = ({departments,levels,handleFetchTimetableChange, departme
       >
         <TabPanel  value={value} index={0} dir={theme.direction}>
           <Grid>
-               <Button className= {classes.saveButton} variant="contained" color="primary"> Save Attendance </Button>
-              <StudentTable data={[]}/>
+             <AttendanceForm
+              handleChange={handleFormChange}
+              departments={departments}
+              department={department}
+              levels= {levels}
+              level={level}
+              courses={courses}
+              course={course}
+              handleFetchStudents= {handleFetchStudents}
+              saveAttendance= {saveAttendance}
+              startTime={startTime}
+              endTime={endTime}
+              />
+             
+              <StudentTable handleCheck= {handleCheck} data={users}/>
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>

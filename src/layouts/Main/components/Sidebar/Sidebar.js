@@ -221,13 +221,13 @@ const Sidebar = props => {
       <div
         {...rest}
         className={clsx(classes.root, className)}
-        style={{height:'100%'}}
+        style={{height:'auto'}}
       > 
         <img  src= {Logo} className={classes.image}/>
          <Divider className={classes.divider} />
          <SidebarNav
           className={classes.nav}
-          pages={pagesUser}
+          pages={pagesAdmin}
           handleClose= {onClose}
         /> 
 

@@ -7,16 +7,98 @@ import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
 import AttendanceTabs from '../components/Attendance/Tab';
+import { compareStartAndEndTime} from '../helpers/timeConverter';
+
 class AttendanceScreen extends Component {
     state= {
-    
+      filteredLevels:[],
+      filteredCourses:[],
+      department:'',
+      level:"",
+      course:"",
+      startTime:"",
+      endTime:""
     }
-    handleChange=(event)=>{
+   componentDidMount (){
+     this.props.fetchAllCourses()
+     this.props.fetchAllDepartment()
+     this.props.fetchAllLevels()
+   }
+
+   handleChange=(event)=>{
+    if( event.target.type=="time"){
+      this.setState({[event.target.name]:event.target.value})
+       return 
+    }
+    if(event.target.name==="department"){
+      this.setState({[event.target.name]:event.target.value},()=>{
+        this.setState({filteredLevels:this.props.levels.allLevels.filter((x)=>x.departmentId==event.target.value)})
+      })
+      return
+    }
+    else if(event.target.name==="level"){
+      this.setState({[event.target.name]:event.target.value},()=>{
+        this.setState({filteredCourses:this.props.courses.allCourses.filter((x)=>{
+           return x.levelId ===event.target.value
+        })})
+      })
+      return
+    }
+    else{
+       this.setState({[event.target.name]:event.target.value})
+       return
+    }
+   }
+    handleFetchStudents= ()=>{
+      if(!this.state.level){
+        alert('no course set')
+      }
+      else{
+        this.props.fetchLevelUser(this.state.level)
+      }
+    }
+    handleCheck= (rowData, event) =>{
+      this.props.users.allUsers.forEach((item,index)=>{
+        if(item.id == rowData.id )
+        this.props.users.allUsers[index].present=event.target.checked
+        this.props.fetchSaveUser(this.props.users.allUsers)
+     })
     }
 
-    addCourse = ()=>{
+    saveAttendance= ()=>{
+      const {level, department, course, startTime, endTime} = this.state
+      if(!department){
+        alert("Please select a department")
+        return
+      }
 
+      if(!level){
+        alert("Please select a level")
+        return
+      }
+      if(!course){
+        alert("Please select a course")
+        return
+      }
+
+      if(!startTime){
+        alert("Please select a class start time")
+        return
+      }
+
+      if(!endTime){
+        alert("Please select a class end time")
+        return
+      }
+
+      if(compareStartAndEndTime(startTime, endTime)){
+           
+      }
+      else{
+        alert("Please the check your values for class start and end time")
+      }
     }
+
     render() { 
         return (
                <Grid
@@ -39,7 +121,21 @@ class AttendanceScreen extends Component {
                 xl={12}
                 xs={12}
                 >
-                   <AttendanceTabs/>
+                   <AttendanceTabs
+                     departments={this.props.departments.allDepartments}
+                     levels = {this.state.filteredLevels}
+                     courses={this.state.filteredCourses}
+                     handleFormChange= {this.handleChange}
+                     department={this.state.department}
+                     level= {this.state.level}
+                     course={this.state.course}
+                     handleFetchStudents= {this.handleFetchStudents}
+                     saveAttendance= {this.saveAttendance}
+                     users={this.props.users.allUsers}
+                     startTime={this.state.startTime}
+                     endTime={this.state.endTime}
+                     handleCheck= {this.handleCheck}
+                   />
                 </Grid>
             </Grid>
         );
@@ -47,13 +143,30 @@ class AttendanceScreen extends Component {
 }
  
 function mapStateToProps(state) {
-    return {
-     
-    }
+  return {
+    users: state.users,
+    courses: state.courses,
+    departments:state.departments,
+    levels:state.levels
+  }
   }
   const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-     
+      fetchAllLevels: () => {
+        dispatch(actions.fetchAllLevels())
+      },
+      fetchAllDepartment: ()=>{
+        dispatch(actions.fetchAllDepartment())
+      },
+     fetchAllCourses: ()=>{
+         dispatch(actions.fetchAllCourses())
+     },
+     fetchLevelUser : (level)=>{
+        dispatch(actions.fetchUserByLevel(level))
+     },
+     fetchSaveUser : (users)=>{
+      dispatch(actions.fetchAllUsersSuccess(users))
+   }
   }
 }
  

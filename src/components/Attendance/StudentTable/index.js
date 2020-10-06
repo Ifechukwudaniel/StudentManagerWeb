@@ -1,13 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MaterialTable from 'material-table'
+import Checkbox from '@material-ui/core/Checkbox'
 
 const useStyles = makeStyles({
   table: {
@@ -16,16 +12,27 @@ const useStyles = makeStyles({
 });
 
 
-export default function StudentTable({data}) {
+export default function StudentTable(props) {
   const classes = useStyles();
 
-  const [row, setData] = useState(data);
+  const [row, setData] = useState([]);
+
+  useEffect(()=>{
+    setData(props.data)
+  },[props.data])
+
 
   const [columns, setColumns] = useState([
     { title: 'Name', field: 'name' },
     { title: 'Matric Number', field: 'matricNumber'},
-    { title: 'Department', field: 'department'},
-    { title: 'Levels', field: 'level', filtering:'never'},
+      {title:'Present', field:'present', 
+      render:(rowData)=>(
+        <Checkbox
+          checked={rowData.present}
+        onChange={(event)=>{props.handleCheck(rowData, event)}}
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
+      )}
   ]);
 
   return (
@@ -33,15 +40,11 @@ export default function StudentTable({data}) {
       <MaterialTable
          title="Students"
          columns={columns}
-         data={data}
-         onRowClick= {()=>{
-           alert("jjjdj")
-         }}
+         data={row}
           options= {{
             sorting:true,
             exportButton: true,
             filtering:true,
-            selection: true
           }}       
       />
     </TableContainer>
