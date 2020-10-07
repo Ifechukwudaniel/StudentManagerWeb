@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AttendanceForm = ({departments= [], levels= [],courses=[],
   department="", level="", course="", 
-  startTime="", endTime='',
+  startTime="", endTime='', date="",
   handleChange= ()=>{}, handleFetchStudents= ()=>{}, saveAttendance= ()=>{}}) => {
 
 
@@ -112,6 +112,20 @@ const AttendanceForm = ({departments= [], levels= [],courses=[],
                   }}
               />
                 </FormControl>
+                <FormControl className={classes.formControl}>
+                  <TextField
+                     name="date"
+                    label="Date"
+                    type="date"
+                    // value={date}
+                    onChange={handleChange}
+                    className={classes.textField}
+                   InputLabelProps={{
+                     shrink: true,
+                    }}
+                  />
+                </FormControl>
+                
                  <div>
                    <Button  onClick={()=>{
                      handleFetchStudents()

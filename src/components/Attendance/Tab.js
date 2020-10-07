@@ -37,6 +37,7 @@ const AttendanceTabs = ({departments =[]
    department='' ,level="", 
    startTime="", endTime="",
    course="", handleFormChange, handleFetchStudents,
+   date="",
    handleCheck =()=>{},
    saveAttendance})=> {
     
@@ -85,6 +86,7 @@ const AttendanceTabs = ({departments =[]
               saveAttendance= {saveAttendance}
               startTime={startTime}
               endTime={endTime}
+              date={date}
               />
              
               <StudentTable handleCheck= {handleCheck} data={users}/>
