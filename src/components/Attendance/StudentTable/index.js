@@ -25,7 +25,7 @@ export default function StudentTable(props) {
   const [columns, setColumns] = useState([
     { title: 'Name', field: 'name' },
     { title: 'Matric Number', field: 'matricNumber'},
-      {title:'Present', field:'present', 
+      {title:'Present', field:'present', filtering:false,
       render:(rowData)=>(
         <Checkbox
           checked={rowData.present}

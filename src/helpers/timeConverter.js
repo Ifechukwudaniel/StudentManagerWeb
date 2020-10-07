@@ -39,7 +39,6 @@ export function to12Time(time) {
     time = time.slice (1);  // Remove full string match value
     time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
     time[0] = +time[0] % 12 || 12; // Adjust hours
-    console.log(time[0])
   }
   return time.join (''); // return adjusted time or original string
 }

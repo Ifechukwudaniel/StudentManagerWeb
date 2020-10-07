@@ -7,8 +7,11 @@ import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
 import AttendanceTabs from '../components/Attendance/Tab';
-import { compareStartAndEndTime} from '../helpers/timeConverter';
+import { compareStartAndEndTime, to12Time} from '../helpers/timeConverter';
+import axiosService from '../services/axiosService'
+const config = require('../config');
 
+const  axiosAuth= axiosService.initInstance();
 class AttendanceScreen extends Component {
     state= {
       filteredLevels:[],
@@ -17,12 +20,14 @@ class AttendanceScreen extends Component {
       level:"",
       course:"",
       startTime:"",
-      endTime:""
+      endTime:"",
+      date:"",
     }
    componentDidMount (){
      this.props.fetchAllCourses()
      this.props.fetchAllDepartment()
      this.props.fetchAllLevels()
+     this.props.fetchSaveUser([])
    }
 
    handleChange=(event)=>{
@@ -92,7 +97,37 @@ class AttendanceScreen extends Component {
       }
 
       if(compareStartAndEndTime(startTime, endTime)){
-           
+          if(this.props.users.allUsers.length==0)
+            return  alert(" please fetch all the  students in this level")
+          else{
+             let studentData =  this.props.users.allUsers.map((stu)=>{
+               return{
+                 user:stu.id,
+                 attended:stu.present,
+                 timeStart: to12Time(this.state.startTime),
+                 timeEnd:to12Time(this.state.endTime),
+                 date:this.state.date,
+                 course:this.state.course
+             }})
+             console.log(studentData)
+            axiosAuth.post(`${config.apiUrl}/attendance/bulk`,{attendance:studentData})
+            .then(()=>{
+              alert("saved  users attendance")
+              this.setState({
+                filteredLevels:[],
+                filteredCourses:[],
+                department:'',
+                level:"",
+                course:"",
+                startTime:"",
+                endTime:"",
+                date:"",
+              })
+            })
+            .catch(()=>{
+              alert("please an error occurred please check the form  ")
+            })
+          }
       }
       else{
         alert("Please the check your values for class start and end time")
@@ -134,6 +169,7 @@ class AttendanceScreen extends Component {
                      users={this.props.users.allUsers}
                      startTime={this.state.startTime}
                      endTime={this.state.endTime}
+                     date={this.state.date}
                      handleCheck= {this.handleCheck}
                    />
                 </Grid>
