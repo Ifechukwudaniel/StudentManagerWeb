@@ -12,6 +12,7 @@ import StudentAttendanceTable from './StudentAttendanceTable'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
 import AttendanceForm from './AttendanceForm'
+import FetchAttendanceForm from './FetchAttendanceForm';
 
 function a11yProps(index) {
   return {
@@ -93,6 +94,7 @@ const AttendanceTabs = ({departments =[]
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
+          <FetchAttendanceForm/>
           <StudentAttendanceTable/>
         </TabPanel>
       </SwipeableViews>
