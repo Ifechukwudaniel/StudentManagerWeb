@@ -24,6 +24,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -508,6 +509,22 @@ module.exports = function(webpackEnv) {
             // Make sure to add the new loader(s) before the "file" loader.
           ],
         },
+        {
+          test: /\.[jt]sx?$/,
+          exclude: /node_modules/,
+          use: [
+            // ... other loaders
+            {
+              loader: require.resolve('babel-loader'),
+              options: {
+                plugins: [
+                  isEnvDevelopment && require.resolve('react-refresh/babel'),
+                ].filter(Boolean),
+              },
+            },
+          ],
+        },
+  
       ],
     },
     plugins: [
@@ -560,7 +577,13 @@ module.exports = function(webpackEnv) {
       // Otherwise React will be compiled in the very slow development mode.
       new webpack.DefinePlugin(env.stringified),
       // This is necessary to emit hot updates (currently CSS only):
-      isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
+
+      ///ksjjsjsj
+      // isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
+      //
+      
+      isEnvDevelopment && new ReactRefreshWebpackPlugin(),
+
       // Watcher doesn't work well if you mistype casing in a path so we use
       // a plugin that prints an error when you attempt to do this.
       // See https://github.com/facebook/create-react-app/issues/240
@@ -653,6 +676,9 @@ module.exports = function(webpackEnv) {
           // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined,
         }),
+
+        // isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
+        isEnvDevelopment && new ReactRefreshWebpackPlugin(),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
