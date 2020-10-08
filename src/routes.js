@@ -16,6 +16,7 @@ import DashboardScreen from './screens/DashboardScreen';
 import TimeTableScreen from './screens/TimeTableScreeen';
 import ChatScreen from './screens/ChatScreen'
 import UserProfile from './screens/UserProfile'
+import MaterialItemScreen from './screens/MaterialItemScreen'
 
 export default class Navigation extends Component {
 
@@ -63,6 +64,12 @@ export default class Navigation extends Component {
                   exact
                   layout={MainLayout}
                   path="/material"
+                />
+                 <PrivateRoute
+                  component={MaterialItemScreen}
+                  exact
+                  layout={MainLayout}
+                  path="/material/:courseId"
                 />
                 <PrivateRoute
                   component={BlogScreen}
