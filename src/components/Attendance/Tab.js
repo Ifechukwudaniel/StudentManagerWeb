@@ -12,6 +12,7 @@ import StudentAttendanceTable from './StudentAttendanceTable'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
 import AttendanceForm from './AttendanceForm'
+import FetchAttendanceForm from './FetchAttendanceForm';
 
 function a11yProps(index) {
   return {
@@ -38,7 +39,10 @@ const AttendanceTabs = ({departments =[]
    startTime="", endTime="",
    course="", handleFormChange, handleFetchStudents,
    date="",
+   matricNumber= "",
+   userAttendance=[],
    handleCheck =()=>{},
+   fetchStudentAttendance=()=>{},
    saveAttendance})=> {
     
   const classes = useStyles();
@@ -93,7 +97,12 @@ const AttendanceTabs = ({departments =[]
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <StudentAttendanceTable/>
+          <FetchAttendanceForm
+            fetchStudentAttendance= {fetchStudentAttendance}
+            handleChange={handleFormChange}
+            matricNumber={matricNumber}
+          />
+          <StudentAttendanceTable data={userAttendance}/>
         </TabPanel>
       </SwipeableViews>
     </div>

@@ -88,7 +88,6 @@ function mapStateToProps(state) {
         dispatch(actions.fetchAllLevels())
       },
       fetchDepartmentTimetable: (levelId)=>{
-         console.log(levelId)
         dispatch(actions.fetchDepartmentTimetable(levelId))
       }
   }

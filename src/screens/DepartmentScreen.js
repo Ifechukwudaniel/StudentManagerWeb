@@ -21,7 +21,6 @@ class DepartmentScreen extends Component {
         this.setState({[event.target.name]:event.target.value})
     }
     addDepartment = ()=>{
-        console.log('x')
         this.setState({loading:true})
         this.props.dispatch(action.addDepartment(this.state))
         this.setState({loading:false,modal:false})

@@ -8,11 +8,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MaterialTable from 'material-table'
-
+import Avatar from '@material-ui/core/Avatar';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  avatar:{
+      width:40
+  }
 });
 
 
@@ -22,10 +25,13 @@ export default function SimpleTable({data}) {
   const [row, setData] = useState(data);
 
   const [columns, setColumns] = useState([
-    { title: 'Name', field: 'name' },
+    { title: 'Avatar', field: 'image', filtering:false ,editable:false, render:(rowData)=>(
+      <Avatar className={classes.avatar} alt={`${rowData.name}`} src={`${rowData.image}`} />
+    )},
+    { title: 'Name', field: 'name', filtering:false },
     { title: 'Matric Number', field: 'matricNumber'},
     { title: 'Department', field: 'department'},
-    { title: 'Levels', field: 'level', filtering:'never'},
+    { title: 'Levels', field: 'level'},
     { title: 'Role', field: 'role',lookup: { admin: 'Admin', user: 'User' },},
   ]);
 

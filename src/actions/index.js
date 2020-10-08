@@ -17,7 +17,10 @@ const {
    CREATE_USER_FAILURE,
    FETCH_DEPARTMENT_TIMETABLE,
    FETCH_DEPARTMENT_TIMETABLE_FAILURE,
-   FETCH_DEPARTMENT_TIMETABLE_SUCCESS
+   FETCH_DEPARTMENT_TIMETABLE_SUCCESS,
+   FETCH_ATTENDANCE_BY_MATRICNUMBER,
+   FETCH_ATTENDANCE_BY_MATRICNUMBER_FAILURE,
+   FETCH_ATTENDANCE_BY_MATRICNUMBER_SUCCESS
 
 } = require('./types')
 const jwt = require('jsonwebtoken')
@@ -297,6 +300,36 @@ export const fetchDepartmentTimetableSuccess = (timetable) => {
 export const fetchDepartmentTimetableFailure = (error) => {
   return {
     type: FETCH_DEPARTMENT_TIMETABLE_FAILURE,
+    error
+  }
+}
+
+
+export const fetchUserAttendance = (matricNumber)=>{
+  return dispatch => {
+    return axiosAuth.post(`${config.apiUrl}/attendance/matric`,{
+      matricNumber:matricNumber
+    } )
+      .then(res => res.data)
+      .then((data) => {
+          dispatch(fetchUserAttendanceSuccess(data))
+      })
+      .catch(({response}) => {
+         dispatch(fetchUserAttendanceFailure(response.data.error))
+      })
+  }
+}
+
+export const fetchUserAttendanceSuccess  = (attendance) => {
+  return {
+    type:FETCH_ATTENDANCE_BY_MATRICNUMBER_SUCCESS,
+      attendance
+  }
+}
+
+export const fetchUserAttendanceFailure = (error) => {
+  return {
+    type: FETCH_ATTENDANCE_BY_MATRICNUMBER_FAILURE,
     error
   }
 }
