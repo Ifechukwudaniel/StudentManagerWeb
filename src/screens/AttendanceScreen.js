@@ -22,46 +22,34 @@ class AttendanceScreen extends Component {
       startTime:"",
       endTime:"",
       date:"",
+      matricNumber:''
     }
+
    componentDidMount (){
      this.props.fetchAllCourses()
      this.props.fetchAllDepartment()
      this.props.fetchAllLevels()
      this.props.fetchSaveUser([])
+     this.props.fetchStudentAttendanceByMatricNumber([])
    }
 
    handleChange=(event)=>{
-    if( event.target.type=="time"){
-      this.setState({[event.target.name]:event.target.value})
-       return 
-    }
+    if( event.target.type=="time")  return this.setState({[event.target.name]:event.target.value})
     if(event.target.name==="department"){
-      this.setState({[event.target.name]:event.target.value},()=>{
-        this.setState({filteredLevels:this.props.levels.allLevels.filter((x)=>x.departmentId==event.target.value)})
-      })
-      return
+     return  this.setState({[event.target.name]:event.target.value},()=>{ this.setState({filteredLevels:this.props.levels.allLevels.filter((x)=>x.departmentId==event.target.value)})})
     }
     else if(event.target.name==="level"){
-      this.setState({[event.target.name]:event.target.value},()=>{
-        this.setState({filteredCourses:this.props.courses.allCourses.filter((x)=>{
-           return x.levelId ===event.target.value
-        })})
-      })
-      return
+     return this.setState({[event.target.name]:event.target.value},()=>{  this.setState({filteredCourses:this.props.courses.allCourses.filter((x)=>{ return x.levelId ===event.target.value })}) })
     }
-    else{
-       this.setState({[event.target.name]:event.target.value})
-       return
-    }
+    else return this.setState({[event.target.name]:event.target.value})
    }
+
     handleFetchStudents= ()=>{
-      if(!this.state.level){
-        alert('no course set')
-      }
-      else{
-        this.props.fetchLevelUser(this.state.level)
-      }
+       if(!this.state.level) 
+         return alert('no course set')
+      return this.props.fetchLevelUser(this.state.level)
     }
+    
     handleCheck= (rowData, event) =>{
       this.props.users.allUsers.forEach((item,index)=>{
         if(item.id == rowData.id )
@@ -71,25 +59,12 @@ class AttendanceScreen extends Component {
     }
 
     saveAttendance= ()=>{
-      const {level, department, course, startTime, endTime} = this.state
-      if(!department){
-        alert("Please select a department")
-        return
-      }
-
-      if(!level){
-        alert("Please select a level")
-        return
-      }
-      if(!course){
-        alert("Please select a course")
-        return
-      }
-
-      if(!startTime){
-        alert("Please select a class start time")
-        return
-      }
+      const {level, department, course, startTime, endTime, date} = this.state
+      if(!department)  return alert("Please select a department")
+      if(!level) return alert("Please select a level")
+      if(!course)  return alert("Please select a course")
+      if(!startTime)return  alert("Please select a class start time")
+      if(!date)return  alert("Please select a date")
 
       if(!endTime){
         alert("Please select a class end time")
@@ -97,8 +72,7 @@ class AttendanceScreen extends Component {
       }
 
       if(compareStartAndEndTime(startTime, endTime)){
-          if(this.props.users.allUsers.length==0)
-            return  alert(" please fetch all the  students in this level")
+          if(this.props.users.allUsers.length==0) return  alert(" please fetch all the  students in this level")
           else{
              let studentData =  this.props.users.allUsers.map((stu)=>{
                return{
@@ -109,7 +83,6 @@ class AttendanceScreen extends Component {
                  date:this.state.date,
                  course:this.state.course
              }})
-             console.log(studentData)
             axiosAuth.post(`${config.apiUrl}/attendance/bulk`,{attendance:studentData})
             .then(()=>{
               alert("saved  users attendance")
@@ -124,15 +97,19 @@ class AttendanceScreen extends Component {
                 date:"",
               })
             })
-            .catch(()=>{
-              alert("please an error occurred please check the form  ")
-            })
+            .catch(()=> alert("please an error occurred please check the form  ")
+            )
           }
       }
-      else{
-        alert("Please the check your values for class start and end time")
-      }
+      else return alert("Please the check your values for class start and end time")
     }
+
+     fetchStudentAttendance = ()=>{
+        this.props.fetchStudentAttendanceByMatricNumber([])
+        if(!this.state.matricNumber) return alert("Please  enter matric number")
+        this.props.fetchStudentAttendanceByMatricNumber(this.state.matricNumber)
+        this.setState({matricNumber:''})
+     }
 
     render() { 
         return (
@@ -140,22 +117,10 @@ class AttendanceScreen extends Component {
               container
               spacing={4}
             >
-               <Grid
-                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
-                >
+               <Grid item lg={12} sm={12}  xl={12}  xs={12}  >
                   <Description screenName="Attendance"/>
                 </Grid>
-                <Grid
-                 item
-                lg={12}
-                sm={12}
-                xl={12}
-                xs={12}
-                >
+                <Grid item lg={12}  sm={12} xl={12} xs={12} >
                    <AttendanceTabs
                      departments={this.props.departments.allDepartments}
                      levels = {this.state.filteredLevels}
@@ -171,6 +136,9 @@ class AttendanceScreen extends Component {
                      endTime={this.state.endTime}
                      date={this.state.date}
                      handleCheck= {this.handleCheck}
+                     fetchStudentAttendance={this.fetchStudentAttendance}
+                     matricNumber={this.state.matricNumber}
+                     userAttendance = {this.props.attendance.userAttendance}
                    />
                 </Grid>
             </Grid>
@@ -183,7 +151,8 @@ function mapStateToProps(state) {
     users: state.users,
     courses: state.courses,
     departments:state.departments,
-    levels:state.levels
+    levels:state.levels,
+    attendance:state.attendance
   }
   }
   const mapDispatchToProps = (dispatch, ownProps) => {
@@ -202,7 +171,10 @@ function mapStateToProps(state) {
      },
      fetchSaveUser : (users)=>{
       dispatch(actions.fetchAllUsersSuccess(users))
-   }
+   },
+    fetchStudentAttendanceByMatricNumber : (matricNumber)=>{
+      dispatch(actions.fetchUserAttendance(matricNumber))
+ }
   }
 }
  

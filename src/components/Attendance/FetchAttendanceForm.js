@@ -34,23 +34,23 @@ const useStyles = makeStyles((theme) => ({
       }
   }));
 
-const FetchAttendanceForm = ({ handleChange= ()=>{}}) => {
+const FetchAttendanceForm = ({ handleChange= ()=>{},matricNumber="", fetchStudentAttendance= ()=>{}}) => {
 
   const classes = useStyles();
   return (
         <Grid item lg={12} xs={12} >
          <FormControl className={classes.formControl}>
                   <TextField
-                     name="matricNumber"
+                    name="matricNumber"
                     label="Matric Number "
                     type="text"
                     onChange={handleChange}
                     className={classes.textField}
-                    
+                    value={matricNumber}
                   />
                 <div>
                    <Button  onClick={()=>{
-                     
+                      fetchStudentAttendance()
                    }} className= {classes.button} variant="contained" color="primary"> Fetch Students Attendance  </Button>
                </div>
                </FormControl>

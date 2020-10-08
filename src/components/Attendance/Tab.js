@@ -39,7 +39,10 @@ const AttendanceTabs = ({departments =[]
    startTime="", endTime="",
    course="", handleFormChange, handleFetchStudents,
    date="",
+   matricNumber= "",
+   userAttendance=[],
    handleCheck =()=>{},
+   fetchStudentAttendance=()=>{},
    saveAttendance})=> {
     
   const classes = useStyles();
@@ -94,8 +97,12 @@ const AttendanceTabs = ({departments =[]
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <FetchAttendanceForm/>
-          <StudentAttendanceTable/>
+          <FetchAttendanceForm
+            fetchStudentAttendance= {fetchStudentAttendance}
+            handleChange={handleFormChange}
+            matricNumber={matricNumber}
+          />
+          <StudentAttendanceTable data={userAttendance}/>
         </TabPanel>
       </SwipeableViews>
     </div>
