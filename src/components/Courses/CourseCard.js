@@ -49,6 +49,11 @@ export default function CourseCard({courseCode, title, image, id}) {
           </Typography>
         </CardContent>
       </CardActionArea>
+      <CardActions>
+        <Button variant="contained" size="small" color="primary">
+          View  {courseCode} Materials
+        </Button>
+      </CardActions>
       </NavLink>
     </Card>
   );
