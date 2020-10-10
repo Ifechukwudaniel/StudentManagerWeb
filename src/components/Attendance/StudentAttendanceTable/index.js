@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import MaterialTable from 'material-table'
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-
+import moment from 'moment'
 
 const useStyles = makeStyles({
   table: {
@@ -62,7 +62,7 @@ export default function StudentAttendanceTable({data}) {
                 <TableBody>
                   {rowData.attendance.map((historyRow) => (
                     <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">{historyRow.date}</TableCell>
+                      <TableCell component="th" scope="row">{moment(historyRow.date).format("YYYY-MM-DD")}</TableCell>
                       <TableCell>{historyRow.timeStart}</TableCell>
                       <TableCell align="right">{historyRow.timeEnd}</TableCell>
                       <TableCell align="right">{historyRow.attended? " Present": "Absent"} </TableCell>

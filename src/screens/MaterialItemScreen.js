@@ -8,6 +8,7 @@ import * as actions from '../actions'
 import Description from '../components/description';
 import { FileIcon, defaultStyles } from 'react-file-icon';
 import CourseList from '../components/Courses/CourseList'
+import MaterialList from '../components/Materials/components/MaterialList';
  
 
 class MaterialItemScreen extends Component {
@@ -20,7 +21,7 @@ class MaterialItemScreen extends Component {
           container
           spacing={4}
         >
-        
+          <MaterialList/>
         </Grid>
         );
     }

@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { AppBar, Toolbar, Hidden, IconButton, Badge } from '@material-ui/core';
+import { AppBar, Toolbar, Hidden, IconButton, Badge, Avatar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
    Notifications, 
@@ -85,6 +85,7 @@ const Topbar = props => {
               </Badge>
             </IconButton>
           </div>
+          <Avatar alt={props.auth.name} src={props.auth.image} />
       </Toolbar>
     </AppBar>
 

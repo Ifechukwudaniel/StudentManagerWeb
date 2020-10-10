@@ -135,7 +135,11 @@ export  default function CourseList() {
                 alignItems="flex-start"
             >
                 {data.map(elem => (
-                    <Grid item  xs={12} sm={6} md={3} key={data.indexOf(elem)}>
+                    <Grid  
+                    justifyContent="center"
+                    alignItems="center"
+                    
+                     item  xs={12} sm={6} md={3} key={data.indexOf(elem)}>
                         <CourseCard
                           courseCode={elem.courseCode}  
                           title={elem.title}  
