@@ -1,4 +1,4 @@
-import { FETCH_ALL_COURSES_SUCCESS, FETCH_ALL_COURSES_FAILURE } from "./types";
+import { FETCH_ALL_COURSES_SUCCESS, FETCH_ALL_COURSES_FAILURE, DECODE_USER } from "./types";
 import axiosService from "../services/axiosService";
 
 const AxiosService = require("../services/axiosService");
@@ -25,6 +25,15 @@ const jwt = require('jsonwebtoken')
 const {tokenName}= require('../config');
 const  axiosAuth= axiosService.initInstance();
 
+export const loadUserProfile = ()=>{
+  const user = jwt.decode(localStorage.getItem(tokenName),tokenName);
+  console.log({decodedUser: user})
+  return {
+    type: DECODE_USER,
+    payload: {name: user.name, image: user.image, matricNumber: user.matricNumber, department: user.department}
+  }
+}
+
 export const login = (userData, navigate) => {
     return dispatch => {
       return axios.post(`${config.apiUrl}/auth/login`, {
@@ -43,16 +52,17 @@ export const login = (userData, navigate) => {
     }
   }
 
-
-export const loginSuccess = (navigate=()=>{}) => {
+//Thunk to handle a successfull login 
+export const loginSuccess = (navigate=()=>{}) => (dispatch)=> {
     const {name ,matricNumber, role} = jwt.decode(localStorage.getItem(tokenName),tokenName)
     navigate()
-    return {
+    dispatch({
       type: LOGIN_SUCCESS,
       name:name,
       matricNumber:matricNumber,
       role
-    }
+    });
+    dispatch(loadUserProfile()); 
   }
 
  export const loginFailure = (  error) => {
@@ -68,7 +78,6 @@ export const loginSuccess = (navigate=()=>{}) => {
      type:LOGOUT
     }
 }
-
 
 export const fetchAllUsers  = () => {
   return dispatch => {

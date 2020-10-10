@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as action from '../actions'
-import  {Table,AddCourses } from '../components/Courses'
-import {TotalCourses} from '../components/Dashboard/components'
-import {Grid, Typography, Paper } from '@material-ui/core'
+import { Table, AddCourses } from '../components/Courses'
+import { TotalCourses } from '../components/Dashboard/components'
+import { Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
 //aditional imports
@@ -22,7 +22,7 @@ import CardAvatar from "../components/Card/CardAvatar.jsx";
 import CardBody from "../components/Card/CardBody.jsx";
 import CardFooter from "../components/Card/CardFooter.jsx";
 
-import {grayColor} from "../assets/jss/material-dashboard-react.jsx";
+import { grayColor } from "../assets/jss/material-dashboard-react.jsx";
 import avatar from "../assets/img/faces/marc.jpg";
 
 const styles = {
@@ -68,75 +68,39 @@ const styles = {
 
 
 class CoursesScreen extends Component {
-    componentWillMount(){
-        this.props.fetchAllCourses()
-        this.props.fetchAllDepartment()
-        this.props.fetchAllLevels()
-    }
-    state= {
-        courseCode:'',
-        description:'',
-        title:'',
-        department:'',
-        level:'',
-        lecturer:'',
-        departmentLevels:[],
-        loading:false ,
-        modal :false,
-        errors: {}
-    }
-
-
-    handleChange=(event)=>{
-       console.log(this.state.department)
-        if(event.target.name==="department"){
-            this.setState({[event.target.name]:event.target.value}, ()=>{
-               console.log(this.state.department)
-             const levels=    this.props.levels.allLevels.filter((value)=>value.departmentId===this.state.department)
-             this.setState({departmentLevels:levels});
-             })
-        }
-        else this.setState({[event.target.name]:event.target.value})
-    }
-
-    addCourse = ()=>{
-      this.setState({loading:true})
-      this.props.addCourse(this.state)
-      this.setState({loading:false, modal:false})
-    }
-    // creative-tim profile page
+  state = {
+    errors: {}
+  }
+  // creative-tim profile page
 
 
   render() {
     /*
     To do 
-    1)get classes object
     2) Replace name and email
-    3)Transfer needed components to components folder //
-
-    
     */
-    const name = "test";
-    const email = "tester@test.com"
-    const { classes} = this.props;
+    const { classes, userDetails } = this.props;
     const { errors } = this.state;
+    const { name, matricNumber, image } = userDetails
+    const email = "test@test"
     return (
       <div>
         <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={4}>
             <Card profile>
               <CardAvatar profile>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
-                  <img src={avatar} alt="..." />
+                  <img src={image} alt="..." />
                 </a>
               </CardAvatar>
               <CardBody profile>
-                <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-                <h4 className={classes.cardTitle}>Alec Thompson</h4>
+                <h6 className={classes.cardCategory}>{matricNumber}</h6>
+                <h4 className={classes.cardTitle}>{name}</h4>
                 <p className={classes.description}>
-                  Don't be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
+                 Department: Your department
+                </p>
+                <p className={classes.description}>
+                 Level: Your level
                 </p>
                 <Button color="success" round>
                   Follow
@@ -150,41 +114,60 @@ class CoursesScreen extends Component {
                 <CardHeader color="success">
                   <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
                   <p className={classes.cardCategoryWhite}>
-                    Complete your profile
+                    Change your password
                   </p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
-                        labelText="Name"
-                        id="name"
+                        labelText="Password"
+                        id="currPassword"
                         error={errors.name}
                         formControlProps={{
                           fullWidth: true
                         }}
                         inputProps={{
+                          type: "password",
                           required: true,
-                          defaultValue: name,
-                          name: "name"
+                          defaultValue: "",
+                          name: "currPassword"
                         }}
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
-                        labelText="Email address"
-                        id="email-address"
+                        labelText="New password"
+                        id="new-password-1"
                         error={errors.username}
                         formControlProps={{
                           fullWidth: true
                         }}
                         inputProps={{
+                          type: "password",
                           required: true,
-                          defaultValue: email,
-                          name: "username"
+                          defaultValue: "",
+                          name: "newPassword1"
                         }}
                       />
                     </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <CustomInput
+                        labelText="Confirm password"
+                        id="new-password-2"
+                        error={errors.username}
+                        formControlProps={{
+                          fullWidth: true
+                        }}
+                        inputProps={{
+                          type: "password",
+                          required: true,
+                          defaultValue: "",
+                          name: "newPassword2"
+                        }}
+                      />
+                    </GridItem>
+                    
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
@@ -195,7 +178,7 @@ class CoursesScreen extends Component {
               </Card>
             </form>
           </GridItem>
-          
+
         </GridContainer>
       </div>
     );
@@ -217,42 +200,25 @@ class CoursesScreen extends Component {
 
 
 
-    //modify content
-    // render() { 
-    //     return (
-    //            <Grid
-    //           container
-    //           spacing={4}
-    //         >
-    //         </Grid>
-    //     );
-    // }
+//modify content
+// render() { 
+//     return (
+//            <Grid
+//           container
+//           spacing={4}
+//         >
+//         </Grid>
+//     );
+// }
 
- 
+
 function mapStateToProps(state) {
-    return {
-      courses: state.courses,
-      departments:state.departments,
-      levels:state.levels
-    }
-  }
-  const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-      fetchAllDepartment: () => {
-        dispatch(actions.fetchAllDepartment())
-      },
-      fetchAllCourses: () => {
-        dispatch(actions.fetchAllCourses())
-      },
-      fetchAllLevels: () => {
-        dispatch(actions.fetchAllLevels())
-      },
-      addCourse:(data)=>{
-        dispatch(action.addCourse(data))
-      }
+  return {
+    userDetails: state.userProfile,
   }
 }
- 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CoursesScreen));
+
+
+export default connect(mapStateToProps)(withStyles(styles)(CoursesScreen));
