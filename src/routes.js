@@ -17,10 +17,7 @@ import TimeTableScreen from './screens/TimeTableScreeen';
 import ChatScreen from './screens/ChatScreen'
 import UserProfile from './screens/UserProfile'
 import MaterialItemScreen from './screens/MaterialItemScreen'
-
-export default class Navigation extends Component {
-
-  render() {
+const Navigation = ()=>{
     return (
          <BrowserRouter>
               <Switch>
@@ -111,4 +108,7 @@ export default class Navigation extends Component {
          </BrowserRouter>
     );
   }
-}
+
+
+
+export default  Navigation
