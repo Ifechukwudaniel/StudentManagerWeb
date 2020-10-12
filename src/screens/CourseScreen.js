@@ -25,10 +25,8 @@ class CoursesScreen extends Component {
         modal :false
     }
     handleChange=(event)=>{
-       console.log(this.state.department)
         if(event.target.name==="department"){
             this.setState({[event.target.name]:event.target.value}, ()=>{
-               console.log(this.state.department)
              const levels=    this.props.levels.allLevels.filter((value)=>value.departmentId===this.state.department)
              this.setState({departmentLevels:levels});
              })

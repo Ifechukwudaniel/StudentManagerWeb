@@ -2,16 +2,17 @@ import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../actions/types';
 
 const INITIAL_STATE = {
   isAuth: false,
-  errors: [],
+  errors: "",
   name: '',
   matricNumber:'', 
-  role:''
+  role:'',
+  image:''
 }
 
 export const authReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case LOGIN_SUCCESS:
-      return Object.assign({}, state, {isAuth: true, error:"", name: action.name, matricNumber:action.matricNumber , role:action.role});
+      return Object.assign({}, state, {isAuth: true, error:"", name: action.name, matricNumber:action.matricNumber , role:action.role, image:action.image});
     case LOGIN_FAILURE:
       return Object.assign({}, state, {error: action.error});
     case LOGOUT:

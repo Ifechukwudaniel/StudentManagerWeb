@@ -16,10 +16,8 @@ import DashboardScreen from './screens/DashboardScreen';
 import TimeTableScreen from './screens/TimeTableScreeen';
 import ChatScreen from './screens/ChatScreen'
 import UserProfile from './screens/UserProfile'
-
-export default class Navigation extends Component {
-
-  render() {
+import MaterialItemScreen from './screens/MaterialItemScreen'
+const Navigation = ()=>{
     return (
          <BrowserRouter>
               <Switch>
@@ -64,6 +62,12 @@ export default class Navigation extends Component {
                   layout={MainLayout}
                   path="/material"
                 />
+                 <PrivateRoute
+                  component={MaterialItemScreen}
+                  exact
+                  layout={MainLayout}
+                  path="/material/:courseId"
+                />
                 <PrivateRoute
                   component={BlogScreen}
                   exact
@@ -104,4 +108,7 @@ export default class Navigation extends Component {
          </BrowserRouter>
     );
   }
-}
+
+
+
+export default  Navigation
