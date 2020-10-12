@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {isAuth}  from '../../../helpers/Auth'
  
 const PrivateRoute  = ({component, layout, path}, ...props) => {
-    if(true){
+    if(isAuth(props)){
         return ( <RouteWIthLayout
             component={component}
             layout={layout}

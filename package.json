@@ -69,6 +69,7 @@
     "react-dev-utils": "^10.0.0",
     "react-dom": "^16.12.0",
     "react-file-icon": "^1.0.0",
+    "react-google-font-loader": "^1.1.0",
     "react-perfect-scrollbar": "^1.5.3",
     "react-reconciler": "^0.25.1",
     "react-redux": "^7.1.3",

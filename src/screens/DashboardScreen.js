@@ -15,7 +15,7 @@ class DashboardScreen extends Component {
                  <Dashboard 
                   
                  />
-            </div>
+          </div>
         );
     }
 }

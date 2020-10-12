@@ -8,9 +8,10 @@ import * as actions from '../actions'
 import Description from '../components/description';
 import { FileIcon, defaultStyles } from 'react-file-icon';
 import CourseList from '../components/Courses/CourseList'
+import MaterialList from '../components/Materials/components/MaterialList';
  
 
-class MaterialScreen extends Component {
+class MaterialItemScreen extends Component {
     state= {
     
     }
@@ -20,7 +21,7 @@ class MaterialScreen extends Component {
           container
           spacing={4}
         >
-         <CourseList/>
+          <MaterialList/>
         </Grid>
         );
     }
@@ -37,4 +38,4 @@ function mapStateToProps(state) {
   }
 }
  
-export default connect(mapStateToProps, mapDispatchToProps)(MaterialScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MaterialItemScreen);
