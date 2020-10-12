@@ -11,6 +11,7 @@ import {departmentReducer} from './department-reducer'
 import { coursesReducer} from './courses-reducer'
 import {levelsReducer } from './levels-reducers'
 import {timeTableReducer} from './timeTables-reducer'
+import { userProfileReducer } from './userProfile-reducer';
 import { attendanceReducer } from './attendance-reducer';
 
  export const init = () => {
@@ -21,6 +22,7 @@ import { attendanceReducer } from './attendance-reducer';
     courses:coursesReducer,
     levels:levelsReducer,
     timeTable:timeTableReducer,
+    userProfile: userProfileReducer,
     attendance: attendanceReducer
   });
 
