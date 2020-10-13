@@ -10,6 +10,8 @@ import Logo from '../../../../images/logo--white.png'
 import image from '../../../../images/sidebar-2.jpg'
 import {connect} from 'react-redux'
 import * as actions from '../../../../actions'
+import {isAuthData} from '../../../../helpers/Auth'
+
 
 
 const drawerWidth = 240;
@@ -191,6 +193,12 @@ const Sidebar = props => {
       icon: <Input/>
     },
   ];
+  useEffect(() => {
+    props.logIn()
+    return () => {
+        // Anything in here is fired on component unmount.
+    }
+}, [])
 
   return (
      <div>
@@ -231,6 +239,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logOut: () => {
       dispatch(actions.logOut())
+    },
+    logIn: () => {
+      dispatch(actions.loginSuccess())
     },
 
 }
