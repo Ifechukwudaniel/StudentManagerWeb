@@ -57,13 +57,17 @@ export const login = (userData, navigate) => {
 
 //Thunk to handle a successfull login 
 export const loginSuccess = (navigate=()=>{}) => (dispatch)=> {
-    const {name ,matricNumber, role} = jwt.decode(localStorage.getItem(tokenName),tokenName)
+    const {name ,matricNumber, role, image, department, level} = jwt.decode(localStorage.getItem(tokenName),tokenName)
+    console.log(jwt.decode(localStorage.getItem(tokenName),tokenName))
     navigate()
     dispatch({
       type: LOGIN_SUCCESS,
       name:name,
       matricNumber:matricNumber,
-      role
+      role,
+      image,
+      department, 
+      level
     });
     dispatch(loadUserProfile()); 
   }
@@ -233,7 +237,7 @@ export const fetchAllLevels = ()=>{
       })
       .catch(({response}) => {
         // console.log(response)
-         dispatch(fetchAllDepartmentsFailure(response.error))
+        //  dispatch(fetchAllDepartmentsFailure(response.error))
       })
   }
 }

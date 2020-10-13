@@ -9,7 +9,6 @@ const {tokenName, apiUrl} = require('../config')
 
 export function isAuth(props, navigate){
     const token=  localStorage.getItem(tokenName)
-    // console.log(token) 
     if(!token)
       return false
     else{

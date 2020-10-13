@@ -67,28 +67,31 @@ const styles = {
 };
 
 
-class CoursesScreen extends Component {
+class UserProfileScreen extends Component {
   state = {
     errors: {}
   }
-  // creative-tim profile page
-
 
   render() {
-    /*
-    To do 
-    2) Replace name and email
-    */
-    const { classes, userDetails } = this.props;
+    const { classes, auth } = this.props;
     const { errors } = this.state;
-    const { name, matricNumber, image } = userDetails
+    const { name, matricNumber, image , department , level} = auth
     const email = "test@test"
     return (
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+        <Grid
+                 item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <Description screenName="User Profile"/>
+                </Grid>
+          <GridItem style={{marginTop:30}} xs={12} sm={12} md={4}>
             <Card profile>
-              <CardAvatar profile>
+              <CardAvatar   profile>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
                   <img src={image} alt="..." />
                 </a>
@@ -97,18 +100,15 @@ class CoursesScreen extends Component {
                 <h6 className={classes.cardCategory}>{matricNumber}</h6>
                 <h4 className={classes.cardTitle}>{name}</h4>
                 <p className={classes.description}>
-                 Department: Your department
+                 Department: {department}
                 </p>
                 <p className={classes.description}>
-                 Level: Your level
+                 Level:{level}
                 </p>
-                <Button color="success" round>
-                  Follow
-                </Button>
               </CardBody>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={12} md={8}>
+          <GridItem style={{marginTop:50}} xs={12} sm={12} md={8}>
             <form >
               <Card>
                 <CardHeader color="success">
@@ -214,11 +214,11 @@ class CoursesScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    userDetails: state.userProfile,
+    auth: state.auth,
   }
 }
 
 
 
 
-export default connect(mapStateToProps)(withStyles(styles)(CoursesScreen));
+export default connect(mapStateToProps)(withStyles(styles)(UserProfileScreen));

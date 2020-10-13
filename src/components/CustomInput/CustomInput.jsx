@@ -43,19 +43,12 @@ function CustomInput({ ...props }) {
     >
       {labelText !== undefined ? (
         <InputLabel
-          className={classes.labelRoot + labelClasses}
-          htmlFor={id}
-          {...labelProps}
+       
         >
           {labelText}
         </InputLabel>
       ) : null}
       <Input
-        classes={{
-          root: marginTop,
-          disabled: classes.disabled,
-          underline: underlineClasses
-        }}
         id={id}
         {...inputProps}
       />

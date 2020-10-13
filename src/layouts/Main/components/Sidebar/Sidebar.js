@@ -74,9 +74,6 @@ const Sidebar = props => {
   const { open, variant, onClose, className, ...rest } = props;
   const classes = useStyles();
 
-
-  let pages = []
-
   const pagesAdmin = [
     {
       id:'1',
@@ -194,20 +191,6 @@ const Sidebar = props => {
       icon: <Input/>
     },
   ];
-
-  // useEffect(()=>{
-  //   if(props.auth.role==''){
-  //     props.logOut()
-  // }
-  // else{
-  //   if(props.auth.role="admin"){
-  //      pages= pagesAdmin
-  //   }
-  //   else{
-  //     pages=pagesUser
-  //   }
-  // }
-  // })
 
   return (
      <div>

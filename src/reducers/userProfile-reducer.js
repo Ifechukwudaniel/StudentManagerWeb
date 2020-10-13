@@ -1,4 +1,4 @@
-import { DECODE_USER } from '../actions/types';
+import {DECODE_USER } from '../actions/types';
 
 const initialState = { 
     name: "", 

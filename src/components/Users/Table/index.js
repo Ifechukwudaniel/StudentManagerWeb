@@ -48,6 +48,8 @@ export default function SimpleTable({data}) {
             sorting:true,
             exportButton: true,
             filtering:true,
+            loadingType:'linear',
+          
           }}
          editable={{
        onRowUpdate: (newData, oldData) =>
