@@ -1,11 +1,60 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import * as action from '../actions'
-import  {Table,AddCourses, CoursesDescription } from '../components/Courses'
-import {TotalCourses} from '../components/Dashboard/components'
-import {Grid, Typography, Paper } from '@material-ui/core'
+import {Grid } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
+
+import NotiAccordion from '../components/NotiAccordion/NotiAccordion';
+
+//fake notifications array for testing, ** delete for production important!!!
+const dummyData = [
+  {
+    id: "1",
+    title: "test title 1",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "2",
+    title: "test title 2",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "3",
+    title: "test title 3",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "4",
+    title: "test title 4",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "5",
+    title: "test title 5",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "6",
+    title: "test title 6",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "7",
+    title: "test title 7",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "8",
+    title: "test title 8",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+  {
+    id: "9",
+    title: "test title 9",
+    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget."
+  },
+]
+
 class BlogsScreen extends Component {
     state= {
     
@@ -30,6 +79,45 @@ class BlogsScreen extends Component {
                 xs={12}
                 >
                   <Description screenName="Notifications"/>
+                </Grid>
+                <Grid
+                 item
+                lg={6}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <NotiAccordion
+                  title="General notification"
+                  subTitle="schoolwide notifications"
+                  data={dummyData}
+                  />
+                </Grid>
+                <Grid
+                 item
+                lg={6}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <NotiAccordion
+                  title="Faculty notifications"
+                  subTitle="your faculty name"
+                  data={dummyData}
+                  />
+                </Grid>
+                <Grid
+                 item
+                lg={6}
+                sm={12}
+                xl={12}
+                xs={12}
+                >
+                  <NotiAccordion
+                  title="Department notifications"
+                  subTitle="Your department name"
+                  data={dummyData}
+                  />
                 </Grid>
             </Grid>
         );
