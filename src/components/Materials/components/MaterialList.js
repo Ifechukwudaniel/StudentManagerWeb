@@ -1,73 +1,141 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
+import  PDF from '../../../assets/svg/fileIcons/pdf.svg'
+import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
+import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
+import { useMediaQuery } from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-  },
-}));
+import {connect} from 'react-redux'
 
 function generate(element) {
-  return [0, 1, 2].map((value) =>
+  return [0, 1, 2, 3, 4,5].map((value) =>
     React.cloneElement(element, {
       key: value,
     }),
   );
 }
 
-export default function MaterialList() {
+function MaterialList(props) {
+  const theme= useTheme()
+  console.log(props)
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
+    defaultMatches: true
+  });
+  
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      // width: '100%',
+      backgroundColor: theme.palette.background.paper,
+      marginLeft:10
+    },
+    demo: {
+      backgroundColor: theme.palette.background.paper,
+    },
+    title: {
+      margin: theme.spacing(4, 0, 2),
+    },
+    listItem:{
+      width: isDesktop ? window.innerWidth-300 : window.innerWidth-0
+    },
+    icon:{
+      width:100, 
+      height:100
+    },
+    list:{
+    //  width:'100%'
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+      background:'transparent'
+    },
+  }));
+
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
 
   return (
     <div className={classes.root}>
-        <Grid item lg={12} xs={12} md={6}>
-          <div className={classes.demo}>
-            <List style={{width:'100%'}} dense={dense}>
-              {generate(
-                <ListItem style={{width:'100%'}} >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>,
-              )}
-            </List>
-          </div>
-        </Grid>
+        <List>
+      {
+         generate(
+           <div>
+           <ListItem   className={classes.listItem} alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar variant="square" className={classes.large} alt="Remy Sharp" src={PDF} />
+        </ListItemAvatar>
+        <ListItemText
+          primary= {" The First Material"} 
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                  By - The school
+              </Typography>
+            </React.Fragment>
+          }
+        />
+        {
+           props.auth.role==="admin"
+           ?
+             (
+              <div>
+                 <IconButton>
+                   <GetAppRoundedIcon/>
+                 </IconButton>
+                 <IconButton>
+                   <VisibilityIcon/>
+                 </IconButton>
+                 <IconButton>
+                   <EditIcon/>
+                 </IconButton>
+                 <IconButton>
+                   <DeleteIcon/>
+                 </IconButton>
+               </div>
+           )
+           :
+            <div>
+               <IconButton>
+                   <GetAppRoundedIcon/>
+                </IconButton>
+               <IconButton>
+                 <VisibilityIcon/>
+              </IconButton>
+             </div>
+        }
+      </ListItem>
+       <Divider variant="fullWidth"/>
+           </div>
+         )} 
+    </List>
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+   auth:state.auth
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+   
+}
+}
+
+export default   connect(mapStateToProps, mapDispatchToProps)(MaterialList)

@@ -71,7 +71,8 @@ const TimeTable = ({departments= [], levels= [],handleFetchTimetableChange, depa
          </Grid>
          <Grid item xs={12}>
          <ScheduleComponent  width='100%' eventSettings={{dataSource:timeTableData,editFollowingEvents:false}} height='550px' currentView='WorkWeek'
-             readonly={true}   timeScale={{ enable: false }}>
+             readonly={true}  workHours={{
+            highlight: true, start: '07:00', end: '18:00'}} timeScale={{ enable: false }}>
              <ViewsDirective>
               <ViewDirective    option='WorkWeek'/>
               {/* <ViewDirective     option="Day"/> */}

@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import {Grid } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
-
-import NotiAccordion from '../components/NotiAccordion/NotiAccordion';
+import Notifications  from '../components/Notifications';
 
 //fake notifications array for testing, ** delete for production important!!!
 const dummyData = [
@@ -82,40 +81,14 @@ class BlogsScreen extends Component {
                 </Grid>
                 <Grid
                  item
-                lg={6}
+                lg={12}
                 sm={12}
                 xl={12}
                 xs={12}
                 >
-                  <NotiAccordion
-                  title="General notification"
-                  subTitle="schoolwide notifications"
-                  data={dummyData}
-                  />
-                </Grid>
-                <Grid
-                 item
-                lg={6}
-                sm={12}
-                xl={12}
-                xs={12}
-                >
-                  <NotiAccordion
-                  title="Faculty notifications"
-                  subTitle="your faculty name"
-                  data={dummyData}
-                  />
-                </Grid>
-                <Grid
-                 item
-                lg={6}
-                sm={12}
-                xl={12}
-                xs={12}
-                >
-                  <NotiAccordion
-                  title="Department notifications"
-                  subTitle="Your department name"
+                  <Notifications
+                  title="Notification"
+                  subTitle="All user  notifications"
                   data={dummyData}
                   />
                 </Grid>

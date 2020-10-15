@@ -23,7 +23,8 @@ import { attendanceReducer } from './attendance-reducer';
     levels:levelsReducer,
     timeTable:timeTableReducer,
     userProfile: userProfileReducer,
-    attendance: attendanceReducer
+    attendance: attendanceReducer,
+
   });
 
 

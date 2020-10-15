@@ -4,11 +4,6 @@ import {ThemeProvider} from '@material-ui/styles'
 import theme from './theme'
 import { Provider } from 'react-redux';
 import  Navigation from './routes';
-import 'react-toastify/dist/ReactToastify.css';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import { ToastContainer, toast } from 'react-toastify';
-
 
 
 const {store,persistor } = require('./reducers').init();

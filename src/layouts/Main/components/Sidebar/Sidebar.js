@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer, Hidden , Avatar} from '@material-ui/core';
 import {Input, CheckBoxRounded, Dashboard , People, MenuBook, LocationCity, Layers,Announcement, Attachment, AvTimer, Chat, Person}  from '@material-ui/icons';
-
 import { Profile, SidebarNav } from './components';
 import Logo from '../../../../images/logo--white.png'
 import image from '../../../../images/sidebar-2.jpg'
@@ -212,13 +211,13 @@ const Sidebar = props => {
       <div
         {...rest}
         className={clsx(classes.root, className)}
-        style={{height:'auto'}}
+        style={{height:props.auth.role=="admin" ? 'auto' :"100%"}}
       > 
         <img  src= {Logo} className={classes.image}/>
          <Divider className={classes.divider} />
          <SidebarNav
           className={classes.nav}
-          pages={pagesAdmin}
+          pages={props.auth.role=="admin" ? pagesAdmin :pagesUser}
           handleClose= {onClose}
         /> 
 

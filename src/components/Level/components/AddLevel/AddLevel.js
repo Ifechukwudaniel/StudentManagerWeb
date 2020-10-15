@@ -127,7 +127,7 @@ const AddLevel = ({className, departments,level,addLevel,modal,openModal,closeMo
                   value={department}
                 >
                   {departments.map((value)=>(
-                      <MenuItem value={value.id}>{value.name}</MenuItem>
+                      <MenuItem key={value.id} value={value.id}>{value.name}</MenuItem>
                   ))}
                 </Select>
              

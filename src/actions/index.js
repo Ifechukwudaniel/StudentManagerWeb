@@ -58,8 +58,6 @@ export const login = (userData, navigate) => {
 //Thunk to handle a successfull login 
 export const loginSuccess = (navigate=()=>{}) => (dispatch)=> {
     const {name ,matricNumber, role, image, department, level} = jwt.decode(localStorage.getItem(tokenName),tokenName)
-    console.log(jwt.decode(localStorage.getItem(tokenName),tokenName))
-    navigate()
     dispatch({
       type: LOGIN_SUCCESS,
       name:name,

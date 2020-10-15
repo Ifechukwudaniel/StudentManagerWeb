@@ -13,7 +13,8 @@ import { NavLink  } from 'react-router-dom';
 const useStyles = makeStyles({
   root: {
     maxWidth: 300,
-    alignSelf:'center'
+    alignSelf:'center',
+    textDecoration:'none'
   },
   nav: {
     color:'rgba(0,0,0,0.2)'
@@ -30,14 +31,13 @@ export default function CourseCard({courseCode, title, image, id}) {
   return (
     
     <Card className={classes.root}>
-     <NavLink activeClassName={classes.active} className={classes.nav} to={`/material/${id}`}  color="inherit">
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt={courseCode}
           height="140"
           image={image}
-          title="Contemplative Reptile"
+          title= {title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -50,11 +50,12 @@ export default function CourseCard({courseCode, title, image, id}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button variant="contained" size="small" color="primary">
-          View  {courseCode} Materials
+         <NavLink activeClassName={classes.active} className={classes.nav} to={`/material/${id}`}  color="inherit">
+           <Button style={{textDecoration:'none'}} variant="contained" size="small" color="primary">
+             View  {courseCode} Materials
         </Button>
+        </NavLink>
       </CardActions>
-      </NavLink>
     </Card>
   );
 }
