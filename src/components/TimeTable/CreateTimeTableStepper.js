@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import TimeTableForm from './TimeTableForm';
 import CreateTimeTable from './CreateTimeTable'
 import { useConfirm } from 'material-ui-confirm';
-import { isWednesday } from 'date-fns';
+import {connect} from 'react-redux';
+import * as actions from '../../actions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,49 +28,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function CreateTimeTableStepper({departments= [], 
-  levels= [],handleFetchTimetableChange, department,
-   level,fetchDepartmentTimetable, createTimeTable, courses,
-   saveTimeTable
-  }) {
-
+export default function CreateTimeTableStepper(props) {
   let  stepArray = ['Select Department and Level', 'Add Monday Timetable', 'Add Tuesday Timetable','Add Wednesday  Timetable', 'Add Thursday Timetable', 'Add Friday Timetable' ]
   
   function getStepContent(stepIndex) {
     if(stepIndex==0){
       return (
         <TimeTableForm
-        levels = {levels}
-        handleFetchTimetableChange = {handleFetchTimetableChange} 
-        level= {level}
-        department= {department}
-        departments={departments}
-        fetchDepartmentTimetable= {fetchDepartmentTimetable}
+        levels = {props.levels}
+        handleFetchTimetableChange = {props.handleFetchTimetableChange} 
+        level= {props.level}
+        department= {props.department}
+        departments={props.departments}
+        fetchDepartmentTimetable= { props.fetchDepartmentTimetable}
         createTimeTable
     />
       )
     }
 
     if(stepIndex===1){
-      return  <CreateTimeTable title="Monday" courses={courses}/>
+      return  <CreateTimeTable title="Monday" courses={props.courses}/>
     }
     if(stepIndex===2){
-     return  <CreateTimeTable title="Tuesday" courses={courses} />
+     return  <CreateTimeTable title="Tuesday" courses={props.courses} />
     }
     if(stepIndex===3){
-      return    <CreateTimeTable title="Wednesday" courses={courses} />
+      return    <CreateTimeTable title="Wednesday" courses={props.courses} />
     }
     if(stepIndex===4){
-      return  <CreateTimeTable title="Thursday" courses={courses} />
+      return  <CreateTimeTable title="Thursday" courses={props.courses} />
     }
     if(stepIndex===5){
-      return <CreateTimeTable title="Friday" courses={courses}/>
+      return <CreateTimeTable title="Friday" courses={props.courses}/>
     } 
   }
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+  const confirm = useConfirm()
 
 function getSteps() {
   return stepArray
@@ -77,11 +74,23 @@ function getSteps() {
 
 
   const handleNext = () => {
-       if(!department && !level){
-       
+       if(!props.department && !props.level){
+         confirm({title:"",description:'Please select a Department and a Level', cancellationText:"",})
+         .then(()=>{
+
+         })
+         .catch(()=>{
+
+         })
        }
        else{
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        confirm({ title:"",description:'Are You Sure You Want To continue'})
+        .then(()=>{
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        })
+        .catch(()=>{
+
+        })
        }
   };
 
@@ -107,8 +116,9 @@ function getSteps() {
           <div>
             {/* <Typography className={classes.instructions}>Sent timetable to server</Typography> */}
             <Button variant="contained" color="primary" onClick={()=>{
-             
-            handleReset()
+             props.saveTimeTable()
+             console.log(props)
+            // handleReset()
             }}>Save TimeTable</Button>
           </div>
         ) : (
@@ -132,3 +142,4 @@ function getSteps() {
     </div>
   );
 }
+

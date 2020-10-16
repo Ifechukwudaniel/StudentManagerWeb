@@ -7,6 +7,10 @@ import {Grid, Typography, Paper } from '@material-ui/core'
 import * as actions from '../actions'
 import Description from '../components/description';
 import TimeTableTabs from '../components/TimeTable/Tab';
+import moment from 'moment'
+import axios from 'axios'
+const AxiosService = require("../services/axiosService");
+const config = require('../config');
 
 class TimeTableScreen extends Component {
     state= {
@@ -20,7 +24,6 @@ class TimeTableScreen extends Component {
       this.props.fetchAllLevels()
       this.props.fetchAllDepartment()
     }
-
     handleFetchTimetableChange= (event)=>{
       if(event.target.name==="department"){
        return  this.setState({[event.target.name]:event.target.value},()=>{ this.setState({filteredLevels:this.props.levels.allLevels.filter((x)=>x.departmentId==event.target.value)})})
@@ -29,6 +32,54 @@ class TimeTableScreen extends Component {
        return this.setState({[event.target.name]:event.target.value},()=>{  this.setState({filteredCourses:this.props.courses.allCourses.filter((x)=>{ return x.levelId ===event.target.value })}) })
       }
       else return this.setState({[event.target.name]:event.target.value})
+    }
+    saveTimetable = ()=>{
+       const {monday, tuesday,wednesday, thursday, friday} = this.props.timeTable
+       let data= {
+          level:this.state.level,
+          days:[
+            {
+              weekDay:1 ,
+              courses:monday.map((data=>{
+                 return {...data, startTime:moment(data.startTime).format('hh:mm A'),endTime:moment(data.endTime).format('hh:mm A'), repeated:true,level:this.state.level, weekDay:1}
+              }))
+            },
+            {
+              weekDay:2 ,
+              courses:tuesday.map((data=>{
+                 return {...data, startTime:moment(data.startTime).format('hh:mm A'),endTime:moment(data.endTime).format('hh:mm A'), repeated:true,level:this.state.level, weekDay:2}
+              }))
+            },
+            {
+              weekDay:3 ,
+              courses:wednesday.map((data=>{
+                 return {...data ,startTime:moment(data.startTime).format('hh:mm A'),endTime:moment(data.endTime).format('hh:mm A'), repeated:true,level:this.state.level, weekDay:3}
+              }))
+            } ,
+            {
+              weekDay:4 ,
+              courses:thursday.map((data=>{
+                 return {...data, startTime:moment(data.startTime).format('hh:mm A'),endTime:moment(data.endTime).format('hh:mm A'), repeated:true,level:this.state.level, weekDay:4}
+              }))
+            },
+            {
+              weekDay:5 ,
+              courses:friday.map((data=>{
+                 return {...data, startTime:moment(data.startTime).format('hh:mm A'),endTime:moment(data.endTime).format('hh:mm A'), repeated:true,level:this.state.level, weekDay:5}
+              }))
+            },
+            {
+              weekDay:6 ,
+              courses:[]
+            } ,
+            {
+              weekDay:7 ,
+              courses:[]
+            } 
+          ]
+       }
+       this.props.postTimeTable(data)
+      console.log(data)
     }
    
   fetchDepartmentTimetable=(levelId)=>{
@@ -66,6 +117,7 @@ class TimeTableScreen extends Component {
                    fetchDepartmentTimetable={this.fetchDepartmentTimetable}
                    timeTableData={this.props.timeTable.departmentTimeTable}
                    courses={this.state.filteredCourses}
+                   saveTimeTable={this.saveTimetable}
                    />
                 </Grid>
             </Grid>
@@ -96,6 +148,9 @@ function mapStateToProps(state) {
       fetchAllCourses: ()=>{
         dispatch(actions.fetchAllCourses())
     },
+    postTimeTable:(data)=>{
+      dispatch(actions.postTimeTable(data))
+    }
   }
 }
  

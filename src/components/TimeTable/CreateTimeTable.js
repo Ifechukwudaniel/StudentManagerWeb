@@ -7,11 +7,11 @@ import * as actions from '../../actions'
  function CreateTimeTable(props) {
   const { useState } = React;
   let  courseData= {}
-   props.course.map((data)=>{
-    
+   props.courses.map((data)=>{
+     courseData[data.id]= data.courseCode
    })
   let data = []
-  const [columns, setColumns] = useState([
+  const [columns] = useState([
     { title: 'Course', field: 'course',  lookup: { ...courseData } },
     { title: 'Start Time', field: 'startTime', type: 'time'  },
     { title: 'End Time', field: 'endTime', type: 'time' },
@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     saveFriday: (data) => {
       dispatch(actions.saveFridayData(data))
-    }
+    },
 }
 }
 

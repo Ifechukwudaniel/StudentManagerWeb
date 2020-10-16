@@ -25,7 +25,8 @@ const {
    ADD_TUESDAY_DATA,
    ADD_WEDNESDAY_DATA,
    ADD_THURSDAY_DATA,
-   ADD_FRIDAY_DATA
+   ADD_FRIDAY_DATA,
+   
 } = require('./types')
 const jwt = require('jsonwebtoken')
 
@@ -381,5 +382,18 @@ export const saveFridayData = (data) => {
   return {
     type: ADD_FRIDAY_DATA,
     data
+  }
+}
+
+export const postTimeTable = (data)=>{
+  return dispatch => {
+    return axiosAuth.post(`${config.apiUrl}/timeTable/`,data)
+      .then(res => res.data)
+      .then((data) => {
+          //dispatch(fetchUserAttendanceSuccess(data))
+      })
+      .catch(({response}) => {
+        //  dispatch(fetchUserAttendanceFailure(response.data.error))
+      })
   }
 }

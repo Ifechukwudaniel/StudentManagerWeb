@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) =>  ({
   }
 }));
 
-const AddUser = ({className, departments,level, handleChange,loading,...rest}, props) => {
+const AddUser = ({className, departments,level, handleChange,loading,...rest}) => {
   const classes = useStyles();
   const [modal , setModal] = useState(false)
   return (

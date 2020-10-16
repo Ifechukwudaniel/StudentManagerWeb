@@ -12,10 +12,9 @@ const useStyles = makeStyles({
 
 
 export default function Table({data}) {
-  const classes = useStyles();
   const [row, setData] = useState(data);
 
-  const [columns, setColumns] = useState([
+  const [columns] = useState([
     { title: 'Department', field: 'department',  editable: 'never'},
     { title: 'Level', field:'level', filtering: false,  editable: 'never' },
     { title: 'Has A TimeTable', field:'hasTimeTable' , filtering: false,  editable: 'never'},
