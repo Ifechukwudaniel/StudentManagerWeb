@@ -6,11 +6,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TabPanel from './TabPanel'
-import TimeTableAccordions from './TimeTableAccordion'
 import TimeTable from '.'
-import TimeTableForm from './TimeTableForm';
 import CreateTimeTableStepper from './CreateTimeTableStepper';
-import EditTimeTable from './EditTimeTable'
+import EditTimeTableStepper from './EditTimeTableStepper'
 
 function a11yProps(index) {
   return {
@@ -75,15 +73,17 @@ const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, departmen
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <TimeTableForm
-             levels = {levels}
-             handleFetchTimetableChange = {handleFetchTimetableChange} 
-             level= {level}
-             department= {department}
-             departments={departments}
-             fetchDepartmentTimetable= {fetchDepartmentTimetable} 
-          />
-           <EditTimeTable/>
+           <EditTimeTableStepper
+               levels = {levels}
+              handleFetchTimetableChange = {handleFetchTimetableChange} 
+              level= {level}
+              department= {department}
+              departments={departments}
+              fetchDepartmentTimetable= {fetchDepartmentTimetable}
+              courses= {courses}
+              createTimeTable
+              saveTimeTable= {saveTimeTable}
+           />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
            <TimeTable departments={departments} 

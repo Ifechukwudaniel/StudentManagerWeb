@@ -73,6 +73,12 @@ const Navigation = (props)=>{
                   layout={MainLayout}
                   path="/material/:courseId"
                 />
+                 <PrivateRoute
+                  component={MaterialItemScreen}
+                  exact
+                  layout={MainLayout}
+                  path="/material/:courseId/view"
+                />
                 <PrivateRoute
                   component={BlogScreen}
                   exact

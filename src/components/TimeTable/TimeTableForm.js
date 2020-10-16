@@ -63,10 +63,9 @@ const TimeTableForm = ({departments= [], levels= [],handleFetchTimetableChange, 
                 </FormControl>
                 {
                   !createTimeTable? (
-                    <div>
+                    <FormControl>
                       <Button  onClick={()=>{}} className= {classes.button} variant="contained" color="primary">  Get TimeTable</Button>
-                      <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary">  Save TimeTable</Button>
-                    </div>
+                    </FormControl>
                   ):(
                     <FormControl>
                            <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary"> Create TimeTable</Button>
