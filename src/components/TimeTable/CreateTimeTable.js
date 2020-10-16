@@ -1,64 +1,98 @@
 import React from 'react';
 import MaterialTable from 'material-table'
+import {connect} from 'react-redux';
+import * as actions from '../../actions'
 
 
-
-
-export default function CreateTimeTable({title}) {
+ function CreateTimeTable(props) {
   const { useState } = React;
-
+  let  courseData= {}
+   props.course.map((data)=>{
+    
+   })
+  let data = []
   const [columns, setColumns] = useState([
-    { title: 'Course', field: 'course' },
+    { title: 'Course', field: 'course',  lookup: { ...courseData } },
     { title: 'Start Time', field: 'startTime', type: 'time'  },
     { title: 'End Time', field: 'endTime', type: 'time' },
-    {title: 'Location', field: 'location'},
+    { title: 'Location', field: 'location'},
   ]);
+  
 
-  const [data, setData] = useState([
-    // {"course":"5e9dc8098ac82322efe9e203","startTime":"08:00 AM","endTime":"10:00 AM" , "location":"  cncnBiu chapel","repeated":true, "level":"5e8e320de1a20dca09a7fef5", "weekDay":5 },
-		// {"course":"5e9dc7da8ac82322efe9e202","startTime":"10:00 AM","endTime":"11:40 AM", "location":"ccBiu chapel", "repeated":true,"level":"5e8e320de1a20dca09a7fef5","weekDay":5 },
-		// {"course":"5e9dc7da8ac82322efe9e202","startTime":"12:00 PM","endTime":"01:00 PM", "location":"llBiu chapel" ,"repeated":true, "level":"5e8e320de1a20dca09a7fef5","weekDay":5 },
-  ]);
+  if(props.title==="Monday") data  = props.timeTable.monday;
+  if(props.title==="Tuesday")  data  = props.timeTable.tuesday;
+  if(props.title==="Wednesday")  data  = props.timeTable.wednesday;
+  if(props.title==="Thursday")  data  = props.timeTable.thursday;
+  if(props.title==="Friday") data  = props.timeTable.friday;
+
+const setData= (data)=>{
+   if(props.title==="Monday") return props.saveMonday(data);
+   if(props.title==="Tuesday")  return props.saveTuesday(data);
+   if(props.title==="Wednesday")  return props.saveWednesday(data);
+   if(props.title==="Thursday")  return props.saveThursday(data);
+   if(props.title==="Friday")  return props.saveFriday(data);
+ }
 
   return (
     <MaterialTable
-      title={title}
-      columns={columns}
+      title={props.title}
+      columns={columns.map((c)=>({...c,tableData:undefined}))}
       style={{margin:10}}
       data={data}
       options= {{search:false, paging:false}}
       editable={{
         onRowAdd: newData =>
           new Promise((resolve, reject) => {
-            setTimeout(() => {
               setData([...data, newData]);
-              
               resolve();
-            }, 1000)
-          }),
+            }),
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve, reject) => {
-            setTimeout(() => {
               const dataUpdate = [...data];
               const index = oldData.tableData.id;
               dataUpdate[index] = newData;
               setData([...dataUpdate]);
 
               resolve();
-            }, 1000)
-          }),
+            }
+          ),
         onRowDelete: oldData =>
           new Promise((resolve, reject) => {
-            setTimeout(() => {
               const dataDelete = [...data];
               const index = oldData.tableData.id;
               dataDelete.splice(index, 1);
               setData([...dataDelete]);
-              
               resolve()
-            }, 1000)
           }),
       }}
     />
   )
 }
+
+
+function mapStateToProps(state) {
+  return {
+   timeTable:state.timeTable
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveMonday: (data) => {
+      dispatch(actions.saveMondayData(data))
+    },
+    saveTuesday: (data) => {
+      dispatch(actions.saveTuesdayData(data))
+    },
+    saveWednesday: (data) => {
+      dispatch(actions.saveWednesdayData(data))
+    },
+    saveThursday: (data) => {
+      dispatch(actions.saveThursdayData(data))
+    },
+    saveFriday: (data) => {
+      dispatch(actions.saveFridayData(data))
+    }
+}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTimeTable);

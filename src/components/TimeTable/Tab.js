@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, department, level, fetchDepartmentTimetable, timeTableData})=> {
+const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, department, level, 
+  fetchDepartmentTimetable, timeTableData, courses,
+  monday=[], setMonday, tuesday=[], setTuesday, wednesday=[], setWednesday, thursday=[], setThursday, friday= [], setFriday })=> {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -67,6 +69,7 @@ const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, departmen
               department= {department}
               departments={departments}
               fetchDepartmentTimetable= {fetchDepartmentTimetable}
+              courses= {courses}
               createTimeTable
           />
         </TabPanel>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import TimeTableForm from './TimeTableForm';
 import CreateTimeTable from './CreateTimeTable'
 import { useConfirm } from 'material-ui-confirm';
+import { isWednesday } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,47 +27,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function CreateTimeTableStepper({departments= [], levels= [],handleFetchTimetableChange, department, level,fetchDepartmentTimetable, createTimeTable}) {
-  const confirm = useConfirm();
+export default function CreateTimeTableStepper({departments= [], 
+  levels= [],handleFetchTimetableChange, department,
+   level,fetchDepartmentTimetable, createTimeTable, courses,
+   saveTimeTable
+  }) {
+
   let  stepArray = ['Select Department and Level', 'Add Monday Timetable', 'Add Tuesday Timetable','Add Wednesday  Timetable', 'Add Thursday Timetable', 'Add Friday Timetable' ]
+  
   function getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return (
-          <TimeTableForm
-          levels = {levels}
-          handleFetchTimetableChange = {handleFetchTimetableChange} 
-          level= {level}
-          department= {department}
-          departments={departments}
-          fetchDepartmentTimetable= {fetchDepartmentTimetable}
-          createTimeTable
-      />
-        )
-      case 1:
-        return (
-          <CreateTimeTable title="Monday"/>
-        );
-      case 2:
-        return (
-          <CreateTimeTable title="Tuesday"/>
-       );
-      case 3:
-        return (
-          <CreateTimeTable title="Wednesday"/>
-       );
-      case 4:
-        return (
-          <CreateTimeTable title="Thursday"/>
-       );
-      case 5:
-        return (
-          <CreateTimeTable title="Friday"/>
-       );
-      case 6:
-      default:
-        return 'Unknown stepIndex';
-     }
+    if(stepIndex==0){
+      return (
+        <TimeTableForm
+        levels = {levels}
+        handleFetchTimetableChange = {handleFetchTimetableChange} 
+        level= {level}
+        department= {department}
+        departments={departments}
+        fetchDepartmentTimetable= {fetchDepartmentTimetable}
+        createTimeTable
+    />
+      )
+    }
+
+    if(stepIndex===1){
+      return  <CreateTimeTable title="Monday" courses={courses}/>
+    }
+    if(stepIndex===2){
+     return  <CreateTimeTable title="Tuesday" courses={courses} />
+    }
+    if(stepIndex===3){
+      return    <CreateTimeTable title="Wednesday" courses={courses} />
+    }
+    if(stepIndex===4){
+      return  <CreateTimeTable title="Thursday" courses={courses} />
+    }
+    if(stepIndex===5){
+      return <CreateTimeTable title="Friday" courses={courses}/>
+    } 
   }
 
   const classes = useStyles();
@@ -79,19 +77,12 @@ function getSteps() {
 
 
   const handleNext = () => {
-
-    confirm({description:'Are you sure you want to proceed '})
-    .then(()=>{
        if(!department && !level){
-
+       
        }
        else{
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
        }
-    })
-    .catch(()=>{
-
-    })
   };
 
   const handleBack = () => {
@@ -114,8 +105,11 @@ function getSteps() {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>All steps completed</Typography>
-            <Button variant="contained" color="primary" onClick={handleReset}>Create a new TimeTable</Button>
+            {/* <Typography className={classes.instructions}>Sent timetable to server</Typography> */}
+            <Button variant="contained" color="primary" onClick={()=>{
+             
+            handleReset()
+            }}>Save TimeTable</Button>
           </div>
         ) : (
           <div>

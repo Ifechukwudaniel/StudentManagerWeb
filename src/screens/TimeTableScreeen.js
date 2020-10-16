@@ -13,7 +13,7 @@ class TimeTableScreen extends Component {
       filteredLevels:[],
       level:'',
       department:'',
-      filteredCourses:[],
+      filteredCourses:[]
     }
     componentDidMount (){
       this.props.fetchAllCourses()

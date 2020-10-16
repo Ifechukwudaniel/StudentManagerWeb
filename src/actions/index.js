@@ -20,8 +20,12 @@ const {
    FETCH_DEPARTMENT_TIMETABLE_SUCCESS,
    FETCH_ATTENDANCE_BY_MATRICNUMBER,
    FETCH_ATTENDANCE_BY_MATRICNUMBER_FAILURE,
-   FETCH_ATTENDANCE_BY_MATRICNUMBER_SUCCESS
-
+   FETCH_ATTENDANCE_BY_MATRICNUMBER_SUCCESS,
+   ADD_MONDAY_DATA,
+   ADD_TUESDAY_DATA,
+   ADD_WEDNESDAY_DATA,
+   ADD_THURSDAY_DATA,
+   ADD_FRIDAY_DATA
 } = require('./types')
 const jwt = require('jsonwebtoken')
 
@@ -342,5 +346,40 @@ export const fetchUserAttendanceFailure = (error) => {
   return {
     type: FETCH_ATTENDANCE_BY_MATRICNUMBER_FAILURE,
     error
+  }
+}
+
+export const saveMondayData = (data) => {
+  return {
+    type: ADD_MONDAY_DATA,
+    data
+  }
+}
+
+export const saveTuesdayData = (data) => {
+  return {
+    type: ADD_TUESDAY_DATA,
+    data
+  }
+}
+
+export const saveWednesdayData = (data) => {
+  return {
+    type: ADD_WEDNESDAY_DATA,
+    data
+  }
+}
+
+export const saveThursdayData = (data) => {
+  return {
+    type: ADD_THURSDAY_DATA,
+    data
+  }
+}
+
+export const saveFridayData = (data) => {
+  return {
+    type: ADD_FRIDAY_DATA,
+    data
   }
 }
