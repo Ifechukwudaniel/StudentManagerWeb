@@ -1,0 +1,9 @@
+.err-img-lay{
+    width: calc(100vw - 240px);
+}
+
+@media only screen and (max-width: 1280px){
+    .err-img-lay {
+        width: 100vw;
+    }
+}
