@@ -16,7 +16,7 @@ import { Paper } from '@material-ui/core';
     >
       {value === index && (
         <Box style={{height:'100%'}} p={1}>
-          <Paper>{children}</Paper>
+          <Paper style={{padding:20}}>{children}</Paper>
         </Box>
       )}
     </div>

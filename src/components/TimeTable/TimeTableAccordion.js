@@ -5,6 +5,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import EditTimeTable from './EditTimeTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,10 +29,7 @@ export default function TimeTableAccordion() {
           <Typography className={classes.heading}>Monday</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+          <EditTimeTable/>
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -41,10 +39,7 @@ export default function TimeTableAccordion() {
           <Typography className={classes.heading}>Tuesday</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+        <EditTimeTable/>
         </AccordionDetails>
       </Accordion>
       <Accordion>

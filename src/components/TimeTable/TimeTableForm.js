@@ -16,15 +16,17 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         minWidth: 120,
         width:300,
-        marginRight:20
+        marginTop:20,
+        marginLeft :30,
+        marginBottom:40
       },
       selectEmpty: {
         marginTop: theme.spacing(2),
       },
       button :{
-         marginTop:20,
+         marginTop:27,
          marginBottom:20,
-         marginLeft:10
+         marginLeft:20
       }
   }));
 
@@ -66,10 +68,9 @@ const TimeTableForm = ({departments= [], levels= [],handleFetchTimetableChange, 
                       <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary">  Save TimeTable</Button>
                     </div>
                   ):(
-                     <div>
-                           <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary"> Creating TimeTable</Button>
-                           <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary">  Save TimeTable</Button>
-                     </div>
+                    <FormControl>
+                           <Button  onClick={()=>{ }} className= {classes.button} variant="contained" color="primary"> Create TimeTable</Button>
+                     </FormControl>
                   )
                 }
          </Grid>

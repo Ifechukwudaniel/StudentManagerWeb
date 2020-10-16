@@ -9,6 +9,8 @@ import TabPanel from './TabPanel'
 import TimeTableAccordions from './TimeTableAccordion'
 import TimeTable from '.'
 import TimeTableForm from './TimeTableForm';
+import CreateTimeTableStepper from './CreateTimeTableStepper';
+import EditTimeTable from './EditTimeTable'
 
 function a11yProps(index) {
   return {
@@ -58,8 +60,8 @@ const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, departmen
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel  value={value} index={0} dir={theme.direction}>
-         <TimeTableForm
-              levels = {levels}
+          <CreateTimeTableStepper
+             levels = {levels}
               handleFetchTimetableChange = {handleFetchTimetableChange} 
               level= {level}
               department= {department}
@@ -67,7 +69,6 @@ const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, departmen
               fetchDepartmentTimetable= {fetchDepartmentTimetable}
               createTimeTable
           />
-          <TimeTableAccordions/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <TimeTableForm
@@ -78,7 +79,7 @@ const TimeTableTabs = ({departments,levels,handleFetchTimetableChange, departmen
              departments={departments}
              fetchDepartmentTimetable= {fetchDepartmentTimetable} 
           />
-          <TimeTableAccordions/>
+           <EditTimeTable/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
            <TimeTable departments={departments} 

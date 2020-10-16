@@ -4,6 +4,7 @@ import {ThemeProvider} from '@material-ui/styles'
 import theme from './theme'
 import { Provider } from 'react-redux';
 import  Navigation from './routes';
+import { ConfirmProvider } from 'material-ui-confirm';
 
 
 const {store,persistor } = require('./reducers').init();
@@ -13,7 +14,9 @@ const App = ()=>{
            <div className='App'>
               <ThemeProvider theme= {theme}>
                   <Provider store={store}>
-                     <Navigation/>
+                  <ConfirmProvider>
+                  <Navigation/>
+                  </ConfirmProvider>
                   </Provider>
                   </ThemeProvider>
           </div>

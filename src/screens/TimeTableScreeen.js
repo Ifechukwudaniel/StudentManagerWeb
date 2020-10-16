@@ -12,22 +12,23 @@ class TimeTableScreen extends Component {
     state= {
       filteredLevels:[],
       level:'',
-      department:''
+      department:'',
+      filteredCourses:[],
     }
     componentDidMount (){
+      this.props.fetchAllCourses()
       this.props.fetchAllLevels()
       this.props.fetchAllDepartment()
     }
 
     handleFetchTimetableChange= (event)=>{
       if(event.target.name==="department"){
-        this.setState({[event.target.name]:event.target.value},()=>{
-          this.setState({filteredLevels:this.props.levels.allLevels.filter((x)=>x.departmentId==event.target.value)})
-        })
+       return  this.setState({[event.target.name]:event.target.value},()=>{ this.setState({filteredLevels:this.props.levels.allLevels.filter((x)=>x.departmentId==event.target.value)})})
       }
-      else{
-         this.setState({[event.target.name]:event.target.value})
+      else if(event.target.name==="level"){
+       return this.setState({[event.target.name]:event.target.value},()=>{  this.setState({filteredCourses:this.props.courses.allCourses.filter((x)=>{ return x.levelId ===event.target.value })}) })
       }
+      else return this.setState({[event.target.name]:event.target.value})
     }
    
   fetchDepartmentTimetable=(levelId)=>{
@@ -64,6 +65,7 @@ class TimeTableScreen extends Component {
                    level = {this.state.level}
                    fetchDepartmentTimetable={this.fetchDepartmentTimetable}
                    timeTableData={this.props.timeTable.departmentTimeTable}
+                   courses={this.state.filteredCourses}
                    />
                 </Grid>
             </Grid>
@@ -75,7 +77,8 @@ function mapStateToProps(state) {
     return {
       departments: state.departments,
       levels: state.levels,
-      timeTable:state.timeTable
+      timeTable:state.timeTable,
+      courses: state.courses,
     }
   }
 
@@ -89,7 +92,10 @@ function mapStateToProps(state) {
       },
       fetchDepartmentTimetable: (levelId)=>{
         dispatch(actions.fetchDepartmentTimetable(levelId))
-      }
+      },
+      fetchAllCourses: ()=>{
+        dispatch(actions.fetchAllCourses())
+    },
   }
 }
  
