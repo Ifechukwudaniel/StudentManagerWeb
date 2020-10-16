@@ -20,12 +20,12 @@ const ChatScreen =  lazy(()=> import('./screens/ChatScreen'));
 const MaterialItemScreen = lazy(()=> import('./screens/MaterialItemScreen'));
 const UserProfile = lazy( ()=> import('./screens/UserProfile'));
 
-const Navigation = ()=>{
+const Navigation = (props)=>{
     return (
          <BrowserRouter>
-              <Switch>
-                <ErrorBoundary>
+           <ErrorBoundary>
                   <Suspense fallback={<MainLayout><Spinner /></MainLayout>} >
+              <Switch>
                 <Route 
                  exact
                  path="/"
@@ -109,9 +109,9 @@ const Navigation = ()=>{
                   layout={MainLayout}
                   path="/logout"
                 />
-                </Suspense>
-                </ErrorBoundary>
             </Switch>
+            </Suspense>
+        </ErrorBoundary>
          </BrowserRouter>
     );
   }
