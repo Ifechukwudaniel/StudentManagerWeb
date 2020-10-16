@@ -1,26 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import { BrowserRouter  , Route, Redirect, Switch } from 'react-router-dom';
 import  RouteWithLayout from "./components/RouteWIthLayout";
-import  PrivateRoute from './components/Route/PrivateRoute'
-import AuthScreen from './screens/AuthScreen';
-import CourseScreen from './screens/CourseScreen';
-import UsersScreen from './screens/UsersScreen';
-import DepartmentScreen from './screens/DepartmentScreen';
-import LevelScreen from './screens/LevelScreen';
-import MaterialScreen from './screens/MaterialScreen';
-import BlogScreen from './screens/BlogScreen';
-import LogoutScreen from './screens/LogoutScreen';
-import AttendanceScreen from './screens/AttendanceScreen';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
-import DashboardScreen from './screens/DashboardScreen';
-import TimeTableScreen from './screens/TimeTableScreeen';
-import ChatScreen from './screens/ChatScreen'
-import UserProfile from './screens/UserProfile'
-import MaterialItemScreen from './screens/MaterialItemScreen'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import Spinner from './components/Spinner/Spinner';
+import  PrivateRoute from './components/Route/PrivateRoute'
+const AuthScreen = lazy(()=> import('./screens/AuthScreen'));
+const CourseScreen = lazy(()=> import('./screens/CourseScreen'));
+const UsersScreen = lazy(()=> import('./screens/UsersScreen'));
+const DepartmentScreen = lazy(()=> import('./screens/DepartmentScreen'));
+const LevelScreen = lazy(()=> import('./screens/LevelScreen'));
+const MaterialScreen = lazy(()=> import('./screens/MaterialScreen'));
+const BlogScreen = lazy(()=> import('./screens/BlogScreen'));
+const LogoutScreen = lazy(()=> import('./screens/LogoutScreen'));
+const AttendanceScreen = lazy(()=> import('./screens/AttendanceScreen'));
+const DashboardScreen = lazy(()=> import('./screens/DashboardScreen'));
+const TimeTableScreen = lazy(()=>import('./screens/TimeTableScreeen'));
+const ChatScreen =  lazy(()=> import('./screens/ChatScreen'));
+const MaterialItemScreen = lazy(()=> import('./screens/MaterialItemScreen'));
+const UserProfile = lazy( ()=> import('./screens/UserProfile'));
+
 const Navigation = ()=>{
     return (
          <BrowserRouter>
               <Switch>
+                <ErrorBoundary>
+                  <Suspense fallback={<MainLayout><Spinner /></MainLayout>} >
                 <Route 
                  exact
                  path="/"
@@ -104,6 +109,8 @@ const Navigation = ()=>{
                   layout={MainLayout}
                   path="/logout"
                 />
+                </Suspense>
+                </ErrorBoundary>
             </Switch>
          </BrowserRouter>
     );
